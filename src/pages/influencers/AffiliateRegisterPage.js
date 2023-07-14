@@ -30,12 +30,12 @@ function AffiliateRegisterPage() {
         if (res.data.err) {
           setError(res.data.err);
         } else {
-          //   signIn({
-          //     token: res.data.token,
-          //     expiresIn: 3600,
-          //     tokenType: "Bearer",
-          //     authState: res.data.user_profile,
-          //   });
+            signIn({
+              token: res.data.token,
+              expiresIn: 3600,
+              tokenType: "Bearer",
+              authState: res.data.user_profile,
+            });
           navigate("/dashboard/affiliate/profile");
         }
       })
