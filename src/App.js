@@ -4,6 +4,7 @@ import { RequireAuth } from "react-auth-kit";
 import "./App.css";
 
 import AffiliateLoginPage from "./pages/influencers/AffiliateLoginPage";
+import AffiliateRegisterPage from "./pages/influencers/AffiliateRegisterPage";
 
 function App() {
   return (
@@ -14,10 +15,11 @@ function App() {
           path="/dashboard/affiliate/profile"
           element={
             <RequireAuth loginPath="/affiliate/login">
-              "Hello World"
+              <div>Login</div>
             </RequireAuth>
           }
         />
+      <Route path="/affiliate/register" element={<AffiliateRegisterPage />} />
       </Routes>
     </div>
   );

@@ -1,38 +1,41 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignIn } from "react-auth-kit";
 import axios from "axios";
 
-function AffiliateLoginPage() {
+function AffiliateRegisterPage() {
+  const navigate = useNavigate();
+
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
   );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [error, setError] = useState("");
-
-  const signIn = useSignIn()
-  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     axios
-      .post(`${process.env.REACT_APP_ROUTE}/api/affiliate/login`, {
-        email: email,
-        password: password,
+      .post(`${process.env.REACT_APP_ROUTE}/api/affiliate/register`, {
+        "first_name": firstname,
+        "last_name": lastname,
+        "email": email,
+        "password": password
       })
       .then((res) => {
         if (res.data.err) {
           setError(res.data.err);
         } else {
-          signIn({
-            token: res.data.token,
-            expiresIn: 3600,
-            tokenType: "Bearer",
-            authState: res.data.user_profile,
-          });
+          //   signIn({
+          //     token: res.data.token,
+          //     expiresIn: 3600,
+          //     tokenType: "Bearer",
+          //     authState: res.data.user_profile,
+          //   });
           navigate("/dashboard/affiliate/profile");
         }
       })
@@ -53,21 +56,45 @@ function AffiliateLoginPage() {
             onSubmit={(e) => handleSubmit(e)}
             className="flex flex-col mx-16 my-10 bg-gray-300"
           >
+            <div className="flex">
+              <div className="flex flex-col flex-1">
+                <label className="my-2">First Name</label>
+                <input
+                  required
+                  type="text"
+                  onChange={(e) => setFirstname(e.target.value)}
+                  onFocus={(e) => setError("")}
+                ></input>
+              </div>
+              <div className="flex flex-col flex-1">
+                <label className="my-2">Last Name</label>
+                <input
+                  required
+                  type="text"
+                  onChange={(e) => setLastname(e.target.value)}
+                  onFocus={(e) => setError("")}
+                ></input>
+              </div>
+            </div>
             <label className="my-2">Email</label>
             <input
+              required
               type="text"
               onChange={(e) => setEmail(e.target.value)}
               onFocus={(e) => setError("")}
             ></input>
             <label className="my-2">Password</label>
             <input
+              required
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               onFocus={(e) => setError("")}
             ></input>
             <div>{error}</div>
-            <button type="submit">Login</button>
-            <div>Not registered yet? <Link to='/affiliate/register'>Create an Account</Link></div>
+            <button type="submit">Sign up</button>
+            <div>
+              Already have an account? <Link to="/affiliate/login">Login</Link>
+            </div>
           </form>
         </div>
       </div>
@@ -76,4 +103,4 @@ function AffiliateLoginPage() {
   );
 }
 
-export default AffiliateLoginPage;
+export default AffiliateRegisterPage;
