@@ -33,7 +33,7 @@ function AffiliateLoginPage() {
             tokenType: "Bearer",
             authState: res.data.user_profile,
           });
-          navigate("/dashboard/affiliate/profile");
+          navigate("/dashboard/profile");
         }
       })
       .catch((err) => console.log(err));
@@ -70,7 +70,7 @@ function AffiliateLoginPage() {
             <div>{error}</div>
             <button type="submit">Login</button>
             <div>
-              Not registered yet?{" "}
+              Not registered yet?
               <Link to="/affiliate/register">Create an Account</Link>
             </div>
           </form>

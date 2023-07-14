@@ -2,3 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom background color */
+.ctm-bg-color-1 {
+  background-color: rgba(229, 231, 235, 1);
+}
+
+.ctm-hvr-bg-color-1:hover {
+  background-color: rgba(229, 231, 235, 1);
+}
+
+/* Custom border color */
+.ctm-border-color-1 {
+  border-color: #e6e8f0;
+}
+
+.ctm-border-color-2 {
+  border-color: rgba(229, 231, 235, 0.5);
+}
+
+/* Custom color */
+.ctm-font-color-1 {
+  color: #8f95b2;
+}
