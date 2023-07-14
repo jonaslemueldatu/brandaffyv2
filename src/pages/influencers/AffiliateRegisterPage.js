@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSignIn } from "react-auth-kit";
 
 function AffiliateRegisterPage() {
   const navigate = useNavigate();
+  const signIn = useSignIn
 
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
