@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom background image */
+.ctm-bg-image-1 {
+  background-image: url('https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/stockphoto-asset-1.jpg')
+}
+
 /* Custom background color */
 .ctm-bg-color-1 {
   background-color: rgba(229, 231, 235, 1);
+}
+
+.ctm-bg-color-2 {
+  background-color: #6c5dd3;
 }
 
 .ctm-hvr-bg-color-1:hover {
@@ -17,10 +26,23 @@
 }
 
 .ctm-border-color-2 {
+  border-color: rgba(216, 218, 229, 1);
+}
+
+.ctm-border-color-2 {
   border-color: rgba(229, 231, 235, 0.5);
+}
+
+/*Custom Box Shadow for input fields*/
+.ctm-box-shadow-1 {
+  box-shadow: ;
 }
 
 /* Custom color */
 .ctm-font-color-1 {
   color: #8f95b2;
+}
+
+.ctm-font-color-2 {
+  color: rgb(79, 70, 229);
 }
