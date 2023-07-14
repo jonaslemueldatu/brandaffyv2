@@ -13,8 +13,8 @@ function AffiliateLoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const signIn = useSignIn()
-  const navigate = useNavigate()
+  const signIn = useSignIn();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,19 +55,24 @@ function AffiliateLoginPage() {
           >
             <label className="my-2">Email</label>
             <input
+              required
               type="text"
               onChange={(e) => setEmail(e.target.value)}
               onFocus={(e) => setError("")}
             ></input>
             <label className="my-2">Password</label>
             <input
+              required
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               onFocus={(e) => setError("")}
             ></input>
             <div>{error}</div>
             <button type="submit">Login</button>
-            <div>Not registered yet? <Link to='/affiliate/register'>Create an Account</Link></div>
+            <div>
+              Not registered yet?{" "}
+              <Link to="/affiliate/register">Create an Account</Link>
+            </div>
           </form>
         </div>
       </div>
