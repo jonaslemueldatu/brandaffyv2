@@ -51,7 +51,7 @@ function Dashboardprofile() {
             Id={userid}
           />
         )}
-        <Affiliatetiktokcard Myprofile={myprofile} Id={userid} />
+        {!isbusy && <Affiliatetiktokcard Myprofile={myprofile} Id={userid} />}
       </div>
     </div>
   );
