@@ -50,7 +50,7 @@ function Dashboardnav(props) {
         {type === "affiliate" && (
           <div className="flex flex-col">
             <Link
-              className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounder-lg ctm-hvr-bg-color-1 ${
+              className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
                 link === "My Profile"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
@@ -85,25 +85,41 @@ function Dashboardnav(props) {
         {type === "brand" && (
           <div className="flex flex-col">
             <Link
-              className={link === "My Profile" ? "active" : ""}
+              className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
+                link === "My Profile"
+                  ? "rounded-lg text-black ctm-bg-color-1"
+                  : "ctm-font-color-1"
+              }`}
               onClick={() => handleLink("/dashboard/profile")}
             >
               My Profile
             </Link>
             <Link
-              className={link === "Campaigns" ? "active" : ""}
+              className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
+                link === "Campaigns"
+                  ? "rounded-lg text-black ctm-bg-color-1"
+                  : "ctm-font-color-1"
+              }`}
               onClick={() => handleLink("/dashboard/campaigns")}
             >
               Campaigns
             </Link>
             <Link
-              className={link === "Influencer Hub" ? "active" : ""}
+              className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
+                link === "Influencer Hub"
+                  ? "rounded-lg text-black ctm-bg-color-1"
+                  : "ctm-font-color-1"
+              }`}
               onClick={() => handleLink("/dashboard/influencerhub")}
             >
               Influencer Hub
             </Link>
             <Link
-              className={link === "Creator Box" ? "active" : ""}
+              className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
+                link === "Creator box"
+                  ? "rounded-lg text-black ctm-bg-color-1"
+                  : "ctm-font-color-1"
+              }`}
               onClick={() => handleLink("/dashboard/influencerbox")}
             >
               Creator Box

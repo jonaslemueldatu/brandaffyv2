@@ -51,7 +51,7 @@ function Dashboardprofile() {
     <div className="h-screen flex">
       <Dashboardnav link={link} Type={usertype} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <Dashboardheader Title="Influencer Profile" />
+        <Dashboardheader Title={usertype === "Affiliate" ? "Influencer Profile" : "Brand Profile"} />
         {!isbusy && (
           <Affiliateinfocard
             Profile={profile}
