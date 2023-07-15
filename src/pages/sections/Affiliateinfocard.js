@@ -1,63 +1,42 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function Affiliateinfocard(props) {
-  const [profile, setProfile] = useState("");
+  const [profile, setProfile] = useState(props.Profile.profile_picture);
   const [myprofile] = useState(props.Myprofile);
   const [newprofile, setNewprofile] = useState("");
-  const [oldprofile, setOldprofile] = useState("");
+  const [oldprofile] = useState(props.Profile.profile_picture);
   const [editprofile, setEditprofile] = useState(false);
   const [editcontact, setEditcontact] = useState(false);
-  const [cancel, setCancel] = useState(false);
   const [profileload, setProfileload] = useState(false);
   const [contactload, setContactload] = useState(false);
 
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [birthdate, setBirthdate] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [province, setProvince] = useState("");
-  const [country, setCountry] = useState("");
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_ROUTE}/api/getprofile`, {
-        params: {
-          id: props.Id,
-        },
-      })
-      .then((res) => {
-        if (res.data.err) {
-          alert(res.data.err);
-        } else {
-          setOldprofile(res.data.user_profile.profile_picture);
-          setProfile(res.data.user_profile.profile_picture);
-          setFirstname(res.data.user_profile.firstname);
-          setLastname(res.data.user_profile.lastname);
-          setAge(res.data.user_profile.age);
-          setGender(res.data.user_profile.gender);
-          setBirthdate(res.data.user_profile.birthdate);
-          setEmail(res.data.user_profile.email);
-          setPhonenumber(res.data.user_profile.phone_number);
-          setProvince(res.data.user_profile.province);
-          setCountry(res.data.user_profile.country);
-        }
-      })
-      .catch((err) => alert(err));
-  }, [cancel, props.Id]);
+  const [firstname, setFirstname] = useState(props.Profile.firstname);
+  const [lastname, setLastname] = useState(props.Profile.lastname);
+  const [birthdate, setBirthdate] = useState(props.Profile.birthdate);
+  const [age, setAge] = useState(props.Profile.age);
+  const [gender, setGender] = useState(props.Profile.gender);
+  const [email] = useState(props.Profile.email);
+  const [phonenumber, setPhonenumber] = useState(props.Profile.phone_number);
+  const [province, setProvince] = useState(props.Profile.province);
+  const [country, setCountry] = useState(props.Profile.country);
 
   const handleCancel = (section) => {
     switch (section) {
       case "profile":
-        setCancel(!cancel);
+        setProfile(props.Profile.profile_picture);
+        setFirstname(props.Profile.firstname);
+        setLastname(props.Profile.lastname);
+        setGender(props.Profile.gender);
+        setBirthdate(props.Profile.birthdate);
+        setAge(props.Profile.age);
         setEditprofile(false);
         break;
       case "contact":
-        setCancel(!cancel);
+        setPhonenumber(props.Profile.phone_number);
+        setProvince(props.Profile.province);
+        setCountry(props.Profile.country);
         setEditcontact(false);
         break;
       default:
