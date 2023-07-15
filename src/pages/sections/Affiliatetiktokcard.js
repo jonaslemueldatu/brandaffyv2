@@ -3,7 +3,7 @@ import { LoginSocialTiktok } from "reactjs-social-login";
 import { useState } from "react";
 
 function Affiliatetiktokcard(props) {
-  const REDIRECT_URI = `${process.env.REACT_APP_ROUTE}/dashboard/profile`;
+  const REDIRECT_URI = `${process.env.REACT_CLIENT_ROUTE}/dashboard/profile`;
 
   const [tokenData, setTokendata] = useState({});
 
