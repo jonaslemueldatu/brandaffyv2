@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useSignIn } from "react-auth-kit";
+import axios from "axios";
 
-function AffiliateRegisterPage() {
+function BrandRegisterPage() {
   const navigate = useNavigate();
   const signIn = useSignIn();
 
@@ -14,22 +14,21 @@ function AffiliateRegisterPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [brandname, setBrandname] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/affiliate/register`,
+        `${process.env.REACT_APP_ROUTE}/api/brand/register`,
         {
-          first_name: firstname,
-          last_name: lastname,
+          brand_name: brandname,
           email: email,
           password: password,
         }
       );
+
       if (res.data.err) {
         setError(res.data.err);
       } else {
@@ -62,29 +61,16 @@ function AffiliateRegisterPage() {
             <div className="my-7 text-4xl font-bold">
               Hi, Welcome to Brandaffy!
             </div>
-            <div className="flex gap-3">
-              <div className="flex flex-col flex-1">
-                <label className="my-2">First Name</label>
-                <input
-                  required
-                  placeholder="John"
-                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
-                  type="text"
-                  onChange={(e) => setFirstname(e.target.value)}
-                  onFocus={(e) => setError("")}
-                ></input>
-              </div>
-              <div className="flex flex-col flex-1">
-                <label className="my-2">Last Name</label>
-                <input
-                  required
-                  placeholder="Doe"
-                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
-                  type="text"
-                  onChange={(e) => setLastname(e.target.value)}
-                  onFocus={(e) => setError("")}
-                ></input>
-              </div>
+            <div className="my-2 flex flex-col">
+              <label className="my-2">Brand Name</label>
+              <input
+                required
+                placeholder="Brand Name"
+                className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
+                type="text"
+                onChange={(e) => setBrandname(e.target.value)}
+                onFocus={(e) => setError("")}
+              ></input>
             </div>
             <div className="my-2 flex flex-col">
               <label className="my-2">Email</label>
@@ -119,7 +105,7 @@ function AffiliateRegisterPage() {
               Already have an account?{" "}
               <Link
                 className="ctm-font-color-2 cursor-pointer"
-                to="/affiliate/login"
+                to="/brand/login"
               >
                 Login
               </Link>
@@ -132,4 +118,4 @@ function AffiliateRegisterPage() {
   );
 }
 
-export default AffiliateRegisterPage;
+export default BrandRegisterPage;

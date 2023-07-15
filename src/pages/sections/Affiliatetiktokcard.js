@@ -15,6 +15,7 @@ function Affiliatetiktokcard(props) {
         setTokendata(data);
         console.log(provider);
         console.log(data);
+        console.log(tokenData)
       }}
       onReject={(err) => {
         console.log(err);

@@ -22,21 +22,29 @@ function Dashboardprofile() {
 
   useEffect(() => {
     setIsbusy(true);
-    axios
-      .get(`${process.env.REACT_APP_ROUTE}/api/getprofile`, {
-        params: {
-          id: userid,
-        },
-      })
-      .then((res) => {
+
+    const getProfile = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_ROUTE}/api/getprofile`,
+          {
+            params: {
+              id: userid,
+            },
+          }
+        );
         if (res.data.err) {
           alert(res.data.err);
         } else {
           setProfile(res.data.user_profile);
           setIsbusy(false);
         }
-      })
-      .catch((err) => alert(err));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getProfile();
   }, [userid]);
 
   return (

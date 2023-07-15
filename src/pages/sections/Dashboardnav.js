@@ -17,20 +17,23 @@ function Dashboardnav(props) {
   );
 
   const handleLogout = async () => {
-    axios
-      .post(`${process.env.REACT_APP_ROUTE}/api/logout`, {
-        id: auth().id,
-        type: type
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          navigate(`/${type}/login`);
-          setTimeout(() => {
-            signOut();
-          }, 1000);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/logout`,
+        {
+          id: auth().id,
+          type: type,
         }
-      })
-      .catch((err) => alert(err));
+      );
+      if (res.status === 200) {
+        navigate(`/${type}/login`);
+        setTimeout(() => {
+          signOut();
+        }, 1000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleLink = (link) => {

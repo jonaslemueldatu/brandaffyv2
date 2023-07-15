@@ -55,29 +55,32 @@ function Affiliateinfocard(props) {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const updateProfile = (e) => {
-    setProfileload(true);
-    newprofile === "" ? setProfile(oldprofile) : console.log("");
-    e.preventDefault();
-    const formData = new FormData();
-    if (newprofile) {
-      formData.append("profile_picture", newprofile);
-    }
-    formData.append("id", props.Id);
-    formData.append("birthdate", birthdate);
-    formData.append("firstname", firstname);
-    formData.append("lastname", lastname);
-    formData.append("age", age);
-    formData.append("gender", gender);
-    formData.append("type", "profile");
+  const updateProfile = async (e) => {
+    try {
+      setProfileload(true);
+      newprofile === "" ? setProfile(oldprofile) : console.log("");
+      e.preventDefault();
+      const formData = new FormData();
+      if (newprofile) {
+        formData.append("profile_picture", newprofile);
+      }
+      formData.append("id", props.Id);
+      formData.append("birthdate", birthdate);
+      formData.append("firstname", firstname);
+      formData.append("lastname", lastname);
+      formData.append("age", age);
+      formData.append("gender", gender);
+      formData.append("type", "profile");
 
-    axios
-      .post(`${process.env.REACT_APP_ROUTE}/api/updateprofile`, formData)
-      .then((res) => {
-        setProfileload(false);
-        setEditprofile(false);
-      })
-      .catch((err) => console.log(err));
+      await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/updateprofile`,
+        formData
+      );
+      setProfileload(false);
+      setEditprofile(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const updateContact = (e) => {

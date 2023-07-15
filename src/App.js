@@ -5,6 +5,7 @@ import "./App.css";
 
 import AffiliateLoginPage from "./pages/influencers/AffiliateLoginPage";
 import AffiliateRegisterPage from "./pages/influencers/AffiliateRegisterPage";
+import BrandRegisterPage from "./pages/brands/BrandRegisterPage"
 import Dashboardprofile from "./pages/Dashboardprofile";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/affiliate/login" element={<AffiliateLoginPage />} />
+        <Route path="/brand/register" element={<BrandRegisterPage />} />
         <Route path="/affiliate/register" element={<AffiliateRegisterPage />} />
         <Route
           path="/dashboard/profile"

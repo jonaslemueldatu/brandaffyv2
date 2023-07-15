@@ -16,27 +16,30 @@ function AffiliateLoginPage() {
   const signIn = useSignIn();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_ROUTE}/api/affiliate/login`, {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        if (res.data.err) {
-          setError(res.data.err);
-        } else {
-          signIn({
-            token: res.data.token,
-            expiresIn: 3600,
-            tokenType: "Bearer",
-            authState: res.data.user_profile,
-          });
-          navigate("/dashboard/profile");
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/affiliate/login`,
+        {
+          email: email,
+          password: password,
         }
-      })
-      .catch((err) => console.log(err));
+      );
+      if (res.data.err) {
+        setError(res.data.err);
+      } else {
+        signIn({
+          token: res.data.token,
+          expiresIn: 3600,
+          tokenType: "Bearer",
+          authState: res.data.user_profile,
+        });
+        navigate("/dashboard/profile");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
