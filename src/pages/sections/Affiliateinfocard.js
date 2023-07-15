@@ -8,14 +8,20 @@ function Affiliateinfocard(props) {
   const [newprofile, setNewprofile] = useState("");
   const [oldprofile, setOldprofile] = useState("");
   const [editprofile, setEditprofile] = useState(false);
+  const [editcontact, setEditcontact] = useState(false);
   const [cancel, setCancel] = useState(false);
   const [profileload, setProfileload] = useState(false);
+  const [contactload, setContactload] = useState(false);
 
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
+  const [province, setProvince] = useState("");
+  const [country, setCountry] = useState("");
 
   useEffect(() => {
     axios
@@ -28,7 +34,6 @@ function Affiliateinfocard(props) {
         if (res.data.err) {
           alert(res.data.err);
         } else {
-          console.log(res.data);
           setOldprofile(res.data.user_profile.profile_picture);
           setProfile(res.data.user_profile.profile_picture);
           setFirstname(res.data.user_profile.firstname);
@@ -36,6 +41,10 @@ function Affiliateinfocard(props) {
           setAge(res.data.user_profile.age);
           setGender(res.data.user_profile.gender);
           setBirthdate(res.data.user_profile.birthdate);
+          setEmail(res.data.user_profile.email);
+          setPhonenumber(res.data.user_profile.phone_number);
+          setProvince(res.data.user_profile.province);
+          setCountry(res.data.user_profile.country);
         }
       })
       .catch((err) => alert(err));
@@ -48,7 +57,8 @@ function Affiliateinfocard(props) {
         setEditprofile(false);
         break;
       case "contact":
-        console.log("hello");
+        setCancel(!cancel);
+        setEditcontact(false);
         break;
       default:
         break;
@@ -80,19 +90,30 @@ function Affiliateinfocard(props) {
     formData.append("lastname", lastname);
     formData.append("age", age);
     formData.append("gender", gender);
+    formData.append("type", "profile");
 
     axios
       .post(`${process.env.REACT_APP_ROUTE}/api/updateprofile`, formData)
       .then((res) => {
-        console.log(res.data.user_profile);
         setProfileload(false);
         setEditprofile(false);
-        // setFirstname(res.data.user_profile.first_name);
-        // setLastname(res.data.user_profile.last_name);
-        // setBirthdate(birthdate);
-        // setProvince(province);
-        // setCountry(country);
-        // setEditview(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const updateContact = (e) => {
+    setContactload(true);
+    axios
+      .post(`${process.env.REACT_APP_ROUTE}/api/updateprofile`, {
+        type: "contact",
+        id: props.Id,
+        phone_number: phonenumber,
+        province: province,
+        country: country,
+      })
+      .then((res) => {
+        setContactload(false);
+        setEditcontact(false);
       })
       .catch((err) => console.log(err));
   };
@@ -130,7 +151,7 @@ function Affiliateinfocard(props) {
       </form>
       <div className="flex-1 flex flex-col">
         <div>
-          <div className="font-bold text-base flex flex-start">
+          <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
             Profile {profileload && <span className="ctm-loaders"></span>}
           </div>
           <hr className="my-4 border-t w-full ctm-border-color-2" />
@@ -165,6 +186,25 @@ function Affiliateinfocard(props) {
             </div>
           </div>
           <div className="flex gap-3 flex-wrap">
+            <div className="flex flex-1 flex-col my-4">
+              <label className="font-bold">Gender</label>
+
+              {editprofile ? (
+                <select
+                  onChange={(e) => setGender(e.target.value)}
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
+                  id="gender"
+                  defaultValue={gender}
+                >
+                  <option className="hidden">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Others">Others</option>
+                </select>
+              ) : (
+                <div className="p-4 ctm-min-width-1">{gender}</div>
+              )}
+            </div>
             <div className="flex flex-1 gap-3">
               <div className="flex flex-1 flex-col my-4 ctm-min-width-1">
                 <label className="font-bold">Birthdate</label>
@@ -191,28 +231,9 @@ function Affiliateinfocard(props) {
                     placeholder={age}
                   ></input>
                 ) : (
-                  <div className="p-4 ctm-min-width-1">{age}</div>
+                  <div className="p-4">{age}</div>
                 )}
               </div>
-            </div>
-            <div className="flex flex-1 flex-col my-4">
-              <label className="font-bold">Gender</label>
-
-              {editprofile ? (
-                <select
-                  onChange={(e) => setGender(e.target.value)}
-                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
-                  id="gender"
-                  defaultValue={gender}
-                >
-                  <option className="hidden">Select gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Others">Others</option>
-                </select>
-              ) : (
-                <div className="p-4 ctm-min-width-1">{gender}</div>
-              )}
             </div>
           </div>
         </div>
@@ -251,6 +272,94 @@ function Affiliateinfocard(props) {
           )}
         </div>
         <hr className="my-4 border-t w-full ctm-border-color-2" />
+        <div>
+          <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
+            Contact Information
+            {contactload && <span className="ctm-loaders"></span>}
+          </div>
+          <hr className="my-4 border-t w-full ctm-border-color-2" />
+          <div className="flex gap-3 flex-wrap">
+            <div className="flex flex-1 flex-col my-4">
+              <label className="my-2 font-bold">Email</label>
+              <div className="p-4 ctm-min-width-1">{email}</div>
+            </div>
+            <div className="flex flex-1 flex-col my-4">
+              <label className="my-2 font-bold">Phone Number</label>
+              {editcontact ? (
+                <input
+                  type="text"
+                  onChange={(e) => setPhonenumber(e.target.value)}
+                  required
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
+                  placeholder={phonenumber}
+                ></input>
+              ) : (
+                <div className="p-4 ctm-min-width-1">{phonenumber}</div>
+              )}
+            </div>
+          </div>
+          <div className="flex gap-3 flex-wrap">
+            <div className="flex flex-1 flex-col my-4">
+              <label className="my-2 font-bold">Province</label>
+              {editcontact ? (
+                <input
+                  type="text"
+                  onChange={(e) => setProvince(e.target.value)}
+                  required
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
+                  placeholder={province}
+                ></input>
+              ) : (
+                <div className="p-4 ctm-min-width-1">{province}</div>
+              )}
+            </div>
+            <div className="flex flex-1 flex-col my-4">
+              <label className="my-2 font-bold">Country</label>
+              {editcontact ? (
+                <input
+                  type="text"
+                  onChange={(e) => setCountry(e.target.value)}
+                  required
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
+                  placeholder={country}
+                ></input>
+              ) : (
+                <div className="p-4 ctm-min-width-1">{country}</div>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-end">
+          {!editcontact && myprofile && (
+            <button
+              onClick={() => {
+                setEditcontact(true);
+              }}
+              className="mx-2 ctm-btn ctm-btn-1"
+            >
+              Edit
+            </button>
+          )}
+          {editcontact && (
+            <button
+              onClick={() => {
+                handleCancel("contact");
+              }}
+              className="mx-2 ctm-btn ctm-btn-2"
+            >
+              Cancel
+            </button>
+          )}
+          {editcontact && (
+            <button
+              onClick={(e) => updateContact(e)}
+              className="mx-2 ctm-btn ctm-btn-3"
+            >
+              Submit
+            </button>
+          )}
+        </div>
+
         {/* <div>
           <div> Contact Information</div>
           <div>Email</div>
