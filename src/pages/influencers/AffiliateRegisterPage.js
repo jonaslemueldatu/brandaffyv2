@@ -66,7 +66,7 @@ function AffiliateRegisterPage() {
                 <input
                   required
                   placeholder="John"
-                  className="p-4 rounded-lg ctm-border-color-2 drop-shadow-sm"
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
                   type="text"
                   onChange={(e) => setFirstname(e.target.value)}
                   onFocus={(e) => setError("")}
@@ -77,7 +77,7 @@ function AffiliateRegisterPage() {
                 <input
                   required
                   placeholder="Doe"
-                  className="p-4 rounded-lg ctm-border-color-2 drop-shadow-sm"
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
                   type="text"
                   onChange={(e) => setLastname(e.target.value)}
                   onFocus={(e) => setError("")}
@@ -89,7 +89,7 @@ function AffiliateRegisterPage() {
               <input
                 required
                 placeholder="john@email.com"
-                className="p-4 rounded-lg ctm-border-color-2 drop-shadow-sm"
+                className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
                 onFocus={(e) => setError("")}
@@ -100,7 +100,7 @@ function AffiliateRegisterPage() {
               <input
                 required
                 placeholder="8+ characters, 1 capital letter"
-                className="p-4 rounded-lg ctm-border-color-2 drop-shadow-sm"
+                className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 onFocus={(e) => setError("")}

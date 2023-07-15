@@ -2,9 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global styles */
+.ctm-btn {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border: 1px solid;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  min-width: 80px;
+}
+.ctm-btn-1 {
+  color: rgba(63, 140, 255, 1);
+  border-color: rgba(63, 140, 255, 1);
+  background-color: transparent;
+}
+
+.ctm-btn-2 {
+  color: red;
+  border-color: red;
+  background-color: transparent;
+}
+
+.ctm-btn-3,
+.ctm-btn-1:hover {
+  color: white;
+  border-color: rgb(108, 93, 211);
+  background-color: rgba(63, 140, 255, 1);
+}
+
+.ctm-btn-4 {
+  color: rgb(108, 93, 211);
+  border-color: rgb(108, 93, 211);
+  background-color: transparent;
+}
+
+.ctm-btn-5 {
+  color: white;
+  border-color: red;
+  background-color: red;
+}
+
 /* Custom background image */
 .ctm-bg-image-1 {
-  background-image: url('https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/stockphoto-asset-1.jpg')
+  background-image: url("https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/stockphoto-asset-1.jpg");
 }
 
 /* Custom background color */
@@ -29,13 +72,8 @@
   border-color: rgba(216, 218, 229, 1);
 }
 
-.ctm-border-color-2 {
+.ctm-border-color-3 {
   border-color: rgba(229, 231, 235, 0.5);
-}
-
-/*Custom Box Shadow for input fields*/
-.ctm-box-shadow-1 {
-  box-shadow: ;
 }
 
 /* Custom color */
@@ -45,4 +83,40 @@
 
 .ctm-font-color-2 {
   color: rgb(79, 70, 229);
+}
+
+/* Custom min-width */
+.ctm-min-width-1 {
+  min-width: 200px;
+}
+
+/* Animations */
+.ctm-loaders {
+  display: inline-block;
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid black;
+  width: 1.5rem;
+  height: 1.5rem rem;
+  animation: spin 2s linear infinite;
+  margin: 0 1rem;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

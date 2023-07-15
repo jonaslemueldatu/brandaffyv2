@@ -5,6 +5,7 @@ import { useAuthUser } from "react-auth-kit";
 
 import Dashboardnav from "./sections/Dashboardnav";
 import Dashboardheader from "./sections/Dashboardheader";
+import Affiliateinfocard from "./sections/Affiliateinfocard";
 
 function Dashboardprofile() {
   const auth = useAuthUser();
@@ -14,7 +15,7 @@ function Dashboardprofile() {
 
   const [myprofile] = useState(id ? false : true);
   const [link] = useState(id ? "" : "My Profile");
-  const [getid] = useState(id ? id : auth().id);
+  const [userid] = useState(id ? id : auth().id);
   const [usertype] = useState(auth().user_type);
 
   return (
@@ -22,6 +23,7 @@ function Dashboardprofile() {
       <Dashboardnav link={link} Type={usertype} />
       <div className="flex flex-col flex-1 p-4">
         <Dashboardheader Title="Influencer Profile" />
+        {usertype === 'Affiliate' && <Affiliateinfocard Myprofile={myprofile} Id={userid} />}
       </div>
     </div>
   );

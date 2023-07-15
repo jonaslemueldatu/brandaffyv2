@@ -58,7 +58,7 @@ function AffiliateLoginPage() {
             <div className="my-2 flex flex-col">
               <label className="text-base my-2">Email</label>
               <input
-                className="p-4 rounded-lg ctm-border-color-2 border drop-shadow-sm"
+                className="p-4 rounded-lg ctm-border-color-3 border drop-shadow-sm"
                 required
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
@@ -70,7 +70,7 @@ function AffiliateLoginPage() {
               <label className="text-base my-2">Password</label>
               <input
                 placeholder="8+ characters, 1 capital letter"
-                className="p-4 rounded-lg ctm-border-color-2 drop-shadow-sm"
+                className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
                 required
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}

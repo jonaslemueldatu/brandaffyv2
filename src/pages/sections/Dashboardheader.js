@@ -4,7 +4,7 @@ import React from "react";
 
 function Dashboardheader(props) {
   return (
-    <div>
+    <div className="my-4">
       <div className="text-2xl font-bold">{props.Title}</div>
     </div>
   );
