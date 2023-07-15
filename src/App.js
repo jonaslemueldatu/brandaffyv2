@@ -5,7 +5,8 @@ import "./App.css";
 
 import AffiliateLoginPage from "./pages/influencers/AffiliateLoginPage";
 import AffiliateRegisterPage from "./pages/influencers/AffiliateRegisterPage";
-import BrandRegisterPage from "./pages/brands/BrandRegisterPage"
+import BrandLoginPage from "./pages/brands/BrandLoginPage";
+import BrandRegisterPage from "./pages/brands/BrandRegisterPage";
 import Dashboardprofile from "./pages/Dashboardprofile";
 
 function App() {
@@ -13,13 +14,14 @@ function App() {
     <div>
       <Routes>
         <Route path="/affiliate/login" element={<AffiliateLoginPage />} />
+        <Route path="/brand/login" element={<BrandLoginPage />} />
         <Route path="/brand/register" element={<BrandRegisterPage />} />
         <Route path="/affiliate/register" element={<AffiliateRegisterPage />} />
         <Route
           path="/dashboard/profile"
           element={
             <RequireAuth loginPath="/affiliate/login">
-              <Dashboardprofile/>
+              <Dashboardprofile />
             </RequireAuth>
           }
         />

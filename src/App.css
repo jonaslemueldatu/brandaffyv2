@@ -50,6 +50,10 @@
   background-image: url("https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/stockphoto-asset-1.jpg");
 }
 
+.ctm-bg-image-2 {
+  background-image: url("https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/stockphoto-asset-2.jpg");
+}
+
 /* Custom background color */
 .ctm-bg-color-1 {
   background-color: rgba(229, 231, 235, 1);
