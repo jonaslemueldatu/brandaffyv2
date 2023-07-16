@@ -17,7 +17,7 @@ function Dashboardprofile() {
   const [myprofile] = useState(id ? false : true);
   const [link] = useState(id ? "" : "My Profile");
   const [userid] = useState(id ? id : auth().id);
-  const [usertype] = useState(auth().user_type);
+  const [usertype] = useState(id ? "Affiliate" : auth().user_type);
   const [profile, setProfile] = useState({});
   const [isbusy, setIsbusy] = useState(true);
 
