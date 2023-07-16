@@ -176,6 +176,7 @@ function Brandinfocard(props) {
                   rows="3"
                   onChange={(e) => setAbout(e.target.value)}
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
+                  placeholder={about}
                 ></textarea>
               ) : (
                 <div className="p-4 ctm-min-width-1">{about}</div>
