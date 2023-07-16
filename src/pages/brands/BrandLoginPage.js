@@ -99,7 +99,7 @@ function BrandLoginPage() {
           </form>
         </div>
       </div>
-      <div className="hidden lg:block md:flex-1 h-full ctm-bg-image-1 bg-no-repeat bg-bottom bg-cover"></div>
+      <div className="hidden lg:block md:flex-1 h-full ctm-bg-image-2 bg-no-repeat bg-center bg-cover"></div>
     </div>
   );
 }

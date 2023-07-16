@@ -40,7 +40,6 @@ function Affiliateinfocard(props) {
         setEditcontact(false);
         break;
       default:
-        break;
     }
   };
 
