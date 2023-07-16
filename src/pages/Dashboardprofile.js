@@ -8,6 +8,7 @@ import Dashboardnav from "./sections/Dashboardnav";
 import Dashboardheader from "./sections/Dashboardheader";
 import Affiliateinfocard from "./sections/Affiliateinfocard";
 import Affiliatetiktokcard from "./sections/Affiliatetiktokcard";
+import Brandinfocard from "./sections/Brandinfocard";
 
 function Dashboardprofile() {
   const auth = useAuthUser();
@@ -64,6 +65,7 @@ function Dashboardprofile() {
             Id={userid}
           />
         )}
+        {!isbusy && usertype === "Brand" && <Brandinfocard Profile={profile} Myprofile={myprofile} Id={userid} />}
         {!isbusy && usertype === "Affiliate" && (
           <Affiliatetiktokcard Myprofile={myprofile} Id={userid} />
         )}

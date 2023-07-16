@@ -1,41 +1,42 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import IndustryDropdown from "../snippets/IndustryDropdown";
 
-function Affiliateinfocard(props) {
+function Brandinfocard(props) {
   const [profile, setProfile] = useState(props.Profile.profile_picture);
   const [myprofile] = useState(props.Myprofile);
   const [newprofile, setNewprofile] = useState("");
   const [oldprofile] = useState(props.Profile.profile_picture);
+
   const [editprofile, setEditprofile] = useState(false);
   const [editcontact, setEditcontact] = useState(false);
   const [profileload, setProfileload] = useState(false);
   const [contactload, setContactload] = useState(false);
 
-  const [firstname, setFirstname] = useState(props.Profile.firstname);
-  const [lastname, setLastname] = useState(props.Profile.lastname);
-  const [birthdate, setBirthdate] = useState(props.Profile.birthdate);
-  const [age, setAge] = useState(props.Profile.age);
-  const [gender, setGender] = useState(props.Profile.gender);
+  const [brandname, setBrandname] = useState(props.Profile.brand_name);
+  const [about, setAbout] = useState(props.Profile.about);
+  const [industry, setIndustry] = useState(props.Profile.industry);
+  const [employeesize, setEmployeesize] = useState(props.Profile.employee_size);
+
   const [email] = useState(props.Profile.email);
   const [phonenumber, setPhonenumber] = useState(props.Profile.phone_number);
-  const [province, setProvince] = useState(props.Profile.province);
+  const [address, setAddress] = useState(props.Profile.company_address);
   const [country, setCountry] = useState(props.Profile.country);
 
   const handleCancel = (section) => {
     switch (section) {
       case "profile":
         setProfile(props.Profile.profile_picture);
-        setFirstname(props.Profile.firstname);
-        setLastname(props.Profile.lastname);
-        setGender(props.Profile.gender);
-        setBirthdate(props.Profile.birthdate);
-        setAge(props.Profile.age);
+        setBrandname(props.Profile.brand_name);
+        setAbout(props.Profile.about);
+        setIndustry(props.Profile.industry);
+        setEmployeesize(props.Profile.employee_size);
         setEditprofile(false);
         break;
       case "contact":
         setPhonenumber(props.Profile.phone_number);
-        setProvince(props.Profile.province);
+        setAddress(props.Profile.address);
         setCountry(props.Profile.country);
         setEditcontact(false);
         break;
@@ -64,13 +65,12 @@ function Affiliateinfocard(props) {
         formData.append("profile_picture", newprofile);
       }
       formData.append("id", props.Id);
-      formData.append("birthdate", birthdate);
-      formData.append("firstname", firstname);
-      formData.append("lastname", lastname);
-      formData.append("age", age);
-      formData.append("gender", gender);
+      formData.append("brand_name", brandname);
+      formData.append("about", about);
+      formData.append("industry", industry);
+      formData.append("employee_size", employeesize);
       formData.append("type", "profile");
-      formData.append("user_type", "Affiliate");
+      formData.append("user_type", "Brand");
 
       await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/updateprofile`,
@@ -90,9 +90,9 @@ function Affiliateinfocard(props) {
         type: "contact",
         id: props.Id,
         phone_number: phonenumber,
-        province: province,
+        address: address,
         country: country,
-        user_type: "Affiliate",
+        user_type: "Brand",
       });
       setContactload(false);
       setEditcontact(false);
@@ -140,83 +140,68 @@ function Affiliateinfocard(props) {
           <hr className="my-4 border-t w-full ctm-border-color-2" />
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
-              <label className="my-2 font-bold">First Name</label>
+              <label className="my-2 font-bold">Brand Name</label>
               {editprofile ? (
                 <input
                   type="text"
-                  onChange={(e) => setFirstname(e.target.value)}
+                  onChange={(e) => setBrandname(e.target.value)}
                   required
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                  placeholder={firstname}
+                  placeholder={brandname}
                 ></input>
               ) : (
-                <div className="p-4 ctm-min-width-1">{firstname}</div>
+                <div className="p-4 ctm-min-width-1">{brandname}</div>
               )}
             </div>
+            <div className="flex flex-1 flex-col my-4"></div>
+          </div>
+          <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
-              <label className="my-2 font-bold">Last Name</label>
+              <label className="font-bold">About</label>
               {editprofile ? (
-                <input
-                  type="text"
-                  onChange={(e) => setLastname(e.target.value)}
-                  required
-                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                  placeholder={lastname}
-                ></input>
+                <textarea
+                  rows="3"
+                  onChange={(e) => setAbout(e.target.value)}
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
+                ></textarea>
               ) : (
-                <div className="p-4 ctm-min-width-1">{lastname}</div>
+                <div className="p-4 ctm-min-width-1">{about}</div>
               )}
             </div>
           </div>
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
-              <label className="font-bold">Gender</label>
-
+              <label className="my-2 font-bold">Industry</label>
               {editprofile ? (
-                <select
-                  onChange={(e) => setGender(e.target.value)}
-                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
-                  id="gender"
-                  defaultValue={gender}
-                >
-                  <option className="hidden">Select gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Others">Others</option>
-                </select>
+                <IndustryDropdown
+                  SetIndustry={setIndustry}
+                  Industry={industry}
+                />
               ) : (
-                <div className="p-4 ctm-min-width-1">{gender}</div>
+                <div className="p-4 ctm-min-width-1">{industry}</div>
               )}
             </div>
-            <div className="flex flex-1 gap-3">
-              <div className="flex flex-1 flex-col my-4 ctm-min-width-1">
-                <label className="font-bold">Birthdate</label>
-                {editprofile ? (
-                  <input
-                    type="date"
-                    value={birthdate}
-                    onChange={(e) => setBirthdate(e.target.value)}
-                    required
-                    className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
-                  ></input>
-                ) : (
-                  <div className="p-4 ctm-min-width-1">{birthdate}</div>
-                )}
-              </div>
-              <div className="flex w-20 flex-col my-4">
-                <label className="font-bold">Age</label>
-                {editprofile ? (
+            <div className="flex flex-1 flex-col my-4">
+              <label className="my-2 font-bold">Employee Size</label>
+              {editprofile ? (
+                <div>
+                  Around
                   <input
                     type="number"
-                    onChange={(e) => setAge(e.target.value)}
+                    onChange={(e) => setEmployeesize(e.target.value)}
                     required
-                    className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
-                    placeholder={age}
+                    className="p-4 mx-2 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
+                    placeholder={employeesize}
                   ></input>
-                ) : (
-                  <div className="p-4">{age}</div>
-                )}
-              </div>
+                  employees
+                </div>
+              ) : (
+                <div className="p-4 ctm-min-width-1">
+                  {employeesize && (
+                    <span>Around {employeesize}+ employees</span>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -283,17 +268,17 @@ function Affiliateinfocard(props) {
           </div>
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
-              <label className="my-2 font-bold">Province</label>
+              <label className="my-2 font-bold">Company Address</label>
               {editcontact ? (
                 <input
                   type="text"
-                  onChange={(e) => setProvince(e.target.value)}
+                  onChange={(e) => setAddress(e.target.value)}
                   required
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                  placeholder={province}
+                  placeholder={address}
                 ></input>
               ) : (
-                <div className="p-4 ctm-min-width-1">{province}</div>
+                <div className="p-4 ctm-min-width-1">{address}</div>
               )}
             </div>
             <div className="flex flex-1 flex-col my-4">
@@ -342,17 +327,9 @@ function Affiliateinfocard(props) {
             </button>
           )}
         </div>
-
-        {/*
-        <div>
-          <div> Something About Me</div>
-          <div>Hobbies</div>
-          <div>Favorite Food</div>
-          <div>Niche</div>
-        </div> */}
       </div>
     </div>
   );
 }
 
-export default Affiliateinfocard;
+export default Brandinfocard;
