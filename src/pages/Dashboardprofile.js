@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
-import Dashboardnav from "./sections/Dashboardnav";
-import Dashboardheader from "./sections/Dashboardheader";
-import Affiliateinfocard from "./sections/Affiliateinfocard";
-import Affiliatetiktokcard from "./sections/Affiliatetiktokcard";
-import Brandinfocard from "./sections/Brandinfocard";
+import Dashboardnav from "../pages/sections/Dashboardnav";
+import Dashboardheader from "../pages/sections/Dashboardheader";
+import Affiliateinfocard from "../pages/sections/Affiliateinfocard";
+import Affiliatetiktokcard from "../pages/sections/Affiliatetiktokcard";
+import Brandinfocard from "../pages/sections/Brandinfocard";
 
 function Dashboardprofile() {
   const auth = useAuthUser();
