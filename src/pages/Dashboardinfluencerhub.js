@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
@@ -10,7 +9,6 @@ import Affiliatelist from "./sections/Affiliatelist";
 
 function Dashboardinfluencerhub() {
   const auth = useAuthUser();
-  const { id } = useParams();
 
   const [link] = useState("Influencer Hub");
   const [usertype] = useState(auth().user_type);
