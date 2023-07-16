@@ -8,6 +8,7 @@ import AffiliateRegisterPage from "./pages/influencers/AffiliateRegisterPage";
 import BrandLoginPage from "./pages/brands/BrandLoginPage";
 import BrandRegisterPage from "./pages/brands/BrandRegisterPage";
 import Dashboardprofile from "./pages/Dashboardprofile";
+import Dashboardinfluencerhub from "./pages/Dashboardinfluencerhub"
 
 function App() {
   return (
@@ -18,10 +19,18 @@ function App() {
         <Route path="/brand/register" element={<BrandRegisterPage />} />
         <Route path="/affiliate/register" element={<AffiliateRegisterPage />} />
         <Route
-          path="/dashboard/profile"
+          path="/dashboard/profile/:id?"
           element={
             <RequireAuth loginPath="/affiliate/login">
               <Dashboardprofile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard/influencerhub"
+          element={
+            <RequireAuth loginPath="/affiliate/login">
+              <Dashboardinfluencerhub />
             </RequireAuth>
           }
         />

@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function Affiliateinfocard(props) {
   const [profile, setProfile] = useState(props.Profile.profile_picture);
@@ -135,7 +137,18 @@ function Affiliateinfocard(props) {
       <div className="flex-1 flex flex-col">
         <div>
           <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
-            Profile {profileload && <span className="ctm-loaders"></span>}
+            Profile{" "}
+            {profileload && (
+              <FontAwesomeIcon
+                className="mx-4 my-auto"
+                icon={faSpinner}
+                spin
+                style={{
+                  "--fa-primary-color": "#000000",
+                  "--fa-secondary-color": "#000000",
+                }}
+              />
+            )}
           </div>
           <hr className="my-4 border-t w-full ctm-border-color-2" />
           <div className="flex gap-3 flex-wrap">
@@ -258,7 +271,17 @@ function Affiliateinfocard(props) {
         <div>
           <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
             Contact Information
-            {contactload && <span className="ctm-loaders"></span>}
+            {contactload && (
+              <FontAwesomeIcon
+                className="mx-4 my-auto"
+                icon={faSpinner}
+                spin
+                style={{
+                  "--fa-primary-color": "#000000",
+                  "--fa-secondary-color": "#000000",
+                }}
+              />
+            )}
           </div>
           <hr className="my-4 border-t w-full ctm-border-color-2" />
           <div className="flex gap-3 flex-wrap">

@@ -63,6 +63,14 @@
   background-color: #6c5dd3;
 }
 
+.ctm-bg-color-3 {
+  background-color: #0fcc45;
+}
+
+.ctm-bg-color-4 {
+  background-color: red;
+}
+
 .ctm-hvr-bg-color-1:hover {
   background-color: rgba(229, 231, 235, 1);
 }
@@ -89,38 +97,31 @@
   color: rgb(79, 70, 229);
 }
 
+.ctm-font-color-3 {
+  color: #01a6ea;
+}
+
+.ctm-font-color-4 {
+  color: #ffb1cb;
+}
+
+.ctm-font-color-5 {
+  color: red;
+}
+
 /* Custom min-width */
 .ctm-min-width-1 {
   min-width: 200px;
 }
 
-/* Animations */
-.ctm-loaders {
-  display: inline-block;
-  border: 3px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 3px solid black;
-  width: 1.5rem;
-  height: 1.5rem rem;
-  animation: spin 2s linear infinite;
-  margin: 0 1rem;
+/* Custom animations */
+
+.ctm-animation-1 {
+  animation: blink 1s linear infinite;
 }
 
-/* Safari */
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+@keyframes blink {
+  100% { transform: scale(2, 2); 
+          opacity: 0;
+        }
 }
