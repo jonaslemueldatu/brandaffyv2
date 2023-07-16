@@ -29,7 +29,7 @@
 .ctm-btn-3,
 .ctm-btn-1:hover {
   color: white;
-  border-color: rgb(108, 93, 211);
+  border-color: rgba(63, 140, 255, 1);
   background-color: rgba(63, 140, 255, 1);
 }
 
@@ -43,6 +43,11 @@
   color: white;
   border-color: red;
   background-color: red;
+}
+
+/* Custom Aspect Ratio */
+.ctm-aspect-ratio-1 {
+  aspect-ratio: 2/1;
 }
 
 /* Custom background image */
@@ -112,6 +117,10 @@
 /* Custom min-width */
 .ctm-min-width-1 {
   min-width: 200px;
+}
+
+.ctm-min-width-2 {
+  min-width: 300px;
 }
 
 /* Custom animations */

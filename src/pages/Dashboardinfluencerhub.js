@@ -20,7 +20,7 @@ function Dashboardinfluencerhub() {
     const getProfilelist = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_ROUTE}/api/getaffiliate`,
+          `${process.env.REACT_APP_ROUTE}/api/affiliate/getlist`,
           {
             params: {},
           }

@@ -116,13 +116,13 @@ function Dashboardnav(props) {
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "Creator box"
+                link === "Influencer Box"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
               onClick={() => handleLink("/dashboard/influencerbox")}
             >
-              Creator Box
+              Influencer Box
             </Link>
           </div>
         )}

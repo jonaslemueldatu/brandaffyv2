@@ -114,7 +114,7 @@ function Affiliateinfocard(props) {
           <label htmlFor="profile-upload">
             <img
               alt="Upload user profile placeholder"
-              className="rounded-lg w-60 h-60 my-10 cursor-pointer"
+              className="rounded-lg w-60 h-60 cursor-pointer"
               src={profile}
             ></img>
             <input
@@ -128,7 +128,7 @@ function Affiliateinfocard(props) {
           profile && (
             <img
               alt="Profile placeholder"
-              className="rounded-lg w-60 h-60 my-10"
+              className="rounded-lg w-60 h-60"
               src={profile}
             ></img>
           )

@@ -8,7 +8,8 @@ import AffiliateRegisterPage from "./pages/influencers/AffiliateRegisterPage";
 import BrandLoginPage from "./pages/brands/BrandLoginPage";
 import BrandRegisterPage from "./pages/brands/BrandRegisterPage";
 import Dashboardprofile from "./pages/Dashboardprofile";
-import Dashboardinfluencerhub from "./pages/Dashboardinfluencerhub"
+import Dashboardinfluencerhub from "./pages/Dashboardinfluencerhub";
+import DashboardInfluencerBox from "./pages/brands/DashboardInfluencerBox"
 
 function App() {
   return (
@@ -31,6 +32,14 @@ function App() {
           element={
             <RequireAuth loginPath="/affiliate/login">
               <Dashboardinfluencerhub />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard/influencerbox"
+          element={
+            <RequireAuth loginPath="/affiliate/login">
+              <DashboardInfluencerBox />
             </RequireAuth>
           }
         />

@@ -7,7 +7,7 @@ import axios from "axios";
 import Dashboardnav from "../pages/sections/Dashboardnav";
 import Dashboardheader from "../pages/sections/Dashboardheader";
 import Affiliateinfocard from "../pages/sections/Affiliateinfocard";
-import Affiliatetiktokcard from "../pages/sections/Affiliatetiktokcard";
+// import Affiliatetiktokcard from "../pages/sections/Affiliatetiktokcard";
 import Brandinfocard from "../pages/sections/Brandinfocard";
 
 function Dashboardprofile() {
@@ -36,7 +36,7 @@ function Dashboardprofile() {
           }
         );
         if (res.data.err) {
-          alert(res.data.err);
+          console.log(res.data.err);
         } else {
           setProfile(res.data.user_profile);
           setIsbusy(false);
@@ -66,9 +66,9 @@ function Dashboardprofile() {
           />
         )}
         {!isbusy && usertype === "Brand" && <Brandinfocard Profile={profile} Myprofile={myprofile} Id={userid} />}
-        {!isbusy && usertype === "Affiliate" && (
+        {/* {!isbusy && usertype === "Affiliate" && (
           <Affiliatetiktokcard Myprofile={myprofile} Id={userid} />
-        )}
+        )} */}
       </div>
     </div>
   );

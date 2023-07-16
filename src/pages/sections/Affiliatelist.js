@@ -23,18 +23,18 @@ function Affiliatelist(props) {
   };
 
   return (
-    <div className="flex-col md:flex-row flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-x-scroll">
+    <div className="flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-x-scroll">
       <table className="flex-1">
         <thead>
           <tr className="h-20 ctm-border-color-3 border-b">
-            <th className="px-4 text-center">Select</th>
-            <th className="px-4 text-center w-80">User</th>
-            <th className="px-4 text-left w-80">Email</th>
-            <th className="px-4 text-center">Gender</th>
-            <th className="px-4 text-center">Age</th>
+            <th className="px-4 text-center w-24">Select</th>
+            <th className="px-4 text-left ctm-min-width-2">User</th>
+            <th className="px-4 text-left">Email</th>
+            <th className="px-4 text-center w-24">Gender</th>
+            <th className="px-4 text-center w-24">Age</th>
             <th className="px-4 text-left">Province</th>
-            <th className="px-4 text-center">Online</th>
-            <th className="px-4 text-center">Tiktok</th>
+            <th className="px-4 text-center w-24">Online</th>
+            <th className="px-4 text-center w-24">Tiktok</th>
             <th className="px-4 text-center">Action</th>
           </tr>
         </thead>
@@ -71,11 +71,11 @@ function Affiliatelist(props) {
               <tr
                 key={affiliate._id.toString()}
                 onClick={() => handleTrClick(affiliate._id.toString())}
-                className="h-20 cursor-pointer"
+                className="h-20 cursor-pointer ctm-border-color-3 border-b"
               >
                 <td className="px-4"></td>
-                <td className="px-4 w-80">
-                  <div className="flex justify-left items-center ">
+                <td className="px-4 whitespace-nowrap">
+                  <div className="flex justify-left items-center">
                     <img
                       className="rounded-full h-16"
                       alt="Affiliate profile per row"
@@ -86,7 +86,7 @@ function Affiliatelist(props) {
                     </span>
                   </div>
                 </td>
-                <td className="px-4 text-left w-80">{affiliate.email}</td>
+                <td className="px-4 text-left">{affiliate.email}</td>
                 <td className="px-4 text-center">{genderIcon}</td>
                 <td className="px-4 text-center">{affiliate.age}</td>
                 <td className="px-4 text-left">{affiliate.province}</td>
@@ -100,6 +100,11 @@ function Affiliatelist(props) {
           })}
         </tbody>
       </table>
+      {affiliatelist.length <= 0 && (
+        <div className="text-center my-8 ctm-font-color-1">
+          No Data to display
+        </div>
+      )}
     </div>
   );
 }
