@@ -49,6 +49,7 @@ function Addtoboxpopup(props) {
           setError(res.data.err)
         } else {
           await setBoxes(res.data.brandbox_list);
+          await setBoxchoice(res.data.brandbox_list[0]._id.toString())
           setIsbusy(false);
         }
       } catch (error) {
@@ -82,11 +83,8 @@ function Addtoboxpopup(props) {
                 required
                 className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border w-full my-4"
                 onChange={(e) => setBoxchoice(e.target.value)}
-                defaultValue=""
+                defaultValue={boxChoice}
               >
-                <option value="" disabled hidden>
-                  Select a box...
-                </option>
                 {boxes.map((box) => {
                   return (
                     <option key={box._id.toString()} value={box._id.toString()}>
@@ -107,7 +105,6 @@ function Addtoboxpopup(props) {
           </button>
           {!isBusy && boxes.length > 0 && (
             <button
-              disabled={boxChoice === undefined ? true : false}
               onClick={() => handleAddButton()}
               className="ctm-btn ctm-btn-3"
             >

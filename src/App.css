@@ -84,6 +84,10 @@
   background-color: red;
 }
 
+.ctm-bg-color-5 {
+  background-color: #fff2cc;
+}
+
 .ctm-hvr-bg-color-1:hover {
   background-color: rgba(229, 231, 235, 1);
 }

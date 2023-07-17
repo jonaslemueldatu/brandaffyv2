@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function GeneralAction(props) {
+  const navigate = useNavigate();
+
   const handleBoxAdd = async (e) => {
     e.stopPropagation();
     props.SetPopup({
@@ -33,7 +36,7 @@ function GeneralAction(props) {
       )}
       {props.CustomData.action === "brandCampaigns" && (
         <div className="flex">
-          <button className="ctm-btn ctm-btn-1">Create Campaign</button>
+          <button onClick={() => navigate("create")} className="ctm-btn ctm-btn-1">Create Campaign</button>
         </div>
       )}
     </div>

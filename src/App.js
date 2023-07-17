@@ -12,6 +12,7 @@ import Dashboardinfluencerhub from "./pages/Dashboardinfluencerhub";
 import DashboardInfluencerBox from "./pages/brands/DashboardInfluencerBox";
 import DashboardBoxDetails from "./pages/brands/DashboardBoxDetails";
 import Dashboardcampaigns from "./pages/Dashboardcampaigns";
+import Dashboardcreatecampaign from "./pages/brands/Dashboardcreatecampaign";
 
 function App() {
   return (
@@ -58,6 +59,14 @@ function App() {
           element={
             <RequireAuth loginPath="/affiliate/login">
               <Dashboardcampaigns />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard/campaigns/create"
+          element={
+            <RequireAuth loginPath="/affiliate/login">
+              <Dashboardcreatecampaign />
             </RequireAuth>
           }
         />
