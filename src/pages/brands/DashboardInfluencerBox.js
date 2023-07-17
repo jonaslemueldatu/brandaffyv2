@@ -6,7 +6,7 @@ import axios from "axios";
 import Dashboardnav from "../../pages/sections/Dashboardnav";
 import Dashboardheader from "../../pages/sections/Dashboardheader";
 import InfluencerBoxList from "../sections/Influencerboxlist";
-import Influencerboxlistaction from "../sections/Influencerboxlistaction";
+import Generalactioncontainer from "../sections/Generalactioncontainer";
 import Createboxpopup from "../snippets/Createboxpopup";
 
 function DashboardInfluencerBox() {
@@ -17,6 +17,9 @@ function DashboardInfluencerBox() {
   const [usertype] = useState(auth().user_type);
   const [boxes, setBoxes] = useState({});
   const [isbusy, setIsbusy] = useState(true);
+  const [customData] = useState({
+    action: "influencerBox"
+  })
 
   const [popup, setPopup] = useState(false);
   const [triggereffect, setTriggereffect] = useState(false);
@@ -52,7 +55,7 @@ function DashboardInfluencerBox() {
       <Dashboardnav link={link} Type={usertype} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <Dashboardheader Title="Influencer Box" />
-        {!isbusy && (<Influencerboxlistaction SetPopup={setPopup} />)}
+        {!isbusy && (<Generalactioncontainer SetPopup={setPopup} CustomData={customData} />)}
         {!isbusy && (<InfluencerBoxList Boxes={boxes} SetEffect={setTriggereffect} />)}
       </div>
       {popup && !isbusy && (<Createboxpopup SetPopup={setPopup} SetEffect={setTriggereffect} Id={userid} />)}

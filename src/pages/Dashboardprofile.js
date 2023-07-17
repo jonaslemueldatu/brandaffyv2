@@ -9,6 +9,8 @@ import Dashboardheader from "../pages/sections/Dashboardheader";
 import Affiliateinfocard from "../pages/sections/Affiliateinfocard";
 // import Affiliatetiktokcard from "../pages/sections/Affiliatetiktokcard";
 import Brandinfocard from "../pages/sections/Brandinfocard";
+import Generalactioncontainer from "./sections/Generalactioncontainer";
+import Addtoboxpopup from "./snippets/Addtoboxpopup";
 
 function Dashboardprofile() {
   const auth = useAuthUser();
@@ -21,6 +23,11 @@ function Dashboardprofile() {
   const [profile, setProfile] = useState({});
   const [isbusy, setIsbusy] = useState(true);
 
+  const [popup, setPopup] = useState({});
+  const [customData] = useState({
+    action: "brandAffiliateProfile",
+    id: userid,
+  });
   useEffect(() => {
     setIsbusy(true);
 
@@ -50,7 +57,7 @@ function Dashboardprofile() {
   }, [userid, usertype]);
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex relative">
       <Dashboardnav link={link} Type={auth().user_type} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <Dashboardheader
@@ -58,6 +65,10 @@ function Dashboardprofile() {
             usertype === "Affiliate" ? "Influencer Profile" : "Brand Profile"
           }
         />
+        {!isbusy && auth().user_type === "Brand" && !myprofile && (
+          <Generalactioncontainer SetPopup={setPopup} CustomData={customData} />
+        )}
+
         {!isbusy && usertype === "Affiliate" && (
           <Affiliateinfocard
             Profile={profile}
@@ -65,11 +76,16 @@ function Dashboardprofile() {
             Id={userid}
           />
         )}
-        {!isbusy && usertype === "Brand" && <Brandinfocard Profile={profile} Myprofile={myprofile} Id={userid} />}
+        {!isbusy && usertype === "Brand" && (
+          <Brandinfocard Profile={profile} Myprofile={myprofile} Id={userid} />
+        )}
         {/* {!isbusy && usertype === "Affiliate" && (
           <Affiliatetiktokcard Myprofile={myprofile} Id={userid} />
         )} */}
       </div>
+      {popup.action === "addBox" && !isbusy && (
+        <Addtoboxpopup SetPopup={setPopup} Popup={popup} />
+      )}
     </div>
   );
 }

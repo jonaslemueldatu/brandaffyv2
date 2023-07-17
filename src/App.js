@@ -10,7 +10,8 @@ import BrandRegisterPage from "./pages/brands/BrandRegisterPage";
 import Dashboardprofile from "./pages/Dashboardprofile";
 import Dashboardinfluencerhub from "./pages/Dashboardinfluencerhub";
 import DashboardInfluencerBox from "./pages/brands/DashboardInfluencerBox";
-import DashboardBoxDetails from "./pages/brands/DashboardBoxDetails"
+import DashboardBoxDetails from "./pages/brands/DashboardBoxDetails";
+import Dashboardcampaigns from "./pages/Dashboardcampaigns";
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
           element={
             <RequireAuth loginPath="/affiliate/login">
               <DashboardBoxDetails />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard/campaigns"
+          element={
+            <RequireAuth loginPath="/affiliate/login">
+              <Dashboardcampaigns />
             </RequireAuth>
           }
         />
