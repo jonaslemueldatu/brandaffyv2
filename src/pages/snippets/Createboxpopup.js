@@ -9,16 +9,19 @@ function Createboxpopup(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_ROUTE}/api/brand/box/create`, {
-        brand_owner_id: props.Id,
-        label: label,
-        description: description
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/brand/box/create`,
+        {
+          brand_owner_id: props.Id,
+          label: label,
+          description: description,
+        }
+      );
       if (res.data.err) {
-        setError(res.data.err)
+        setError(res.data.err);
       } else {
-        props.SetEffect(true)
-        props.SetPopup(false)
+        props.SetEffect(true);
+        props.SetPopup(false);
       }
     } catch (error) {
       console.log(error);
@@ -49,6 +52,7 @@ function Createboxpopup(props) {
           <div className="flex flex-1 flex-col my-4">
             <label className="font-medium">About</label>
             <textarea
+              required
               rows="3"
               onChange={(e) => setDescription(e.target.value)}
               className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"

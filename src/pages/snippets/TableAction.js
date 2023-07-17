@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-function RemoveBoxButton(props) {
+function TableAction(props) {
   const handleBoxRemove = async (e, id) => {
     e.stopPropagation();
     try {
@@ -9,7 +9,7 @@ function RemoveBoxButton(props) {
         `${process.env.REACT_APP_ROUTE}/api/brand/box/removeAffiliate`,
         {
           id: props.Id,
-          boxId: props.CustomData.boxId
+          boxId: props.CustomData.boxId,
         }
       );
       if (res.data.err) {
@@ -22,8 +22,16 @@ function RemoveBoxButton(props) {
     }
   };
 
+  const handleBoxAdd = async (e) => {
+    e.stopPropagation();
+    props.SetPopup({
+      action: "addBox",
+      id: props.Id
+    })
+  }
+
   return (
-    <div>
+    <div className="flex justify-center">
       {props.CustomData.action === "removeFromBox" && (
         <button
           onClick={(e) => handleBoxRemove(e)}
@@ -32,8 +40,19 @@ function RemoveBoxButton(props) {
           Remove
         </button>
       )}
+      {props.CustomData.action === "brandActions" && (
+        <div className="flex">
+          <button
+            onClick={(e) => handleBoxAdd(e)}
+            className="ctm-btn mx-2 ctm-btn-4"
+          >
+            Add to Box
+          </button>
+          <button className="ctm-btn ctm-btn-1">Invite</button>
+        </div>
+      )}
     </div>
   );
 }
 
-export default RemoveBoxButton;
+export default TableAction;

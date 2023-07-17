@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 
 import Activeindicator from "../snippets/Activeindicator";
-import RemoveBoxButton from "../snippets/RemoveBoxButton";
+import TableAction from "../snippets/TableAction";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVenus } from "@fortawesome/free-solid-svg-icons";
@@ -36,7 +36,7 @@ function Affiliatelist(props) {
             <th className="px-4 text-left">Province</th>
             <th className="px-4 text-center w-24">Online</th>
             <th className="px-4 text-center w-24">Tiktok</th>
-            <th className="px-4 text-center">Action</th>
+            <th className="px-4 text-center ctm-min-width-2">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -97,10 +97,11 @@ function Affiliatelist(props) {
                 <td className="px-4"></td>
                 <td className="px-4">
                   {props.CustomData.hasAction && (
-                    <RemoveBoxButton
+                    <TableAction
                       CustomData={props.CustomData}
                       Id={affiliate._id.toString()}
                       SetTrigger={props.SetTrigger}
+                      SetPopup={props.SetPopup}
                     />
                   )}
                 </td>

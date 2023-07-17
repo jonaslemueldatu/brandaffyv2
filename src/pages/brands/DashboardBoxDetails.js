@@ -41,9 +41,6 @@ function DashboardBoxDetails() {
           console.log(res.data.err);
         } else {
           setBox(res.data.box_details);
-          console.log("hi");
-          console.log(res.data.box_details.affiliate_list.length);
-          console.log("hello");
           if (res.data.box_details.affiliate_list.length !== 0) {
             const res2 = await axios.get(
               `${process.env.REACT_APP_ROUTE}/api/affiliate/getlist`,
@@ -59,10 +56,10 @@ function DashboardBoxDetails() {
               console.log(res2.data.err);
             } else {
               setAffiliatelist(res2.data.affiliate_list);
-              setTrigger(false)
               setIsbusy(false);
             }
           } else {
+            setAffiliatelist([]);
             setIsbusy(false);
           }
         }
@@ -72,6 +69,7 @@ function DashboardBoxDetails() {
     };
 
     getBoxdetails();
+    setTrigger(false)
   }, [boxid, trigger]);
 
   return (
