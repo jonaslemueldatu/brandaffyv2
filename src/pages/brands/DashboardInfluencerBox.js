@@ -53,7 +53,7 @@ function DashboardInfluencerBox() {
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <Dashboardheader Title="Influencer Box" />
         {!isbusy && (<Influencerboxlistaction SetPopup={setPopup} />)}
-        {!isbusy && (<InfluencerBoxList Boxes={boxes} />)}
+        {!isbusy && (<InfluencerBoxList Boxes={boxes} SetEffect={setTriggereffect} />)}
       </div>
       {popup && !isbusy && (<Createboxpopup SetPopup={setPopup} SetEffect={setTriggereffect} Id={userid} />)}
     </div>

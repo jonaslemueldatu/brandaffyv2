@@ -39,7 +39,8 @@
   background-color: transparent;
 }
 
-.ctm-btn-5 {
+.ctm-btn-5,
+.ctm-btn-2:hover {
   color: white;
   border-color: red;
   background-color: red;
@@ -130,7 +131,8 @@
 }
 
 @keyframes blink {
-  100% { transform: scale(2, 2); 
-          opacity: 0;
-        }
+  100% {
+    transform: scale(2, 2);
+    opacity: 0;
+  }
 }

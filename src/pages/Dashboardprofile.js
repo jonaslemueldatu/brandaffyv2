@@ -51,7 +51,7 @@ function Dashboardprofile() {
 
   return (
     <div className="h-screen flex">
-      <Dashboardnav link={link} Type={usertype} />
+      <Dashboardnav link={link} Type={auth().user_type} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <Dashboardheader
           Title={
