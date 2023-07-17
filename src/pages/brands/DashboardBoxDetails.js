@@ -17,6 +17,12 @@ function DashboardBoxDetails() {
   const [isbusy, setIsbusy] = useState(true);
   const [affiliateList, setAffiliatelist] = useState([]);
   const [box, setBox] = useState({});
+  const [trigger, setTrigger] = useState(false)
+  const [customData] = useState({
+    action: "removeFromBox",
+    boxId: boxid,
+    hasAction: true
+  })
 
   useEffect(() => {
     setIsbusy(true);
@@ -53,6 +59,7 @@ function DashboardBoxDetails() {
               console.log(res2.data.err);
             } else {
               setAffiliatelist(res2.data.affiliate_list);
+              setTrigger(false)
               setIsbusy(false);
             }
           } else {
@@ -65,7 +72,7 @@ function DashboardBoxDetails() {
     };
 
     getBoxdetails();
-  }, [boxid]);
+  }, [boxid, trigger]);
 
   return (
     <div className="h-screen flex relative">
@@ -74,7 +81,7 @@ function DashboardBoxDetails() {
         {!isbusy && (
           <Dashboardheader Title={`Influencer Box - ${box.box_label}`} />
         )}
-        {!isbusy && <Affiliatelist AffiliateList={affiliateList} />}
+        {!isbusy && <Affiliatelist AffiliateList={affiliateList} CustomData={customData} SetTrigger={setTrigger} />}
       </div>
     </div>
   );

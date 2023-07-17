@@ -68,7 +68,7 @@ function InfluencerBoxList(props) {
                     }}
                     className="ctm-btn ctm-btn-2 mx-auto"
                   >
-                    Remove
+                    Delete
                   </button>
                 </td>
               </tr>

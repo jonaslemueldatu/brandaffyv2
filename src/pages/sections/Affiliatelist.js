@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 
 import Activeindicator from "../snippets/Activeindicator";
+import RemoveBoxButton from "../snippets/RemoveBoxButton";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVenus } from "@fortawesome/free-solid-svg-icons";
@@ -94,7 +95,15 @@ function Affiliatelist(props) {
                   <Activeindicator Status={affiliate.logged_in} />
                 </td>
                 <td className="px-4"></td>
-                <td className="px-4"></td>
+                <td className="px-4">
+                  {props.CustomData.hasAction && (
+                    <RemoveBoxButton
+                      CustomData={props.CustomData}
+                      Id={affiliate._id.toString()}
+                      SetTrigger={props.SetTrigger}
+                    />
+                  )}
+                </td>
               </tr>
             );
           })}

@@ -14,6 +14,9 @@ function Dashboardinfluencerhub() {
   const [usertype] = useState(auth().user_type);
   const [affiliatelist, setAffiliatelist] = useState({});
   const [isbusy, setIsbusy] = useState(true);
+  const [customData] = useState({
+    hasAction: false
+  })
 
   useEffect(() => {
     setIsbusy(true);
@@ -40,7 +43,7 @@ function Dashboardinfluencerhub() {
       <Dashboardnav link={link} Type={usertype} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <Dashboardheader Title="Influencer Hub" />
-        {!isbusy && <Affiliatelist AffiliateList={affiliatelist} />}
+        {!isbusy && <Affiliatelist AffiliateList={affiliatelist} CustomData={customData} />}
       </div>
     </div>
   );
