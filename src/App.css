@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Global styles */
 .ctm-btn {
   cursor: pointer;
@@ -98,6 +102,10 @@
 
 .ctm-bg-color-8 {
   background: linear-gradient(135deg, #ffb7f5, #6c5dd3);
+}
+
+.ctm-bg-color-9 {
+  background-color: rgba(244,241,254,1);
 }
 
 .ctm-hvr-bg-color-1:hover {

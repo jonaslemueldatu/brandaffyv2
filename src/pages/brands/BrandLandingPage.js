@@ -12,8 +12,16 @@ function Brandlandingpage() {
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
   );
-  const [purpleCurvedDesign] = useState(
+  const [purpleBottomCurvedDesign] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/design-purple-bottom-curve.svg"
+  );
+
+  const [purpleTopCurvedDesign] = useState(
+    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/design-purple-top-curve.svg"
+  );
+
+  const [creamTopCurvedDesign] = useState(
+    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/design-cream-top-curve.svg"
   );
 
   // State to handle display of Mobile Menu
@@ -21,32 +29,32 @@ function Brandlandingpage() {
 
   return (
     <div className="relative">
-      {/* Top Naigation Bar */}
-      <div className="justify-between ctm-bg-color-7 w-full p-4 flex xl:justify-evenly">
+      {/* Top Navigation Bar */}
+      <div className="sticky top-0 xl:relative justify-between ctm-bg-color-7 w-full p-4 flex xl:justify-evenly">
         <img alt="Brandaffy logo" src={brandlogo} className="h-28 w-28"></img>
         <div className="hidden xl:flex">
           <ul className="flex items-center">
             <li className="mx-5 font-semibold hover:underline cursor-pointer">
-              What is Brandaffy
+              <a href={"/#what-is-brandaffy"}> What is Brandaffy</a>
+            </li>
+            <li className="mx-5 font-semibold hover:underline cursor-pointer">
+              <a href={"/#features"}>Features</a>
             </li>
             <li className="mx-5 font-semibold hover:underline cursor-pointer">
               How it Works
             </li>
-            <li className="mx-5 font-semibold hover:underline cursor-pointer">
-              Features
-            </li>
-            <li className="mx-5 font-semibold hover:underline cursor-pointer">
+            {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Why We
-            </li>
+            </li> */}
             <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Pricing
             </li>
-            <li className="mx-5 font-semibold hover:underline cursor-pointer">
+            {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Upcoming Features
-            </li>
+            </li> */}
             <li className="mx-5 font-semibold hover:underline cursor-pointer">
               {" "}
-              UGC Creator Portal
+              <Link to={"/affiliate"}>UGC Creator Portal</Link>
             </li>
           </ul>
         </div>
@@ -64,14 +72,14 @@ function Brandlandingpage() {
           >
             Login
           </Link>
-          <button className="shadow-lg ctm-bg-color-8 text-white ctm-btn text-lg">
+          <Link to={"/brand/register"} className="shadow-lg ctm-bg-color-8 text-white ctm-btn text-lg">
             Sign Up
-          </button>
+          </Link>
         </div>
       </div>
       {/* Hero Section */}
       <div className="flex-col lg:flex-row ctm-bg-color-7 w-full flex">
-        <div className="p-8 lg:p-20 xl:p-28 flex-1">
+        <div className="p-8 lg:p-20 xl:px-24 xl:pt-24 xl:pb-4 flex-1">
           <h1 className="font-extrabold leading-none text-5xl">
             Connect With Hundreds Of Creators In Less Than 30 Minutes
           </h1>
@@ -88,9 +96,15 @@ function Brandlandingpage() {
         </div>
         <div className="flex-1"></div>
       </div>
-      <img alt="Purple Curved Design Separator" src={purpleCurvedDesign}></img>
+      <img
+        alt="Purple Curved Design Separator"
+        src={purpleBottomCurvedDesign}
+      ></img>
       {/* What is Brandaffy Section */}
-      <div className="p-8 lg:p-20 xl:p-28 max-w-6xl m-auto">
+      <div
+        id="what-is-brandaffy"
+        className="p-8 lg:p-20 xl:px-24 xl:py-10 max-w-6xl m-auto"
+      >
         <h2 className="text-center font-extrabold leading-none text-6xl">
           Discover, Curate, And Amplify<br></br> Authentic Content With Ease
         </h2>
@@ -100,7 +114,7 @@ function Brandlandingpage() {
             <h2 className="text-2xl font-extrabold">
               Unlock the Potential of UGC
             </h2>
-            <p className="my-10 text-lg ctm-font-color-6">
+            <p className="my-4 text-lg ctm-font-color-6">
               Are you tired of searching high and low for captivating content
               that resonates with your target audience? Brandaffy empowers
               brands like yours to effortlessly find, collect, and leverage UGC
@@ -114,7 +128,7 @@ function Brandlandingpage() {
             <h2 className="text-2xl font-extrabold">
               Effortless Campaign Creation
             </h2>
-            <p className="my-10 text-lg ctm-font-color-6">
+            <p className="my-4 text-lg ctm-font-color-6">
               Say goodbye to complex campaign planning. With Brandaffy, creating
               compelling UGC campaigns is a breeze. Our intuitive campaign
               creation platform enables you to define your goals, set campaign
@@ -130,7 +144,7 @@ function Brandlandingpage() {
             <h2 className="text-2xl font-extrabold">
               Seamless Influencer Connections
             </h2>
-            <p className="my-10 text-lg ctm-font-color-6">
+            <p className="my-4 text-lg ctm-font-color-6">
               Our comprehensive influencer database allows you to seamlessly
               connect and collaborate with top-tier influencers. From
               micro-influencers to industry experts, build lasting partnerships
@@ -144,18 +158,86 @@ function Brandlandingpage() {
             <h2 className="text-2xl font-extrabold">
               Elevate Your Strategy with Influencer Boxes
             </h2>
-            <p className="my-10 text-lg ctm-font-color-6">
+            <p className="my-4 text-lg ctm-font-color-6">
               Stay ahead of the competition by creating customized influencer
-              groups on Brandaffy. Harness the power of targeted
-              influencer communities to amplify your campaigns and drive
-              exceptional results. Assign specific campaigns to dedicated
-              influencer groups and maximize the impact of your UGC initiatives.
-              Get ready to witness exponential growth fueled by the collective
-              power of your influencers.
+              groups on Brandaffy. Harness the power of targeted influencer
+              communities to amplify your campaigns and drive exceptional
+              results. Assign specific campaigns to dedicated influencer groups
+              and maximize the impact of your UGC initiatives. Get ready to
+              witness exponential growth fueled by the collective power of your
+              influencers.
             </p>
           </div>
         </div>
       </div>
+      {/* Features */}
+      <img
+        alt="Purple Curved Design Separator"
+        src={purpleTopCurvedDesign}
+      ></img>
+      <div id="features" className="ctm-bg-color-9">
+        <div className="p-8 lg:p-20 xl:px-24 xl:py-10 max-w-7xl m-auto flex flex-col items-center">
+          <h2 className="text-center font-extrabold leading-none text-6xl">
+            A Faster, Simpler UGC Management Tool
+          </h2>
+          <div className="grid justify-items-center">
+            <dl className="mt-12 space-y-6 sm:grid sm:grid-cols-1 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-2 lg:gap-x-6">
+              <div className="relative">
+                <dt className="my-4 text-lg ctm-font-color-6">
+                  <span className="font-bold">
+                    Comprehensive UGC Discovery:
+                  </span>
+                  Effortlessly find compelling content that aligns with your
+                  brand's voice and values.
+                </dt>
+              </div>
+              <div className="relative">
+                <dt className="my-4 text-lg ctm-font-color-6">
+                  <span className="font-bold">
+                    Intuitive Campaign Creation:
+                  </span>
+                  Craft captivating campaigns and watch the UGC flood in with
+                  our user-friendly platform.
+                </dt>
+              </div>
+              <div className="relative">
+                <dt className="my-4 text-lg ctm-font-color-6">
+                  <span className="font-bold">Influencer Collaboration:</span>{" "}
+                  Forge valuable relationships with influencers, expanding your
+                  brand's reach and impact.
+                </dt>
+              </div>
+              <div className="relative">
+                <dt className="my-4 text-lg ctm-font-color-6">
+                  <span className="font-bold">
+                    Customized Influencer Groups:
+                  </span>{" "}
+                  Amplify the effectiveness of your campaigns by targeting
+                  specific influencer communities.
+                </dt>
+              </div>
+              <div className="relative">
+                <dt className="my-4 text-lg ctm-font-color-6">
+                  <span className="font-bold">Analytics and Insights:</span>{" "}
+                  Access real-time performance metrics to track the success of
+                  your UGC initiatives and make data-driven decisions.
+                </dt>
+              </div>
+            </dl>
+          </div>
+          <Link
+            to={"/brand/register"}
+            className="shadow-lg ctm-bg-color-8 text-white ctm-btn text-lg my-4 w-fit"
+          >
+            Create Your Account Now
+          </Link>
+        </div>
+        <img
+          alt="Cream Curved Design Separator"
+          src={creamTopCurvedDesign}
+        ></img>
+      </div>
+      {/*  */}
       {/* Display component only when mobileMenu is set to true */}
       {mobileMenu && (
         <div
@@ -170,18 +252,23 @@ function Brandlandingpage() {
               className="h-28 w-28 mx-auto"
             ></img>
             <ul className="flex flex-col gap-6 my-20">
-              <li className="font-semibold hover:underline">
+              <a
+                href="#what-is-brandaffy"
+                className="font-semibold hover:underline"
+              >
                 What is Brandaffy
+              </a>
+              <li className="font-semibold hover:underline">
+                <a href={"/#features"}>Features</a>
               </li>
-              <li className="font-semibold hover:underline">How it Works</li>
-              <li className="font-semibold hover:underline">Features</li>
-              <li className="font-semibold hover:underline">Why We</li>
+              {/* <li className="font-semibold hover:underline">How it Works</li> */}
+              {/* <li className="font-semibold hover:underline">Why We</li> */}
               <li className="font-semibold hover:underline">Pricing</li>
-              <li className="font-semibold hover:underline">
+              {/* <li className="font-semibold hover:underline">
                 Upcoming Features
-              </li>
+              </li> */}
               <li className="font-semibold hover:underline">
-                UGC Creator Portal
+                <Link to={"/affiliate"}>UGC Creator Portal</Link>
               </li>
             </ul>
             <div className="flex flex-col">
