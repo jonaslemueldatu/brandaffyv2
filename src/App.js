@@ -13,11 +13,13 @@ import DashboardInfluencerBox from "./pages/brands/DashboardInfluencerBox";
 import DashboardBoxDetails from "./pages/brands/DashboardBoxDetails";
 import Dashboardcampaigns from "./pages/Dashboardcampaigns";
 import Dashboardcreatecampaign from "./pages/brands/Dashboardcreatecampaign";
+import Brandlandingpage from "./pages/brands/BrandLandingPage";
 
 function App() {
   return (
     <div>
       <Routes>
+      <Route path="/" element={<Brandlandingpage />} />
         <Route path="/affiliate/login" element={<AffiliateLoginPage />} />
         <Route path="/brand/login" element={<BrandLoginPage />} />
         <Route path="/brand/register" element={<BrandRegisterPage />} />

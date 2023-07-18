@@ -24,7 +24,8 @@ function Affiliatelist(props) {
   };
 
   return (
-    <div className="flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-x-scroll">
+    <div className="flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-visible">
+      <div className="overflow-x-scroll flex">
       <table className="flex-1">
         <thead>
           <tr className="h-20 ctm-border-color-3 border-b">
@@ -36,7 +37,7 @@ function Affiliatelist(props) {
             <th className="px-4 text-left">Province</th>
             <th className="px-4 text-center w-24">Online</th>
             <th className="px-4 text-center w-24">Tiktok</th>
-            <th className="px-4 text-center ctm-min-width-2">Action</th>
+            <th className="px-4 text-center ctm-min-width-15">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -110,6 +111,7 @@ function Affiliatelist(props) {
           })}
         </tbody>
       </table>
+      </div>
       {affiliatelist.length <= 0 && (
         <div className="text-center my-8 ctm-font-color-1">
           No Data to display

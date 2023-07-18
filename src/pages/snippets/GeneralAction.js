@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function GeneralAction(props) {
   const navigate = useNavigate();
 
-  const handleBoxAdd = async (e) => {
+  const brandAffiliateProfileAdd = async (e) => {
     e.stopPropagation();
     props.SetPopup({
       action: "addBox",
@@ -26,7 +26,7 @@ function GeneralAction(props) {
       {props.CustomData.action === "brandAffiliateProfile" && (
         <div className="flex">
           <button
-            onClick={(e) => handleBoxAdd(e)}
+            onClick={(e) => brandAffiliateProfileAdd(e)}
             className="ctm-btn mx-2 ctm-btn-4"
           >
             Add to Box

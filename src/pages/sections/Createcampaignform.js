@@ -9,15 +9,15 @@ function Createcampaignform(props) {
   const [campaignProduct, setCampaignProduct] = useState("");
   const [campaignMarket, setCampaignMarket] = useState("");
   const [campaignObjectives, setCampaignObjectives] = useState("");
-  const [paymentType, setPaymenType] = useState("");
+  const [paymentType, setPaymenType] = useState("Fixed Rate");
   const [termsConditions, setTermsConditions] = useState("");
   const [invitationBox, setInvitationBox] = useState("");
+  const [error, setError] = useState("")
 
   const [box] = useState(props.Box);
 
   const handleCreateCampaign = async (e) => {
     e.preventDefault();
-    alert("Submitted!");
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/brand/campaign/create`,
@@ -34,8 +34,9 @@ function Createcampaignform(props) {
       );
       if (res.data.err) {
         console.log(res.data.err);
+        setError(res.data.err)
       } else {
-        console.log(res.data);
+        navigate(-1)
       }
     } catch (error) {
       console.log(error);
@@ -52,9 +53,11 @@ function Createcampaignform(props) {
               type="text"
               required
               onChange={(e) => setCampaignName(e.target.value)}
+              onFocus={() => setError("")}
               placeholder="Title of your campaign"
               className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border max-w-lg ctm-min-width-1"
             ></input>
+            <div className="text-red-500">{error}</div>
           </div>
           <div className="flex flex-1 flex-col my-4 ctm-min-width-1">
             <label className="my-2 font-bold">Status</label>
@@ -100,7 +103,7 @@ function Createcampaignform(props) {
             <label className="my-2 font-bold">Payment Type</label>
             <select
               required
-              defaultValue="Fixed Rate"
+              defaultValue={paymentType}
               onChange={(e) => setPaymenType(e.target.value)}
               className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1 max-w-sm"
             >

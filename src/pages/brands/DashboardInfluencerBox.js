@@ -16,12 +16,14 @@ function DashboardInfluencerBox() {
   const [userid] = useState(auth().id);
   const [usertype] = useState(auth().user_type);
   const [boxes, setBoxes] = useState({});
+
   const [isbusy, setIsbusy] = useState(true);
-  const [customData] = useState({
+
+  const [customHeaderActionData] = useState({
     action: "influencerBox"
   })
 
-  const [popup, setPopup] = useState(false);
+  const [createBoxPopup, setCreateBoxPopup] = useState(false);
   const [triggereffect, setTriggereffect] = useState(false);
 
   useEffect(() => {
@@ -55,10 +57,10 @@ function DashboardInfluencerBox() {
       <Dashboardnav link={link} Type={usertype} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <Dashboardheader Title="Influencer Box" />
-        {!isbusy && (<Generalactioncontainer SetPopup={setPopup} CustomData={customData} />)}
+        {!isbusy && (<Generalactioncontainer SetPopup={setCreateBoxPopup} CustomData={customHeaderActionData} />)}
         {!isbusy && (<InfluencerBoxList Boxes={boxes} SetEffect={setTriggereffect} />)}
       </div>
-      {popup && !isbusy && (<Createboxpopup SetPopup={setPopup} SetEffect={setTriggereffect} Id={userid} />)}
+      {createBoxPopup && !isbusy && (<Createboxpopup SetPopup={setCreateBoxPopup} SetEffect={setTriggereffect} Id={userid} />)}
     </div>
   );
 }

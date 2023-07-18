@@ -88,6 +88,18 @@
   background-color: #fff2cc;
 }
 
+.ctm-bg-color-6 {
+  background-color: #d9ead3;
+}
+
+.ctm-bg-color-7 {
+  background-color: #f4f1fe;
+}
+
+.ctm-bg-color-8 {
+  background: linear-gradient(135deg, #ffb7f5, #6c5dd3);
+}
+
 .ctm-hvr-bg-color-1:hover {
   background-color: rgba(229, 231, 235, 1);
 }
@@ -126,13 +138,38 @@
   color: red;
 }
 
+.ctm-font-color-6 {
+  color: rgba(107, 114, 128, 1);
+}
+
 /* Custom min-width */
+.ctm-min-width-0 {
+  min-width: 100px;
+}
+
 .ctm-min-width-1 {
   min-width: 200px;
 }
 
+.ctm-min-width-15 {
+  min-width: 250px;
+}
+
 .ctm-min-width-2 {
-  min-width: 300px;
+  min-width: 350px;
+}
+
+/* Custom max-width */
+.ctm-max-width-0 {
+  max-width: 100px;
+}
+
+.ctm-max-width-1 {
+  max-width: 200px;
+}
+
+.ctm-max-width-2 {
+  max-width: 350px;
 }
 
 /* Custom animations */
