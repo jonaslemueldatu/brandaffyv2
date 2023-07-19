@@ -6,7 +6,7 @@
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
 //6. TriggerState = goes hand in hand with SetTrigger1
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 
@@ -34,11 +34,17 @@ function Affiliatelist(props) {
           <thead>
             <tr className="h-20 ctm-border-color-3 border-b">
               <th className="w-12 px-4 text-center">Select</th>
-              <th className="w-80 ctm-min-width-15 whitespace-nowrap px-4 text-left">User</th>
-              <th className="w-80 ctm-min-width-15 whitespace-nowrap px-4 text-left">Email</th>
+              <th className="w-80 ctm-min-width-15 whitespace-nowrap px-4 text-left">
+                User
+              </th>
+              <th className="w-80 ctm-min-width-15 whitespace-nowrap px-4 text-left">
+                Email
+              </th>
               <th className="w-12 px-4 text-center">Gender</th>
               <th className="w-12 px-4 text-center">Age</th>
-              <th className="w-80 ctm-min-width-1 whitespace-nowrap px-4 text-left">Province</th>
+              <th className="w-80 ctm-min-width-1 whitespace-nowrap px-4 text-left">
+                Province
+              </th>
               <th className="w-12 px-4 text-center">Online</th>
               <th className="w-12 px-4 text-center">Tiktok</th>
               <th className="w-80 px-4 text-center">Action</th>
@@ -52,7 +58,10 @@ function Affiliatelist(props) {
                   onClick={() => handleRowClick(affiliate._id.toString())}
                   className="h-20 cursor-pointer ctm-border-color-3 border-b"
                 >
-                  <td className="w-12 px-4" onClick={(e) => e.stopPropagation()}>
+                  <td
+                    className="w-12 px-4"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <input
                       className="block m-auto cursor-pointer"
                       type="checkbox"
@@ -70,12 +79,16 @@ function Affiliatelist(props) {
                       </span>
                     </div>
                   </td>
-                  <td className="w-80 ctm-min-width-15 whitespace-nowrap px-4 text-left">{affiliate.email}</td>
+                  <td className="w-80 ctm-min-width-15 whitespace-nowrap overflow-ellipsis px-4 text-left">
+                    {affiliate.email}
+                  </td>
                   <td className="w-12 px-4 text-center">
                     <IndicatorGender Gender={affiliate.gender} />
                   </td>
                   <td className="w-12 px-4 text-center">{affiliate.age}</td>
-                  <td className="w-80 ctm-min-width-1 whitespace-nowrap px-4 text-left">{affiliate.province}</td>
+                  <td className="w-80 ctm-min-width-1 whitespace-nowrap overflow-ellipsis px-4 text-left">
+                    {affiliate.province}
+                  </td>
                   <td className="w-12 px-4 text-center">
                     <IndicatorActive Status={affiliate.logged_in} />
                   </td>

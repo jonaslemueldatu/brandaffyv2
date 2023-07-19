@@ -40,11 +40,13 @@ function InfluencerBoxList(props) {
         <table className="flex-1">
           <thead>
             <tr className="h-20 ctm-border-color-3 border-b">
-              <th className="px-4 text-center w-24">Select</th>
-              <th className="px-4 text-left ctm-min-width-2">Label</th>
+              <th className="w-12 px-4 text-center">Select</th>
+              <th className="w-80 ctm-min-width-15 whitespace-nowrap px-4 text-left ctm-min-width-2">
+                Label
+              </th>
               <th className="px-4 text-left">Description</th>
-              <th className="px-4 text-center w-24">List</th>
-              <th className="px-4 text-center">Action</th>
+              <th className="w-12 px-4 text-center">List</th>
+              <th className="w-80 px-4 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +58,7 @@ function InfluencerBoxList(props) {
                   className="h-20 cursor-pointer ctm-border-color-3 border-b"
                 >
                   <td
-                    className="w-12 px-4"
+                    className="w-12 px-4 text-center"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <input
@@ -64,16 +66,16 @@ function InfluencerBoxList(props) {
                       type="checkbox"
                     ></input>
                   </td>
-                  <td className="px-4 text-left whitespace-nowrap overflow-ellipsis max-w-xs overflow-hidden">
+                  <td className="ctm-min-width-15 whitespace-nowrap px-4 text-left">
                     {box.box_label}
                   </td>
-                  <td className="px-4 text-left whitespace-nowrap overflow-ellipsis max-w-xs overflow-hidden">
+                  <td className="w-80 ctm-min-width-15 ctm-max-width-4 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">
                     {box.box_description}
                   </td>
-                  <td className="px-4 text-center">
+                  <td className="w-12 px-4 text-center">
                     {box.affiliate_list.length.toString()}
                   </td>
-                  <td className="px-4">
+                  <td className="w-80 px-4 text-center">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
