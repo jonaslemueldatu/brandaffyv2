@@ -5,7 +5,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function GeneralAction(props) {
+function ActionGeneral(props) {
   const navigate = useNavigate();
 
   return (
@@ -48,4 +48,4 @@ function GeneralAction(props) {
   );
 }
 
-export default GeneralAction;
+export default ActionGeneral;

@@ -3,10 +3,10 @@ import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
 // Section imports
-import Dashboardnav from "../../sections/Dashboardnav";
-import Dashboardheader from "../../sections/Dashboardheader";
-import Generalactioncontainer from "../../sections/Generalactioncontainer";
-import Campaignlist from "../../sections/Campaignlist";
+import NavigationDashboard from "../../sections/NavigationDashboard";
+import ContainerHeader from "../../sections/ContainerHeader";
+import ContainerActionGeneral from "../../sections/ContainerGeneralAction";
+import ListCampaigns from "../../sections/ListCampaigns";
 
 function Dashboardcampaigns() {
   const auth = useAuthUser();
@@ -15,11 +15,14 @@ function Dashboardcampaigns() {
   const [loggedInUserId] = useState(auth().id);
   const [campaignReadyToStartList, setCampaignReadyToStartList] = useState([]);
   const [campaignActiveList, setCampaignActiveList] = useState([]);
+  const [campaignCancelledList, setCampaignCancelledList] = useState([]);
 
   //UseEffect triggers
   const [getCampaignReadyToStartTrigger, setGetCampaignReadyToStartTrigger] =
     useState(true);
   const [getCampaignActiveTrigger, setGetCampaignActiveTrigger] =
+    useState(true);
+  const [getCampaignCancelledTrigger, setGetCampaignCancelledTrigger] =
     useState(true);
   const [getCampaignListExternalTrigger, setGetCampaignListExternalTrigger] =
     useState(true);
@@ -63,7 +66,7 @@ function Dashboardcampaigns() {
     };
 
     getCampaignReadyToStart();
-  }, [loggedInUserId]);
+  }, [loggedInUserId, getCampaignListExternalTrigger]);
 
   //UseEffect to get List of Active Campaigns
   useEffect(() => {
@@ -92,26 +95,65 @@ function Dashboardcampaigns() {
     getCampaignActive();
   }, [loggedInUserId, getCampaignListExternalTrigger]);
 
+  //Useeffect to get list of cancelled campaigns
+  useEffect(() => {
+    setGetCampaignCancelledTrigger(true);
+    const getCampaignCancelled = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_ROUTE}/api/campaign/getlist`,
+          {
+            params: {
+              brand_owner_id: loggedInUserId,
+              status: "Cancelled",
+            },
+          }
+        );
+        if (res.data.err) {
+          console.log(res.data.err);
+        } else {
+          setCampaignCancelledList(res.data.campaign_list);
+          setGetCampaignCancelledTrigger(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCampaignCancelled();
+  }, [loggedInUserId, getCampaignListExternalTrigger]);
+
   return (
     <div className="h-screen flex relative">
-      <Dashboardnav ActiveLink="Campaigns" ViewerUserType={viewerUserType} />
+      <NavigationDashboard
+        ActiveLink="Campaigns"
+        ViewerUserType={viewerUserType}
+      />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <Dashboardheader Title="Campaigns" />
+        <ContainerHeader Title="Campaigns" />
         {auth().user_type === "Brand" && (
-          <Generalactioncontainer CustomData={customData} />
+          <ContainerActionGeneral CustomData={customData} />
         )}
         {!getCampaignActiveTrigger && auth().user_type === "Brand" && (
-          <Campaignlist
+          <ListCampaigns
             CampaignList={campaignActiveList}
             TableTitle={{ color: "ctm-bg-color-6", text: "Active" }}
             CustomData={ActiveTableActionData}
           />
         )}
         {!getCampaignReadyToStartTrigger && viewerUserType === "Brand" && (
-          <Campaignlist
+          <ListCampaigns
             CampaignList={campaignReadyToStartList}
             TableTitle={{ color: "ctm-bg-color-5", text: "Ready to Start" }}
             CustomData={CustomDataReadyToStart}
+            SetTrigger1={setGetCampaignListExternalTrigger}
+            Trigger1={getCampaignListExternalTrigger}
+          />
+        )}
+        {!getCampaignCancelledTrigger && viewerUserType === "Brand" && (
+          <ListCampaigns
+            CampaignList={campaignCancelledList}
+            TableTitle={{ color: "ctm-bg-color-10", text: "Cancelled" }}
+            CustomData={{}}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
           />

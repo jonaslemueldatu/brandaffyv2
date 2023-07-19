@@ -3,9 +3,9 @@ import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
 //Section imports
-import Dashboardnav from "../../../sections/Dashboardnav";
-import Dashboardheader from "../../../sections/Dashboardheader";
-import Createcampaignform from "../../../sections/Createcampaignform";
+import NavigationDashboard from "../../../sections/NavigationDashboard";
+import ContainerHeader from "../../../sections/ContainerHeader";
+import FormCreateCampaign from "../../../sections/FormCreateCampaign";
 
 function Dashboardcreatecampaign() {
   const auth = useAuthUser();
@@ -47,11 +47,11 @@ function Dashboardcreatecampaign() {
 
   return (
     <div className="h-screen flex relative">
-      <Dashboardnav ViewerUserType={viewerUserType} />
+      <NavigationDashboard ViewerUserType={viewerUserType} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <Dashboardheader Title="Campaign - New Campaign" />
+        <ContainerHeader Title="Campaign - New Campaign" />
         {!getBoxListTrigger && (
-          <Createcampaignform Box={boxList} OwnerId={loggedInUserId} />
+          <FormCreateCampaign Box={boxList} OwnerId={loggedInUserId} />
         )}
       </div>
     </div>

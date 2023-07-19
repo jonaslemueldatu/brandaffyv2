@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthUser } from "react-auth-kit";
 
-function Addtoboxpopup(props) {
+function PopupAddTobox(props) {
   const auth = useAuthUser();
 
   const [getBoxListTrigger, setGetBoxListTrigger] = useState(true);
@@ -125,4 +125,4 @@ function Addtoboxpopup(props) {
   );
 }
 
-export default Addtoboxpopup;
+export default PopupAddTobox;

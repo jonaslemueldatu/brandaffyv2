@@ -104,6 +104,10 @@ html {
   background-color: rgba(244, 241, 254, 1);
 }
 
+.ctm-bg-color-10 {
+  background-color: #f4cccc;
+}
+
 .ctm-hvr-bg-color-1:hover {
   background-color: rgba(229, 231, 235, 1);
 }
@@ -187,7 +191,7 @@ html {
 
 /* Custom animations */
 
-.ctm-animation-1 {
+.ctm-animation-blink {
   animation: blink 1s linear infinite;
 }
 

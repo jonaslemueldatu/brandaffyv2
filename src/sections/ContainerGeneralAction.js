@@ -5,9 +5,9 @@
 import React from "react";
 
 //Snippet import
-import Generalaction from "../snippets/GeneralAction";
+import Generalaction from "../snippets/ActionGeneral";
 
-function Generalactioncontainer(props) {
+function ContainerActionGeneral(props) {
   return (
     <div className="overflow-visible mb-4 flex justify-end rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4">
       <Generalaction
@@ -18,4 +18,4 @@ function Generalactioncontainer(props) {
   );
 }
 
-export default Generalactioncontainer;
+export default ContainerActionGeneral;

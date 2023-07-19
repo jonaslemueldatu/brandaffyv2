@@ -5,14 +5,14 @@ import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
 // Section imports
-import Dashboardnav from "../../sections/Dashboardnav";
-import Dashboardheader from "../../sections/Dashboardheader";
+import NavigationDashboard from "../../sections/NavigationDashboard";
+import ContainerHeader from "../../sections/ContainerHeader";
 import InfoCardAffiliate from "../../sections/InfoCardAffiliate";
 import InfoCardBrand from "../../sections/InfoCardBrand";
-import Generalactioncontainer from "../../sections/Generalactioncontainer";
+import ContainerActionGeneral from "../../sections/ContainerGeneralAction";
 
 // Snippet imports
-import Addtoboxpopup from "../../snippets/Addtoboxpopup";
+import PopupAddTobox from "../../snippets/PopupAddToBox";
 
 function DashboardProfile() {
   const auth = useAuthUser();
@@ -31,7 +31,7 @@ function DashboardProfile() {
   // Popup information
   const [addToBoxPopup, setAddToBoxPopup] = useState(false);
   const [customData] = useState({
-    action: "Influencer Profile - Brand"
+    action: "Influencer Profile - Brand",
   });
 
   useEffect(() => {
@@ -64,12 +64,12 @@ function DashboardProfile() {
 
   return (
     <div className="h-screen flex relative">
-      <Dashboardnav
+      <NavigationDashboard
         ActiveLink={id ? "" : "My Profile"}
         ViewerUserType={viewerUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <Dashboardheader
+        <ContainerHeader
           Title={
             viewedProfileUserType === "Affiliate"
               ? "Influencer Profile"
@@ -79,7 +79,7 @@ function DashboardProfile() {
         {!GetProfileTrigger &&
           viewerUserType === "Brand" &&
           !isThisMyProfile && (
-            <Generalactioncontainer
+            <ContainerActionGeneral
               SetPopup1={setAddToBoxPopup}
               CustomData={customData}
             />
@@ -101,7 +101,7 @@ function DashboardProfile() {
         )}
       </div>
       {addToBoxPopup && !GetProfileTrigger && (
-        <Addtoboxpopup
+        <PopupAddTobox
           SetAddToBoxPopup={setAddToBoxPopup}
           ViewedProfileId={viewedProfileId}
         />

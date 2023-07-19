@@ -13,9 +13,9 @@ import { useAuthUser } from "react-auth-kit";
 //Snippet imports
 import IndicatorActive from "../snippets/IndicatorActive";
 import IndicatorGender from "../snippets/IndicatorGender";
-import TableAction from "../snippets/TableAction";
+import ActionTable from "../snippets/ActionTable";
 
-function Affiliatelist(props) {
+function ListAffiliates(props) {
   const navigate = useNavigate();
   const auth = useAuthUser();
 
@@ -95,7 +95,7 @@ function Affiliatelist(props) {
                   <td className="w-12 px-4"></td>
                   <td className="w-80 px-4">
                     {props.CustomData.displayActionButtons && (
-                      <TableAction
+                      <ActionTable
                         CustomData={props.CustomData}
                         ClickedProfileId={affiliate._id.toString()}
                         SetAddToBoxPopup={props.SetAddToBoxPopup}
@@ -120,4 +120,4 @@ function Affiliatelist(props) {
   );
 }
 
-export default Affiliatelist;
+export default ListAffiliates;

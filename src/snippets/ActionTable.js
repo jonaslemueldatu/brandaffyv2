@@ -9,8 +9,7 @@
 import React from "react";
 import axios from "axios";
 
-function TableAction(props) {
-
+function ActionTable(props) {
   //Influencer Box Functions
   const handleRemove = async (e, id) => {
     e.stopPropagation();
@@ -35,28 +34,47 @@ function TableAction(props) {
   // Campaigns Functions
   const handleStart = async (e) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_ROUTE}/api/campaign/update`, {
-        campaign_id: props.ClickedCampaignId,
-        change_to_status: "Active"
-      })
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
+        {
+          campaign_id: props.ClickedCampaignId,
+          change_to_status: "Active",
+        }
+      );
       if (res.data.err) {
-        console.log(res.data.err)
+        console.log(res.data.err);
       } else {
-        props.SetTrigger1(!props.Trigger1)
+        props.SetTrigger1(!props.Trigger1);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  const handleCancel = async (e) => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
+        {
+          campaign_id: props.ClickedCampaignId,
+          change_to_status: "Cancelled",
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+      } else {
+        props.SetTrigger1(!props.Trigger1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex justify-center">
       {/* Influencer Box - Details - Brand Actions */}
       {props.CustomData.action === "Influencer Box - Details - Brand" && (
-        <button
-          onClick={(e) => handleRemove(e)}
-          className="ctm-btn ctm-btn-2"
-        >
+        <button onClick={(e) => handleRemove(e)} className="ctm-btn ctm-btn-2">
           Remove
         </button>
       )}
@@ -65,7 +83,11 @@ function TableAction(props) {
       {props.CustomData.action === "Influencer Hub - Brand" && (
         <div className="flex">
           <button
-            onClick={(e) => {e.stopPropagation(); props.SetClickedProfileId(props.ClickedProfileId); props.SetAddToBoxPopup(true)}}
+            onClick={(e) => {
+              e.stopPropagation();
+              props.SetClickedProfileId(props.ClickedProfileId);
+              props.SetAddToBoxPopup(true);
+            }}
             className="ctm-btn mx-2 ctm-btn-4"
           >
             Add to Box
@@ -76,12 +98,19 @@ function TableAction(props) {
       {/* Campaigns - Brand - Ready To Start buttons */}
       {props.CustomData.action === "Campaigns - Ready To Start - Brand" && (
         <div className="flex">
-          <button className="ctm-btn mx-2 ctm-btn-2">Cancel</button>
-          <button onClick={() => handleStart()} className="ctm-btn ctm-btn-1">Start</button>
+          <button
+            className="ctm-btn mx-2 ctm-btn-2 "
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </button>
+          <button onClick={() => handleStart()} className="ctm-btn ctm-btn-1">
+            Start
+          </button>
         </div>
       )}
     </div>
   );
 }
 
-export default TableAction;
+export default ActionTable;

@@ -6,9 +6,9 @@
 import React, { useState } from "react";
 
 //Snippet Imports
-import TableAction from "../snippets/TableAction";
+import ActionTable from "../snippets/ActionTable";
 
-function Campaignlist(props) {
+function ListCampaigns(props) {
   const [campaignList] = useState(props.CampaignList);
 
   return (
@@ -75,7 +75,7 @@ function Campaignlist(props) {
                   </td>
                   <td className="px-4 text-center">{campaign.status}</td>
                   <td className="px-4 text-center">
-                    <TableAction
+                    <ActionTable
                       ClickedCampaignId={campaign._id.toString()}
                       CustomData={props.CustomData}
                       SetTrigger1={props.SetTrigger1}
@@ -97,4 +97,4 @@ function Campaignlist(props) {
   );
 }
 
-export default Campaignlist;
+export default ListCampaigns;

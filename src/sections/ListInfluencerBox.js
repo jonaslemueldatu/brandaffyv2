@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function InfluencerBoxList(props) {
+function ListInfluencerBox(props) {
   const navigate = useNavigate();
 
   const [boxList] = useState(props.BoxList);
@@ -101,4 +101,4 @@ function InfluencerBoxList(props) {
   );
 }
 
-export default InfluencerBoxList;
+export default ListInfluencerBox;

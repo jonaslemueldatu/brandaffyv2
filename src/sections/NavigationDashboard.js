@@ -7,7 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import axios from "axios";
 
-function Dashboardnav(props) {
+function NavigationDashboard(props) {
   // Assets
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
@@ -169,4 +169,4 @@ function Dashboardnav(props) {
   );
 }
 
-export default Dashboardnav;
+export default NavigationDashboard;

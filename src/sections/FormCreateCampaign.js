@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
-function Createcampaignform(props) {
+function FormCreateCampaign(props) {
   const navigate = useNavigate();
 
   const [campaignName, setCampaignName] = useState("");
@@ -12,7 +12,7 @@ function Createcampaignform(props) {
   const [paymentType, setPaymenType] = useState("Fixed Rate");
   const [termsConditions, setTermsConditions] = useState("");
   const [invitationBox, setInvitationBox] = useState("");
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   //Selected box to automatically send invitations to
   const [box] = useState(props.Box);
@@ -35,9 +35,9 @@ function Createcampaignform(props) {
       );
       if (res.data.err) {
         console.log(res.data.err);
-        setError(res.data.err)
+        setError(res.data.err);
       } else {
-        navigate(-1)
+        navigate(-1);
       }
     } catch (error) {
       console.log(error);
@@ -129,7 +129,10 @@ function Createcampaignform(props) {
                   </option>
                   {box.map((box) => {
                     return (
-                      <option key={box._id.toString()} value={box._id.toString()}>
+                      <option
+                        key={box._id.toString()}
+                        value={box._id.toString()}
+                      >
                         {box.box_label}
                       </option>
                     );
@@ -169,4 +172,4 @@ function Createcampaignform(props) {
   );
 }
 
-export default Createcampaignform;
+export default FormCreateCampaign;

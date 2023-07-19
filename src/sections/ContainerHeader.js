@@ -1,11 +1,11 @@
-// Props: 
+// Props:
 // 1. Title = Title to be displayed on the header
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-function Dashboardheader(props) {
+function ContainerHeader(props) {
   return (
     <div className="my-4 flex justify-between">
       <div className="text-2xl font-bold">{props.Title}</div>
@@ -14,4 +14,4 @@ function Dashboardheader(props) {
   );
 }
 
-export default Dashboardheader;
+export default ContainerHeader;

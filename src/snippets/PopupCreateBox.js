@@ -7,7 +7,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Createboxpopup(props) {
+function PopupCreateBox(props) {
   const [description, setDescription] = useState("");
   const [boxLabel, setBoxLabel] = useState("");
   const [error, setError] = useState("");
@@ -83,4 +83,4 @@ function Createboxpopup(props) {
   );
 }
 
-export default Createboxpopup;
+export default PopupCreateBox;

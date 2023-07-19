@@ -3,13 +3,13 @@ import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
 // Section imports
-import Dashboardnav from "../../../sections/Dashboardnav";
-import Dashboardheader from "../../../sections/Dashboardheader";
-import InfluencerBoxList from "../../../sections/Influencerboxlist";
-import Generalactioncontainer from "../../../sections/Generalactioncontainer";
+import NavigationDashboard from "../../../sections/NavigationDashboard";
+import ContainerHeader from "../../../sections/ContainerHeader";
+import ListInfluencerBox from "../../../sections/ListInfluencerBox";
+import ContainerActionGeneral from "../../../sections/ContainerGeneralAction";
 
 //Snippet imports
-import Createboxpopup from "../../../snippets/Createboxpopup";
+import PopupCreateBox from "../../../snippets/PopupCreateBox";
 
 function DashboardInfluencerBox() {
   const auth = useAuthUser();
@@ -21,7 +21,8 @@ function DashboardInfluencerBox() {
 
   // Trigger the useEffect
   const [getBoxListTrigger, setGetBoxListTrigger] = useState(true);
-  const [getBoxListExternalTrigger, setGetBoxListExternalTrigger] = useState(false)
+  const [getBoxListExternalTrigger, setGetBoxListExternalTrigger] =
+    useState(false);
 
   // Popup information
   const [createBoxPopup, setCreateBoxPopup] = useState(false);
@@ -58,20 +59,20 @@ function DashboardInfluencerBox() {
 
   return (
     <div className="h-screen flex relative">
-      <Dashboardnav
+      <NavigationDashboard
         ActiveLink="Influencer Box"
         ViewerUserType={viewerUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <Dashboardheader Title="Influencer Box" />
+        <ContainerHeader Title="Influencer Box" />
         {!getBoxListTrigger && (
-          <Generalactioncontainer
+          <ContainerActionGeneral
             SetPopup1={setCreateBoxPopup}
             CustomData={customData}
           />
         )}
         {!getBoxListTrigger && (
-          <InfluencerBoxList
+          <ListInfluencerBox
             BoxList={boxList}
             SetGetBoxListTrigger={setGetBoxListExternalTrigger}
             GetBoxListTrigger={getBoxListExternalTrigger}
@@ -79,7 +80,7 @@ function DashboardInfluencerBox() {
         )}
       </div>
       {createBoxPopup && !getBoxListTrigger && (
-        <Createboxpopup
+        <PopupCreateBox
           SetCreateBoxPopup={setCreateBoxPopup}
           SetGetBoxListTrigger={setGetBoxListExternalTrigger}
           GetBoxListTrigger={getBoxListExternalTrigger}

@@ -3,12 +3,12 @@ import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
 // Section imports
-import Dashboardnav from "../../sections/Dashboardnav";
-import Dashboardheader from "../../sections/Dashboardheader";
-import Affiliatelist from "../../sections/Affiliatelist";
+import NavigationDashboard from "../../sections/NavigationDashboard";
+import ContainerHeader from "../../sections/ContainerHeader";
+import ListAffiliates from "../../sections/ListAffiliates";
 
 //Snippet imports
-import Addtoboxpopup from "../../snippets/Addtoboxpopup";
+import PopupAddTobox from "../../snippets/PopupAddToBox";
 
 function Dashboardinfluencerhub() {
   const auth = useAuthUser();
@@ -53,14 +53,14 @@ function Dashboardinfluencerhub() {
 
   return (
     <div className="h-screen flex relative">
-      <Dashboardnav
+      <NavigationDashboard
         ActiveLink="Influencer Hub"
         ViewerUserType={viewerUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <Dashboardheader Title="Influencer Hub" />
+        <ContainerHeader Title="Influencer Hub" />
         {!getAffiliateListTrigger && (
-          <Affiliatelist
+          <ListAffiliates
             AffiliateList={affiliateList}
             CustomData={customData}
             SetAddToBoxPopup={setAddToBoxPopup}
@@ -69,7 +69,7 @@ function Dashboardinfluencerhub() {
         )}
       </div>
       {addToBoxPopup && !getAffiliateListTrigger && (
-        <Addtoboxpopup
+        <PopupAddTobox
           SetAddToBoxPopup={setAddToBoxPopup}
           ViewedProfileId={clickedProfileId}
         />

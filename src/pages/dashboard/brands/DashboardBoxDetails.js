@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 //Section import
-import Dashboardnav from "../../../sections/Dashboardnav";
-import Dashboardheader from "../../../sections/Dashboardheader";
-import Affiliatelist from "../../../sections/Affiliatelist";
+import NavigationDashboard from "../../../sections/NavigationDashboard";
+import ContainerHeader from "../../../sections/ContainerHeader";
+import ListAffiliates from "../../../sections/ListAffiliates";
 
 function DashboardBoxDetails() {
   const auth = useAuthUser();
@@ -19,7 +19,8 @@ function DashboardBoxDetails() {
 
   //Useeffect Triggers
   const [getBoxDetailsTrigger, setGetBoxDetailsTrigger] = useState(true);
-  const [getBoxDetailsExternalTrigger, setGetBoxDetailsExternalTrigger] = useState(false)
+  const [getBoxDetailsExternalTrigger, setGetBoxDetailsExternalTrigger] =
+    useState(false);
 
   //Popup states/information
   const [customData] = useState({
@@ -76,16 +77,16 @@ function DashboardBoxDetails() {
 
   return (
     <div className="h-screen flex relative">
-      <Dashboardnav
+      <NavigationDashboard
         ActiveLink="Influencer Box"
         ViewerUserType={viewerUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         {!getBoxDetailsTrigger && (
-          <Dashboardheader Title={`Influencer Box - ${box.box_label}`} />
+          <ContainerHeader Title={`Influencer Box - ${box.box_label}`} />
         )}
         {!getBoxDetailsTrigger && (
-          <Affiliatelist
+          <ListAffiliates
             AffiliateList={affiliateList}
             CustomData={customData}
             SetTrigger1={setGetBoxDetailsExternalTrigger}

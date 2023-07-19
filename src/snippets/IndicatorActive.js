@@ -14,7 +14,7 @@ function IndicatorActive(props) {
       }`}
     >
       <span
-        className={`block h-4 w-4 rounded-full opacity-70 ctm-animation-1 ${
+        className={`block h-4 w-4 rounded-full opacity-70 ctm-animation-blink ${
           status ? "ctm-bg-color-3" : "ctm-bg-color-4"
         }`}
       ></span>
