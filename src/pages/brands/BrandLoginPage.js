@@ -45,9 +45,10 @@ function BrandLoginPage() {
     <div className="flex h-screen">
       <div className="flex-1 h-full flex flex-col">
         <img
-          className="h-40 w-40 m-7"
+          className="h-40 w-40 m-7 cursor-pointer"
           alt="Brandaffy colored logo"
           src={brandlogo}
+          onClick={() => navigate("/")}
         ></img>
         <div className="flex-1 flex justify-start flex-col">
           <form
@@ -62,7 +63,7 @@ function BrandLoginPage() {
               <input
                 className="p-4 rounded-lg ctm-border-color-3 border drop-shadow-sm"
                 required
-                type="text"
+                type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 onFocus={(e) => setError("")}
                 placeholder="john@email.com"

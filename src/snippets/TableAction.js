@@ -1,33 +1,32 @@
+//Props
+//1. SetAddToBoxPopup = Used to toggle the display of the Add to Box Popup
+//2. SetClickedProfileId = Used to set the ID of the clicked Affiliate. This will be passed onto the parent
+//3. ClickedProfileId = ID of the clicked affilaite in the List
+//4. SetGetAffiliateListTrigger = Will contain custom data for usage when configuring the Table Action
+//5. SetTrigger1 = Assign a setState to trigger parent useEffect
+
 import React from "react";
 import axios from "axios";
 
 function TableAction(props) {
-  const RemoveFromBox = async (e, id) => {
+  const handleRemove = async (e, id) => {
     e.stopPropagation();
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/brand/box/removeAffiliate`,
         {
-          id: props.Id,
-          boxId: props.CustomData.boxId,
+          affiliate_to_remove: props.ClickedProfileId,
+          box_Id: props.CustomData.boxId,
         }
       );
       if (res.data.err) {
         console.log(res.data.err);
       } else {
-        props.SetTrigger(true);
+        props.SetTrigger1(!props.Trigger1);
       }
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const BrandActionsAddToBox = async (e) => {
-    e.stopPropagation();
-    props.SetPopup({
-      action: "addBox",
-      id: props.Id,
-    });
   };
 
   const RTSButtonsStart = async (e) => {
@@ -47,19 +46,22 @@ function TableAction(props) {
   }
 
   return (
+    // Influencer Box - Details - Brand Actions
     <div className="flex justify-center">
-      {props.CustomData.action === "removeFromBox" && (
+      {props.CustomData.action === "Influencer Box - Details - Brand" && (
         <button
-          onClick={(e) => RemoveFromBox(e)}
+          onClick={(e) => handleRemove(e)}
           className="ctm-btn ctm-btn-2"
         >
           Remove
         </button>
       )}
-      {props.CustomData.action === "brandActions" && (
+
+      {/* Influencer Hub - Brand Actions */}
+      {props.CustomData.action === "Influencer Hub - Brand" && (
         <div className="flex">
           <button
-            onClick={(e) => BrandActionsAddToBox(e)}
+            onClick={(e) => {e.stopPropagation(); props.SetClickedProfileId(props.ClickedProfileId); props.SetAddToBoxPopup(true)}}
             className="ctm-btn mx-2 ctm-btn-4"
           >
             Add to Box
@@ -67,6 +69,7 @@ function TableAction(props) {
           <button className="ctm-btn ctm-btn-1">Invite</button>
         </div>
       )}
+      
       {props.CustomData.action === "RTSbuttons" && (
         <div className="flex">
           <button className="ctm-btn mx-2 ctm-btn-2">Cancel</button>

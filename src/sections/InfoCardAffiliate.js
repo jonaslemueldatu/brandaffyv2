@@ -1,56 +1,72 @@
-import React from "react";
-import { useState } from "react";
+// Props
+// 1. ProfileToDisplay = The profile information to be displayed when accessing the affiliate profile
+// 2. IsThisMyProfile = boolean if logged-user is viewing own profile page
+// 3. ViewedProfileId = Id of the profile being Viewed
+
+import React, { useState } from "react";
 import axios from "axios";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-function Affiliateinfocard(props) {
-  const [profile, setProfile] = useState(props.Profile.profile_picture);
-  const [myprofile] = useState(props.Myprofile);
-  const [newprofile, setNewprofile] = useState("");
-  const [oldprofile] = useState(props.Profile.profile_picture);
-  const [editprofile, setEditprofile] = useState(false);
-  const [editcontact, setEditcontact] = useState(false);
-  const [profileload, setProfileload] = useState(false);
-  const [contactload, setContactload] = useState(false);
+function InfoCardAffiliate(props) {
+  // Toggles the edit buttons if profile viewed is logged-in user
+  const [isThisMyProfile] = useState(props.IsThisMyProfile);
 
-  const [firstname, setFirstname] = useState(props.Profile.firstname);
-  const [lastname, setLastname] = useState(props.Profile.lastname);
-  const [birthdate, setBirthdate] = useState(props.Profile.birthdate);
-  const [age, setAge] = useState(props.Profile.age);
-  const [gender, setGender] = useState(props.Profile.gender);
-  const [email] = useState(props.Profile.email);
-  const [phonenumber, setPhonenumber] = useState(props.Profile.phone_number);
-  const [province, setProvince] = useState(props.Profile.province);
-  const [country, setCountry] = useState(props.Profile.country);
+  // Toggles the edit state of the sections
+  const [editProfile, setEditProfile] = useState(false);
+  const [editContact, seteditContact] = useState(false);
+
+  // Loading indicator
+  const [profileStillLoading, setProfileStillLoading] = useState(false);
+  const [contactStillLoading, setContactStillLoading] = useState(false);
+
+  const [profilePicture, setProfilePicture] = useState(
+    props.ProfileToDisplay.profile_picture
+  );
+  // Store new profile picture when updating
+  const [newProfilePicture, setNewProfilePicture] = useState("");
+  // Store old profile picture when discarding edit
+  const [oldProfilePicture] = useState(props.ProfileToDisplay.profile_picture);
+  const [firstName, setFirstName] = useState(props.ProfileToDisplay.firstname);
+  const [lastName, setLastName] = useState(props.ProfileToDisplay.lastname);
+  const [birthDate, setBirthDate] = useState(props.ProfileToDisplay.birthdate);
+  const [age, setAge] = useState(props.ProfileToDisplay.age);
+  const [gender, setGender] = useState(props.ProfileToDisplay.gender);
+  const [email] = useState(props.ProfileToDisplay.email);
+  const [phoneNumber, setPhoneNumber] = useState(
+    props.ProfileToDisplay.phone_number
+  );
+  const [province, setProvince] = useState(props.ProfileToDisplay.province);
+  const [country, setCountry] = useState(props.ProfileToDisplay.country);
 
   const handleCancel = (section) => {
     switch (section) {
       case "profile":
-        setProfile(props.Profile.profile_picture);
-        setFirstname(props.Profile.firstname);
-        setLastname(props.Profile.lastname);
-        setGender(props.Profile.gender);
-        setBirthdate(props.Profile.birthdate);
-        setAge(props.Profile.age);
-        setEditprofile(false);
+        setProfilePicture(props.ProfileToDisplay.profile_picture);
+        setFirstName(props.ProfileToDisplay.firstname);
+        setLastName(props.ProfileToDisplay.lastname);
+        setGender(props.ProfileToDisplay.gender);
+        setBirthDate(props.ProfileToDisplay.birthdate);
+        setAge(props.ProfileToDisplay.age);
+        setEditProfile(false);
         break;
       case "contact":
-        setPhonenumber(props.Profile.phone_number);
-        setProvince(props.Profile.province);
-        setCountry(props.Profile.country);
-        setEditcontact(false);
+        setPhoneNumber(props.ProfileToDisplay.phone_number);
+        setProvince(props.ProfileToDisplay.province);
+        setCountry(props.ProfileToDisplay.country);
+        seteditContact(false);
         break;
       default:
     }
   };
 
   const handlePhotochange = (e) => {
-    setNewprofile(e.target.files[0]);
+    setNewProfilePicture(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setProfile(reader.result);
+        setProfilePicture(reader.result);
       }
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -58,17 +74,17 @@ function Affiliateinfocard(props) {
 
   const updateProfile = async (e) => {
     try {
-      setProfileload(true);
-      newprofile === "" ? setProfile(oldprofile) : console.log("");
+      setProfileStillLoading(true);
+      newProfilePicture === "" ? setProfilePicture(oldProfilePicture) : console.log("");
       e.preventDefault();
       const formData = new FormData();
-      if (newprofile) {
-        formData.append("profile_picture", newprofile);
+      if (newProfilePicture) {
+        formData.append("profile_picture", newProfilePicture);
       }
-      formData.append("id", props.Id);
-      formData.append("birthdate", birthdate);
-      formData.append("firstname", firstname);
-      formData.append("lastname", lastname);
+      formData.append("id", props.ViewedProfileId);
+      formData.append("birthdate", birthDate);
+      formData.append("firstname", firstName);
+      formData.append("lastname", lastName);
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("type", "profile");
@@ -78,26 +94,26 @@ function Affiliateinfocard(props) {
         `${process.env.REACT_APP_ROUTE}/api/updateprofile`,
         formData
       );
-      setProfileload(false);
-      setEditprofile(false);
+      setProfileStillLoading(false);
+      setEditProfile(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const updateContact = async (e) => {
-    setContactload(true);
+    setContactStillLoading(true);
     try {
       await axios.post(`${process.env.REACT_APP_ROUTE}/api/updateprofile`, {
         type: "contact",
-        id: props.Id,
-        phone_number: phonenumber,
+        id: props.ViewedProfileId,
+        phone_number: phoneNumber,
         province: province,
         country: country,
         user_type: "Affiliate",
       });
-      setContactload(false);
-      setEditcontact(false);
+      setContactStillLoading(false);
+      seteditContact(false);
     } catch (error) {
       console.log(error);
     }
@@ -107,15 +123,15 @@ function Affiliateinfocard(props) {
     <div className="mb-4 flex-col md:flex-row flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4">
       <form
         id="profile"
-        className="justify-center w-full md:w-80 flex flex-col md:justify-start items-center"
+        className="m-4 md:m-0 justify-center w-full md:w-80 flex flex-col md:justify-start items-center"
         onSubmit={(e) => updateProfile(e)}
       >
-        {editprofile ? (
+        {editProfile ? (
           <label htmlFor="profile-upload">
             <img
               alt="Upload user profile placeholder"
               className="rounded-lg w-60 h-60 cursor-pointer"
-              src={profile}
+              src={profilePicture}
             ></img>
             <input
               hidden
@@ -125,11 +141,11 @@ function Affiliateinfocard(props) {
             ></input>
           </label>
         ) : (
-          profile && (
+          profilePicture && (
             <img
               alt="Profile placeholder"
               className="rounded-lg w-60 h-60"
-              src={profile}
+              src={profilePicture}
             ></img>
           )
         )}
@@ -138,7 +154,7 @@ function Affiliateinfocard(props) {
         <div>
           <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
             Profile{" "}
-            {profileload && (
+            {profileStillLoading && (
               <FontAwesomeIcon
                 className="mx-4 my-auto"
                 icon={faSpinner}
@@ -154,30 +170,30 @@ function Affiliateinfocard(props) {
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">First Name</label>
-              {editprofile ? (
+              {editProfile ? (
                 <input
                   type="text"
-                  onChange={(e) => setFirstname(e.target.value)}
+                  onChange={(e) => setFirstName(e.target.value)}
                   required
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                  placeholder={firstname}
+                  placeholder={firstName}
                 ></input>
               ) : (
-                <div className="p-4 ctm-min-width-1">{firstname}</div>
+                <div className="p-4 ctm-min-width-1">{firstName}</div>
               )}
             </div>
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Last Name</label>
-              {editprofile ? (
+              {editProfile ? (
                 <input
                   type="text"
-                  onChange={(e) => setLastname(e.target.value)}
+                  onChange={(e) => setLastName(e.target.value)}
                   required
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                  placeholder={lastname}
+                  placeholder={lastName}
                 ></input>
               ) : (
-                <div className="p-4 ctm-min-width-1">{lastname}</div>
+                <div className="p-4 ctm-min-width-1">{lastName}</div>
               )}
             </div>
           </div>
@@ -185,7 +201,7 @@ function Affiliateinfocard(props) {
             <div className="flex flex-1 flex-col my-4">
               <label className="font-bold">Gender</label>
 
-              {editprofile ? (
+              {editProfile ? (
                 <select
                   onChange={(e) => setGender(e.target.value)}
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
@@ -204,21 +220,21 @@ function Affiliateinfocard(props) {
             <div className="flex flex-1 gap-3">
               <div className="flex flex-1 flex-col my-4 ctm-min-width-1">
                 <label className="font-bold">Birthdate</label>
-                {editprofile ? (
+                {editProfile ? (
                   <input
                     type="date"
-                    value={birthdate}
-                    onChange={(e) => setBirthdate(e.target.value)}
+                    value={birthDate}
+                    onChange={(e) => setBirthDate(e.target.value)}
                     required
                     className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
                   ></input>
                 ) : (
-                  <div className="p-4 ctm-min-width-1">{birthdate}</div>
+                  <div className="p-4 ctm-min-width-1">{birthDate}</div>
                 )}
               </div>
               <div className="flex w-20 flex-col my-4">
                 <label className="font-bold">Age</label>
-                {editprofile ? (
+                {editProfile ? (
                   <input
                     type="number"
                     onChange={(e) => setAge(e.target.value)}
@@ -234,11 +250,11 @@ function Affiliateinfocard(props) {
           </div>
         </div>
         <div className="flex justify-end">
-          {!editprofile && myprofile && (
+          {!editProfile && isThisMyProfile && (
             <button
               onClick={() => {
-                setEditprofile(true);
-                setProfile(
+                setEditProfile(true);
+                setProfilePicture(
                   "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/profile+upload+icon.webp"
                 );
               }}
@@ -247,7 +263,7 @@ function Affiliateinfocard(props) {
               Edit
             </button>
           )}
-          {editprofile && (
+          {editProfile && (
             <button
               onClick={() => {
                 handleCancel("profile");
@@ -257,7 +273,7 @@ function Affiliateinfocard(props) {
               Cancel
             </button>
           )}
-          {editprofile && (
+          {editProfile && (
             <button
               type="submit"
               form="profile"
@@ -271,7 +287,7 @@ function Affiliateinfocard(props) {
         <div>
           <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
             Contact Information
-            {contactload && (
+            {contactStillLoading && (
               <FontAwesomeIcon
                 className="mx-4 my-auto"
                 icon={faSpinner}
@@ -291,23 +307,23 @@ function Affiliateinfocard(props) {
             </div>
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Phone Number</label>
-              {editcontact ? (
+              {editContact ? (
                 <input
                   type="text"
-                  onChange={(e) => setPhonenumber(e.target.value)}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   required
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                  placeholder={phonenumber}
+                  placeholder={phoneNumber}
                 ></input>
               ) : (
-                <div className="p-4 ctm-min-width-1">{phonenumber}</div>
+                <div className="p-4 ctm-min-width-1">{phoneNumber}</div>
               )}
             </div>
           </div>
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Province</label>
-              {editcontact ? (
+              {editContact ? (
                 <input
                   type="text"
                   onChange={(e) => setProvince(e.target.value)}
@@ -321,7 +337,7 @@ function Affiliateinfocard(props) {
             </div>
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Country</label>
-              {editcontact ? (
+              {editContact ? (
                 <input
                   type="text"
                   onChange={(e) => setCountry(e.target.value)}
@@ -336,17 +352,17 @@ function Affiliateinfocard(props) {
           </div>
         </div>
         <div className="flex justify-end">
-          {!editcontact && myprofile && (
+          {!editContact && isThisMyProfile && (
             <button
               onClick={() => {
-                setEditcontact(true);
+                seteditContact(true);
               }}
               className="mx-2 ctm-btn ctm-btn-1"
             >
               Edit
             </button>
           )}
-          {editcontact && (
+          {editContact && (
             <button
               onClick={() => {
                 handleCancel("contact");
@@ -356,7 +372,7 @@ function Affiliateinfocard(props) {
               Cancel
             </button>
           )}
-          {editcontact && (
+          {editContact && (
             <button
               onClick={(e) => updateContact(e)}
               className="mx-2 ctm-btn ctm-btn-3"
@@ -378,4 +394,4 @@ function Affiliateinfocard(props) {
   );
 }
 
-export default Affiliateinfocard;
+export default InfoCardAffiliate;

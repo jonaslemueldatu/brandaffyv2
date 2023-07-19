@@ -1,9 +1,15 @@
+//Props
+//1. SetCreateBoxPopup = This is used to toggle the popup to display or hide
+//2. SetGetBoxListTrigger = Triggers the getboxList use Effect to reflect new boxes added
+//3. BoxOwnerId = This is the box owner ID where the created box will be assigned to
+//4. GetBoxListTrigger = The status of the trigger
+
 import React, { useState } from "react";
 import axios from "axios";
 
 function Createboxpopup(props) {
   const [description, setDescription] = useState("");
-  const [label, setLabel] = useState("");
+  const [boxLabel, setBoxLabel] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -12,16 +18,16 @@ function Createboxpopup(props) {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/brand/box/create`,
         {
-          brand_owner_id: props.Id,
-          label: label,
-          description: description,
+          brand_owner_id: props.BoxOwnerId,
+          box_label: boxLabel,
+          box_description: description,
         }
       );
       if (res.data.err) {
         setError(res.data.err);
       } else {
-        props.SetEffect(true);
-        props.SetPopup(false);
+        props.SetGetBoxListTrigger(!props.GetBoxListTrigger);
+        props.SetCreateBoxPopup(false);
       }
     } catch (error) {
       console.log(error);
@@ -30,7 +36,7 @@ function Createboxpopup(props) {
 
   return (
     <div
-      onClick={() => props.SetPopup(false)}
+      onClick={() => props.SetCreateBoxPopup(false)}
       className="flex justify-center items-center fixed w-full h-full top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50"
     >
       <div
@@ -43,18 +49,20 @@ function Createboxpopup(props) {
             <label className="my-2 font-medium">Label</label>
             <input
               type="text"
-              onChange={(e) => setLabel(e.target.value)}
+              onChange={(e) => setBoxLabel(e.target.value)}
               onFocus={() => setError("")}
+              placeholder="Box label"
               required
               className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
             ></input>
           </div>
           <div className="flex flex-1 flex-col my-4">
-            <label className="font-medium">About</label>
+            <label className="font-medium">Description</label>
             <textarea
               required
               rows="3"
               onChange={(e) => setDescription(e.target.value)}
+              placeholder="Tell us something about this box"
               className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
             ></textarea>
           </div>
@@ -62,7 +70,7 @@ function Createboxpopup(props) {
 
           <div className="flex justify-end">
             <button
-              onClick={() => props.SetPopup(false)}
+              onClick={() => props.SetCreateBoxPopup(false)}
               className="ctm-btn ctm-btn-2 mx-4"
             >
               Cancel

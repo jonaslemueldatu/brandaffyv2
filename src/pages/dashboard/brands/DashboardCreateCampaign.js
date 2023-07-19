@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
 import axios from 'axios'
 
-import Dashboardnav from "../../pages/sections/Dashboardnav";
-import Dashboardheader from "../../pages/sections/Dashboardheader";
-import Createcampaignform from "../sections/Createcampaignform";
+import Dashboardnav from "../../../sections/Dashboardnav";
+import Dashboardheader from "../../../sections/Dashboardheader";
+import Createcampaignform from "../../../sections/Createcampaignform";
 
 function Dashboardcreatecampaign() {
   const auth = useAuthUser();

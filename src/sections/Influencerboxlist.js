@@ -1,29 +1,33 @@
-import React from "react";
-import { useState } from "react";
+//Props
+//1. BoxList = List of Boxes to be displayed
+//2. SetGetBoxListTrigger = Initiates the variable to trigger useEffect
+//3. GetBoxListTrigger = Variable to trigger the UseEffect
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function InfluencerBoxList(props) {
   const navigate = useNavigate();
 
-  const [boxeslist] = useState(props.Boxes);
+  const [boxList] = useState(props.BoxList);
 
-  const handleTrClick = (id) => {
+  const handleRowClick = (id) => {
     navigate(`${id}`);
   };
 
-  const handleTdRemove = async (id) => {
+  const handleRemoveBox = async (boxId) => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/brand/box/delete`,
         {
-          id: id,
+          box_id: boxId,
         }
       );
       if (res.data.err) {
         console.log(res.data.err);
       } else {
-        props.SetEffect(true);
+        props.SetGetBoxListTrigger(!props.GetBoxListTrigger);
       }
     } catch (error) {
       console.log(error);
@@ -44,14 +48,22 @@ function InfluencerBoxList(props) {
             </tr>
           </thead>
           <tbody>
-            {boxeslist.map((box) => {
+            {boxList.map((box) => {
               return (
                 <tr
                   key={box._id.toString()}
-                  onClick={() => handleTrClick(box._id.toString())}
+                  onClick={() => handleRowClick(box._id.toString())}
                   className="h-20 cursor-pointer ctm-border-color-3 border-b"
                 >
-                  <td className="px-4"></td>
+                  <td
+                    className="w-12 px-4"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <input
+                      className="block m-auto cursor-pointer"
+                      type="checkbox"
+                    ></input>
+                  </td>
                   <td className="px-4 text-left whitespace-nowrap overflow-ellipsis max-w-xs overflow-hidden">
                     {box.box_label}
                   </td>
@@ -65,7 +77,7 @@ function InfluencerBoxList(props) {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleTdRemove(box._id.toString());
+                        handleRemoveBox(box._id.toString());
                       }}
                       className="ctm-btn ctm-btn-2 mx-auto"
                     >
@@ -78,7 +90,7 @@ function InfluencerBoxList(props) {
           </tbody>
         </table>
       </div>
-      {boxeslist.length <= 0 && (
+      {boxList.length <= 0 && (
         <div className="text-center my-8 ctm-font-color-1">
           No Data to display
         </div>

@@ -1,57 +1,76 @@
-import React from "react";
-import { useState } from "react";
+// Props
+// 1. ProfileToDisplay = The profile information to be displayed when accessing the affiliate profile
+// 2. IsThisMyProfile = boolean if logged-user is viewing own profile page
+// 3. ViewedProfileId = Id of the profile being Viewed
+
+import React, { useState } from "react";
 import axios from "axios";
-import IndustryDropdown from "../snippets/IndustryDropdown";
+
+//Snippet Imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import IndustryDropdown from "../snippets/IndustryDropdown";
 
-function Brandinfocard(props) {
-  const [profile, setProfile] = useState(props.Profile.profile_picture);
-  const [myprofile] = useState(props.Myprofile);
-  const [newprofile, setNewprofile] = useState("");
-  const [oldprofile] = useState(props.Profile.profile_picture);
+function InfoCardBrand(props) {
+  // Toggles the edit buttons if profile viewed is logged-in user
+  const [isThisMyProfile] = useState(props.IsThisMyProfile);
 
-  const [editprofile, setEditprofile] = useState(false);
-  const [editcontact, setEditcontact] = useState(false);
-  const [profileload, setProfileload] = useState(false);
-  const [contactload, setContactload] = useState(false);
+  // Toggles the edit state of the sections
+  const [editProfile, setEditProfile] = useState(false);
+  const [editContact, setEditContact] = useState(false);
 
-  const [brandname, setBrandname] = useState(props.Profile.brand_name);
-  const [about, setAbout] = useState(props.Profile.about);
-  const [industry, setIndustry] = useState(props.Profile.industry);
-  const [employeesize, setEmployeesize] = useState(props.Profile.employee_size);
+  // Loading indicator
+  const [profileStillLoading, setProfileStillLoading] = useState(false);
+  const [contactStillLoading, setContactStillLoading] = useState(false);
 
-  const [email] = useState(props.Profile.email);
-  const [phonenumber, setPhonenumber] = useState(props.Profile.phone_number);
-  const [address, setAddress] = useState(props.Profile.company_address);
-  const [country, setCountry] = useState(props.Profile.country);
+  const [profilePicture, setProfilePicture] = useState(
+    props.ProfileToDisplay.profile_picture
+  );
+  const [newProfilePicture, setNewProfilePicture] = useState("");
+  const [oldProfilePicture] = useState(props.ProfileToDisplay.profile_picture);
+
+  const [brandName, setBrandName] = useState(props.ProfileToDisplay.brand_name);
+  const [about, setAbout] = useState(props.ProfileToDisplay.about);
+  const [industry, setIndustry] = useState(props.ProfileToDisplay.industry);
+  const [employeeSize, setEmployeeSize] = useState(
+    props.ProfileToDisplay.employee_size
+  );
+
+  const [email] = useState(props.ProfileToDisplay.email);
+  const [phonenumber, setPhonenumber] = useState(
+    props.ProfileToDisplay.phone_number
+  );
+  const [address, setAddress] = useState(
+    props.ProfileToDisplay.company_address
+  );
+  const [country, setCountry] = useState(props.ProfileToDisplay.country);
 
   const handleCancel = (section) => {
     switch (section) {
       case "profile":
-        setProfile(props.Profile.profile_picture);
-        setBrandname(props.Profile.brand_name);
-        setAbout(props.Profile.about);
-        setIndustry(props.Profile.industry);
-        setEmployeesize(props.Profile.employee_size);
-        setEditprofile(false);
+        setProfilePicture(props.ProfileToDisplay.profile_picture);
+        setBrandName(props.ProfileToDisplay.brand_name);
+        setAbout(props.ProfileToDisplay.about);
+        setIndustry(props.ProfileToDisplay.industry);
+        setEmployeeSize(props.ProfileToDisplay.employee_size);
+        setEditProfile(false);
         break;
       case "contact":
-        setPhonenumber(props.Profile.phone_number);
-        setAddress(props.Profile.address);
-        setCountry(props.Profile.country);
-        setEditcontact(false);
+        setPhonenumber(props.ProfileToDisplay.phone_number);
+        setAddress(props.ProfileToDisplay.address);
+        setCountry(props.ProfileToDisplay.country);
+        setEditContact(false);
         break;
       default:
     }
   };
 
   const handlePhotochange = (e) => {
-    setNewprofile(e.target.files[0]);
+    setNewProfilePicture(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setProfile(reader.result);
+        setProfilePicture(reader.result);
       }
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -59,18 +78,18 @@ function Brandinfocard(props) {
 
   const updateProfile = async (e) => {
     try {
-      setProfileload(true);
-      newprofile === "" ? setProfile(oldprofile) : console.log("");
+      setProfileStillLoading(true);
+      newProfilePicture === "" ? setProfilePicture(oldProfilePicture) : console.log("");
       e.preventDefault();
       const formData = new FormData();
-      if (newprofile) {
-        formData.append("profile_picture", newprofile);
+      if (newProfilePicture) {
+        formData.append("profile_picture", newProfilePicture);
       }
-      formData.append("id", props.Id);
-      formData.append("brand_name", brandname);
+      formData.append("id", props.ViewedProfileId);
+      formData.append("brand_name", brandName);
       formData.append("about", about);
       formData.append("industry", industry);
-      formData.append("employee_size", employeesize);
+      formData.append("employee_size", employeeSize);
       formData.append("type", "profile");
       formData.append("user_type", "Brand");
 
@@ -78,26 +97,26 @@ function Brandinfocard(props) {
         `${process.env.REACT_APP_ROUTE}/api/updateprofile`,
         formData
       );
-      setProfileload(false);
-      setEditprofile(false);
+      setProfileStillLoading(false);
+      setEditProfile(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const updateContact = async (e) => {
-    setContactload(true);
+    setContactStillLoading(true);
     try {
       await axios.post(`${process.env.REACT_APP_ROUTE}/api/updateprofile`, {
         type: "contact",
-        id: props.Id,
+        id: props.ViewedProfileId,
         phone_number: phonenumber,
         address: address,
         country: country,
         user_type: "Brand",
       });
-      setContactload(false);
-      setEditcontact(false);
+      setContactStillLoading(false);
+      setEditContact(false);
     } catch (error) {
       console.log(error);
     }
@@ -107,29 +126,29 @@ function Brandinfocard(props) {
     <div className="mb-4 flex-col md:flex-row flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4">
       <form
         id="profile"
-        className="justify-center w-full md:w-80 flex flex-col md:justify-start items-center"
+        className="m-4 md:m-0 justify-center w-full md:w-80 flex flex-col md:justify-start items-center"
         onSubmit={(e) => updateProfile(e)}
       >
-        {editprofile ? (
+        {editProfile ? (
           <label htmlFor="profile-upload">
             <img
               alt="Upload user profile placeholder"
               className="rounded-lg w-60 h-60 cursor-pointer"
-              src={profile}
+              src={profilePicture}
             ></img>
             <input
               hidden
-              id="profile-upload"
+              id="profilePicture-upload"
               onChange={(e) => handlePhotochange(e)}
               type="file"
             ></input>
           </label>
         ) : (
-          profile && (
+          profilePicture && (
             <img
               alt="Profile placeholder"
               className="rounded-lg w-60 h-60"
-              src={profile}
+              src={profilePicture}
             ></img>
           )
         )}
@@ -138,7 +157,7 @@ function Brandinfocard(props) {
         <div>
           <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
             Profile{" "}
-            {profileload && (
+            {profileStillLoading && (
               <FontAwesomeIcon
                 className="mx-4 my-auto"
                 icon={faSpinner}
@@ -154,16 +173,16 @@ function Brandinfocard(props) {
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Brand Name</label>
-              {editprofile ? (
+              {editProfile ? (
                 <input
                   type="text"
-                  onChange={(e) => setBrandname(e.target.value)}
+                  onChange={(e) => setBrandName(e.target.value)}
                   required
                   className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                  placeholder={brandname}
+                  placeholder={brandName}
                 ></input>
               ) : (
-                <div className="p-4 ctm-min-width-1">{brandname}</div>
+                <div className="p-4 ctm-min-width-1">{brandName}</div>
               )}
             </div>
             <div className="flex flex-1 flex-col my-4"></div>
@@ -171,7 +190,7 @@ function Brandinfocard(props) {
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
               <label className="font-bold">About</label>
-              {editprofile ? (
+              {editProfile ? (
                 <textarea
                   rows="3"
                   onChange={(e) => setAbout(e.target.value)}
@@ -186,7 +205,7 @@ function Brandinfocard(props) {
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Industry</label>
-              {editprofile ? (
+              {editProfile ? (
                 <IndustryDropdown
                   SetIndustry={setIndustry}
                   Industry={industry}
@@ -197,22 +216,22 @@ function Brandinfocard(props) {
             </div>
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Employee Size</label>
-              {editprofile ? (
+              {editProfile ? (
                 <div>
                   Around
                   <input
                     type="number"
-                    onChange={(e) => setEmployeesize(e.target.value)}
+                    onChange={(e) => setEmployeeSize(e.target.value)}
                     required
                     className="p-4 mx-2 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
-                    placeholder={employeesize}
+                    placeholder={employeeSize}
                   ></input>
                   employees
                 </div>
               ) : (
                 <div className="p-4 ctm-min-width-1">
-                  {employeesize && (
-                    <span>Around {employeesize}+ employees</span>
+                  {employeeSize && (
+                    <span>Around {employeeSize}+ employees</span>
                   )}
                 </div>
               )}
@@ -220,11 +239,11 @@ function Brandinfocard(props) {
           </div>
         </div>
         <div className="flex justify-end">
-          {!editprofile && myprofile && (
+          {!editProfile && isThisMyProfile && (
             <button
               onClick={() => {
-                setEditprofile(true);
-                setProfile(
+                setEditProfile(true);
+                setProfilePicture(
                   "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/profile+upload+icon.webp"
                 );
               }}
@@ -233,7 +252,7 @@ function Brandinfocard(props) {
               Edit
             </button>
           )}
-          {editprofile && (
+          {editProfile && (
             <button
               onClick={() => {
                 handleCancel("profile");
@@ -243,7 +262,7 @@ function Brandinfocard(props) {
               Cancel
             </button>
           )}
-          {editprofile && (
+          {editProfile && (
             <button
               type="submit"
               form="profile"
@@ -257,7 +276,7 @@ function Brandinfocard(props) {
         <div>
           <div className="font-bold text-base flex flex-start ctm-bg-color-1 rounded-sm px-4">
             Contact Information
-            {contactload && (
+            {contactStillLoading && (
               <FontAwesomeIcon
                 className="mx-4 my-auto"
                 icon={faSpinner}
@@ -277,7 +296,7 @@ function Brandinfocard(props) {
             </div>
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Phone Number</label>
-              {editcontact ? (
+              {editContact ? (
                 <input
                   type="text"
                   onChange={(e) => setPhonenumber(e.target.value)}
@@ -293,7 +312,7 @@ function Brandinfocard(props) {
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Company Address</label>
-              {editcontact ? (
+              {editContact ? (
                 <input
                   type="text"
                   onChange={(e) => setAddress(e.target.value)}
@@ -307,7 +326,7 @@ function Brandinfocard(props) {
             </div>
             <div className="flex flex-1 flex-col my-4">
               <label className="my-2 font-bold">Country</label>
-              {editcontact ? (
+              {editContact ? (
                 <input
                   type="text"
                   onChange={(e) => setCountry(e.target.value)}
@@ -322,17 +341,17 @@ function Brandinfocard(props) {
           </div>
         </div>
         <div className="flex justify-end">
-          {!editcontact && myprofile && (
+          {!editContact && isThisMyProfile && (
             <button
               onClick={() => {
-                setEditcontact(true);
+                setEditContact(true);
               }}
               className="mx-2 ctm-btn ctm-btn-1"
             >
               Edit
             </button>
           )}
-          {editcontact && (
+          {editContact && (
             <button
               onClick={() => {
                 handleCancel("contact");
@@ -342,7 +361,7 @@ function Brandinfocard(props) {
               Cancel
             </button>
           )}
-          {editcontact && (
+          {editContact && (
             <button
               onClick={(e) => updateContact(e)}
               className="mx-2 ctm-btn ctm-btn-3"
@@ -356,4 +375,4 @@ function Brandinfocard(props) {
   );
 }
 
-export default Brandinfocard;
+export default InfoCardBrand;

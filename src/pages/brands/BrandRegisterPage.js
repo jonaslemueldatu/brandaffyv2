@@ -1,20 +1,21 @@
 import React from "react";
+import axios from "axios";
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
-import axios from "axios";
 
 function BrandRegisterPage() {
-  const navigate = useNavigate();
-  const signIn = useSignIn();
-
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
   );
 
+  const navigate = useNavigate();
+  const signIn = useSignIn();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [brandname, setBrandname] = useState("");
+  const [brandName, setBrandname] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -23,7 +24,7 @@ function BrandRegisterPage() {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/brand/register`,
         {
-          brand_name: brandname,
+          brand_name: brandName,
           email: email,
           password: password,
         }
@@ -49,9 +50,10 @@ function BrandRegisterPage() {
     <div className="flex h-screen">
       <div className="flex-1 h-full flex flex-col">
         <img
-          className="h-40 w-40 m-7"
+          className="h-40 w-40 m-7 cursor-pointer"
           alt="Brandaffy colored logo"
           src={brandlogo}
+          onClick={() => navigate("/")}
         ></img>
         <div className="flex-1 flex justify-start flex-col">
           <form
@@ -78,7 +80,7 @@ function BrandRegisterPage() {
                 required
                 placeholder="john@email.com"
                 className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
-                type="text"
+                type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 onFocus={(e) => setError("")}
               ></input>

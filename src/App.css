@@ -100,16 +100,17 @@ html {
   background-color: #f4f1fe;
 }
 
-.ctm-bg-color-8 {
-  background: linear-gradient(135deg, #ffb7f5, #6c5dd3);
-}
-
 .ctm-bg-color-9 {
-  background-color: rgba(244,241,254,1);
+  background-color: rgba(244, 241, 254, 1);
 }
 
 .ctm-hvr-bg-color-1:hover {
   background-color: rgba(229, 231, 235, 1);
+}
+
+/* Custom Background */
+.ctm-bg-1 {
+  background: linear-gradient(135deg, #ffb7f5, #6c5dd3);
 }
 
 /* Custom border color */

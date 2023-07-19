@@ -1,32 +1,39 @@
+// Props
+// 1. ActiveLink = Link that will be set to active
+// 2. ViewerUserType = User Type of logged-in user (Brand/Affilaite)
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSignOut } from "react-auth-kit";
-import { useNavigate } from "react-router-dom";
-import { useAuthUser } from "react-auth-kit";
+import { useSignOut, useAuthUser } from "react-auth-kit";
+import { useNavigate, Link } from "react-router-dom";
+
 import axios from "axios";
 
 function Dashboardnav(props) {
+  // Assets
+  const [brandlogo] = useState(
+    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
+  );
+
   const auth = useAuthUser();
   const signOut = useSignOut();
   const navigate = useNavigate();
 
-  const [type] = useState(props.Type.toLowerCase());
-  const [link] = useState(props.link);
-  const [brandlogo] = useState(
-    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
-  );
+  const [viewerUserType] = useState(props.ViewerUserType.toLowerCase());
+  const [activeLink] = useState(props.ActiveLink);
+  const [viewerId] = useState(auth().id);
 
   const handleLogout = async () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/logout`,
         {
-          id: auth().id,
-          type: type,
+          _id: viewerId,
+          viewer_user_type: viewerUserType,
         }
       );
-      if (res.status === 200) {
-        navigate(`/${type}/login`);
+      if (res.data.err) {
+        console.log(res.data.err);
+      } else {
+        navigate(`/${viewerUserType}/login`);
         setTimeout(() => {
           signOut();
         }, 1000);
@@ -36,8 +43,8 @@ function Dashboardnav(props) {
     }
   };
 
-  const handleLink = (link) => {
-    navigate(link);
+  const handleLink = (navLink) => {
+    navigate(navLink);
     navigate(0);
   };
 
@@ -47,11 +54,11 @@ function Dashboardnav(props) {
         <img alt="Brandaffy logo colored" src={brandlogo}></img>
       </div>
       <div className="flex flex-col justify-around flex-1">
-        {type === "affiliate" && (
+        {viewerUserType === "affiliate" && (
           <div className="flex flex-col">
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "My Profile"
+                activeLink === "My Profile"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
@@ -61,7 +68,7 @@ function Dashboardnav(props) {
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "Campaigns"
+                activeLink === "Campaigns"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
@@ -71,7 +78,7 @@ function Dashboardnav(props) {
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "Influencer Hub"
+                activeLink === "Influencer Hub"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
@@ -82,11 +89,11 @@ function Dashboardnav(props) {
           </div>
         )}
 
-        {type === "brand" && (
+        {viewerUserType === "brand" && (
           <div className="flex flex-col">
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "My Profile"
+                activeLink === "My Profile"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
@@ -96,7 +103,7 @@ function Dashboardnav(props) {
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "Campaigns"
+                activeLink === "Campaigns"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
@@ -106,7 +113,7 @@ function Dashboardnav(props) {
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "Influencer Hub"
+                activeLink === "Influencer Hub"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
@@ -116,7 +123,7 @@ function Dashboardnav(props) {
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                link === "Influencer Box"
+                activeLink === "Influencer Box"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
@@ -132,7 +139,7 @@ function Dashboardnav(props) {
         <div className="flex flex-col">
           <Link
             className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-              link === "Account Settings"
+              activeLink === "Account Settings"
                 ? "rounded-lg text-black ctm-bg-color-1"
                 : "ctm-font-color-1"
             }`}
@@ -142,7 +149,7 @@ function Dashboardnav(props) {
           </Link>
           <Link
             className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-              link === "Help Center"
+              activeLink === "Help Center"
                 ? "rounded-lg text-black ctm-bg-color-1"
                 : "ctm-font-color-1"
             }`}

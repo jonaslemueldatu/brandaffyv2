@@ -1,7 +1,10 @@
+//Props
+//1. Status = The status of the Affiliate (isLogged_in? True/false)
+
 import React from "react";
 import { useState } from "react";
 
-function ActiveIndicator(props) {
+function IndicatorActive(props) {
   const [status] = useState(props.Status);
 
   return (
@@ -19,4 +22,4 @@ function ActiveIndicator(props) {
   );
 }
 
-export default ActiveIndicator;
+export default IndicatorActive;

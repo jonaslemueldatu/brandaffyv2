@@ -30,7 +30,7 @@ function Brandlandingpage() {
   return (
     <div className="relative">
       {/* Top Navigation Bar */}
-      <div className="sticky top-0 xl:relative justify-between ctm-bg-color-7 w-full p-4 flex xl:justify-evenly">
+      <div className="sticky top-0 xl:relative justify-between ctm-bg-color-7 w-full p-4 flex xl:justify-evenly z-10">
         <img alt="Brandaffy logo" src={brandlogo} className="h-28 w-28"></img>
         <div className="hidden xl:flex">
           <ul className="flex items-center">
@@ -72,7 +72,10 @@ function Brandlandingpage() {
           >
             Login
           </Link>
-          <Link to={"/brand/register"} className="shadow-lg ctm-bg-color-8 text-white ctm-btn text-lg">
+          <Link
+            to={"/brand/register"}
+            className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg"
+          >
             Sign Up
           </Link>
         </div>
@@ -89,7 +92,7 @@ function Brandlandingpage() {
           </p>
           <Link
             to={"/brand/register"}
-            className="shadow-lg ctm-bg-color-8 text-white ctm-btn text-lg my-4 w-fit"
+            className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4 w-fit"
           >
             Start Your UGC Campaign Today
           </Link>
@@ -105,7 +108,7 @@ function Brandlandingpage() {
         id="what-is-brandaffy"
         className="p-8 lg:p-20 xl:px-24 xl:py-10 max-w-6xl m-auto"
       >
-        <h2 className="text-center font-extrabold leading-none text-6xl">
+        <h2 className="text-center font-extrabold leading-none text-5xl">
           Discover, Curate, And Amplify<br></br> Authentic Content With Ease
         </h2>
         <div className="flex flex-col-reverse md:flex-row py-8">
@@ -177,7 +180,7 @@ function Brandlandingpage() {
       ></img>
       <div id="features" className="ctm-bg-color-9">
         <div className="p-8 lg:p-20 xl:px-24 xl:py-10 max-w-7xl m-auto flex flex-col items-center">
-          <h2 className="text-center font-extrabold leading-none text-6xl">
+          <h2 className="text-center font-extrabold leading-none text-5xl">
             A Faster, Simpler UGC Management Tool
           </h2>
           <div className="grid justify-items-center">
@@ -227,7 +230,7 @@ function Brandlandingpage() {
           </div>
           <Link
             to={"/brand/register"}
-            className="shadow-lg ctm-bg-color-8 text-white ctm-btn text-lg my-4 w-fit"
+            className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4 w-fit"
           >
             Create Your Account Now
           </Link>
@@ -237,7 +240,56 @@ function Brandlandingpage() {
           src={creamTopCurvedDesign}
         ></img>
       </div>
-      {/*  */}
+      {/* Footer */}
+      <div className="p-10 sm:p-18 flex flex-col sm:flex-row bg-white justify-evenly">
+        <div>
+          <img alt="Brandaffy logo" src={brandlogo} className="h-28 w-28"></img>
+        </div>
+        <div className="flex flex-col sm:flex-row">
+          <div className="sm:mx-10">
+            <h3 className="my-4 font-bold">Product</h3>
+            <ul className="">
+              <li className="my-4 hover:underline cursor-pointer">
+                <a href={"/#what-is-brandaffy"}> What is Brandaffy</a>
+              </li>
+              <li className="my-4 hover:underline cursor-pointer">
+                <a href={"/#features"}>Features</a>
+              </li>
+              <li className="my-4 hover:underline cursor-pointer">
+                How it Works
+              </li>
+              {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
+              Why We
+            </li> */}
+              <li className="my-4 hover:underline cursor-pointer">Pricing</li>
+              {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
+              Upcoming Features
+            </li> */}
+              <li className="my-4 hover:underline cursor-pointer">
+                {" "}
+                <Link to={"/affiliate"}>UGC Creator Portal</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="sm:mx-10">
+            <h3 className="my-4 font-bold">Support</h3>
+            <ul className="">
+              <li className="my-4 hover:underline cursor-pointer">
+                <a href={"mailto:jonas.lemuel.datu@eee.upd.edu.ph"}>
+                  Contact Us
+                </a>
+              </li>
+              <li className="my-4 hover:underline cursor-pointer">
+                Terms of Service
+              </li>
+              <li className="my-4 hover:underline cursor-pointer">
+                Privacy Policy
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Display component only when mobileMenu is set to true */}
       {mobileMenu && (
         <div
@@ -280,7 +332,7 @@ function Brandlandingpage() {
               </Link>
               <Link
                 to={"brand/register"}
-                className="shadow-lg ctm-bg-color-8 text-white ctm-btn text-lg my-4"
+                className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4"
               >
                 Sign Up
               </Link>

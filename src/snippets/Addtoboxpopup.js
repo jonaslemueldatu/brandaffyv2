@@ -1,3 +1,7 @@
+//Props
+//1. ViewedProfileId = Id of the profile being viewed
+//2. SetAddToBoxPopup = Trigger the display of the AddToBoxPopup
+
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -6,26 +10,29 @@ import { useAuthUser } from "react-auth-kit";
 function Addtoboxpopup(props) {
   const auth = useAuthUser();
 
-  const [isBusy, setIsbusy] = useState(true);
-  const [userid] = useState(auth().id);
-  const [boxes, setBoxes] = useState([]);
+  const [getBoxListTrigger, setGetBoxListTrigger] = useState(true);
+  //Box owner ID which is the same ID as the logged-in brand
+  const [boxOwnerId] = useState(auth().id);
+  //List of Boxes from the API
+  const [boxList, setBoxList] = useState([]);
+  //Chosen box to add user
   const [boxChoice, setBoxchoice] = useState();
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const handleAddButton = async () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/brand/box/addaffiliate`,
         {
-          id: props.Popup.id,
+          id: props.ViewedProfileId,
           box_id: boxChoice,
         }
       );
       if (res.data.err) {
         console.log(res.data.err);
-        setError(res.data.err)
+        setError(res.data.err);
       } else {
-        props.SetPopup("");
+        props.SetAddToBoxPopup(false);
       }
     } catch (error) {
       console.log(error);
@@ -33,35 +40,36 @@ function Addtoboxpopup(props) {
   };
 
   useEffect(() => {
-    setIsbusy(true);
+    setGetBoxListTrigger(true);
     const getBoxList = async () => {
       try {
         const res = await axios.get(
           `${process.env.REACT_APP_ROUTE}/api/brand/box/getlist`,
           {
             params: {
-              brand_owner_id: userid,
+              brand_owner_id: boxOwnerId,
             },
           }
         );
         if (res.data.err) {
           console.log(res.data.err);
-          setError(res.data.err)
+          setError(res.data.err);
+          setGetBoxListTrigger(false);
         } else {
-          await setBoxes(res.data.brandbox_list);
-          await setBoxchoice(res.data.brandbox_list[0]._id.toString())
-          setIsbusy(false);
+          setBoxList(res.data.brandbox_list);
+          setBoxchoice(res.data.brandbox_list[0]._id.toString());
+          setGetBoxListTrigger(false);
         }
       } catch (error) {
         console.log(error);
       }
     };
     getBoxList();
-  }, [userid]);
+  }, [boxOwnerId]);
 
   return (
     <div
-      onClick={() => props.SetPopup("")}
+      onClick={() => props.SetAddToBoxPopup(false)}
       className="flex justify-center items-center fixed w-full h-full top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50"
     >
       {" "}
@@ -71,8 +79,8 @@ function Addtoboxpopup(props) {
       >
         <div className="font-bold">Add Influencer to box:</div>
 
-        {!isBusy &&
-          (boxes.length === 0 ? (
+        {!getBoxListTrigger &&
+          (boxList.length === 0 ? (
             <div className="text-center my-8 ctm-font-color-1">
               No available boxes to choose from
             </div>
@@ -85,7 +93,7 @@ function Addtoboxpopup(props) {
                 onChange={(e) => setBoxchoice(e.target.value)}
                 defaultValue={boxChoice}
               >
-                {boxes.map((box) => {
+                {boxList.map((box) => {
                   return (
                     <option key={box._id.toString()} value={box._id.toString()}>
                       {box.box_label}
@@ -98,12 +106,12 @@ function Addtoboxpopup(props) {
           ))}
         <div className="flex justify-end">
           <button
-            onClick={() => props.SetPopup("")}
+            onClick={() => props.SetAddToBoxPopup(false)}
             className="ctm-btn ctm-btn-2 mx-4"
           >
             Cancel
           </button>
-          {!isBusy && boxes.length > 0 && (
+          {!getBoxListTrigger && boxList.length > 0 && (
             <button
               onClick={() => handleAddButton()}
               className="ctm-btn ctm-btn-3"

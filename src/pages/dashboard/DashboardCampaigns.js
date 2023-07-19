@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
-import Dashboardnav from "../pages/sections/Dashboardnav";
-import Dashboardheader from "../pages/sections/Dashboardheader";
-import Generalactioncontainer from "../pages/sections/Generalactioncontainer";
-import Campaignlist from "../pages/sections/Campaignlist";
+import Dashboardnav from "../../sections/Dashboardnav";
+import Dashboardheader from "../../sections/Dashboardheader";
+import Generalactioncontainer from "../../sections/Generalactioncontainer";
+import Campaignlist from "../../sections/Campaignlist";
 
 function Dashboardcampaigns() {
   const auth = useAuthUser();
