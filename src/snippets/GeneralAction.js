@@ -1,5 +1,6 @@
 // Props
 // 1. SetPopup1 = Contains the toggle for the assigned SetPopup
+// 2. CustomData = CustomData passed on from the parent component
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,8 @@ function GeneralAction(props) {
           </button>
         </div>
       )}
-      {props.CustomData.action === "brandCampaigns" && (
+      {/* Brand Campaigns action button */}
+      {props.CustomData.action === "Campaigns - Brand" && (
         <div className="flex">
           <button
             onClick={() => navigate("create")}

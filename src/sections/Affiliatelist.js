@@ -4,7 +4,7 @@
 //3. SetClickedProfileId = Used to set the ID of the clicked Affiliate. This will be passed onto the parent
 //4. CustomData = Will contain custom data for usage when configuring the Table Action
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
-//6. TriggerState = goes hand in hand with SetTrigger1
+//6. Trigger1 = goes hand in hand with SetTrigger1
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";

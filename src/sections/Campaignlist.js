@@ -1,15 +1,20 @@
-import React from "react";
-import { useState } from "react";
+//Props
+// 1. CampaignList = List of campaigns to be listed in this section
+// 2. CustomData = CustomData unique to be passed on
+// 3. TableTitle = The title of the table, and the color of the header
 
+import React, { useState } from "react";
+
+//Snippet Imports
 import TableAction from "../snippets/TableAction";
 
 function Campaignlist(props) {
-  const [campaignList] = useState(props.Campaigns);
+  const [campaignList] = useState(props.CampaignList);
 
   return (
     <div className="mb-4 flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-visible">
-      <div className={`font-bold mb-4 ${props.Title.color} px-4`}>
-        {props.Title.text}
+      <div className={`font-bold mb-4 ${props.TableTitle.color} px-4`}>
+        {props.TableTitle.text}
       </div>
       <div className="overflow-x-scroll flex">
         <table className="flex-1">
@@ -71,8 +76,10 @@ function Campaignlist(props) {
                   <td className="px-4 text-center">{campaign.status}</td>
                   <td className="px-4 text-center">
                     <TableAction
-                      Id={campaign._id.toString()}
+                      ClickedCampaignId={campaign._id.toString()}
                       CustomData={props.CustomData}
+                      SetTrigger1={props.SetTrigger1}
+                      Trigger1={props.Trigger1}
                     />
                   </td>
                 </tr>

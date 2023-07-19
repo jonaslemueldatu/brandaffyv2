@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
+// Section imports
 import Dashboardnav from "../../sections/Dashboardnav";
 import Dashboardheader from "../../sections/Dashboardheader";
 import Generalactioncontainer from "../../sections/Generalactioncontainer";
@@ -10,35 +11,42 @@ import Campaignlist from "../../sections/Campaignlist";
 function Dashboardcampaigns() {
   const auth = useAuthUser();
 
-  const [userid] = useState(auth().id);
+  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserId] = useState(auth().id);
+  const [campaignReadyToStartList, setCampaignReadyToStartList] = useState([]);
+  const [campaignActiveList, setCampaignActiveList] = useState([]);
 
-  const [, setPopup] = useState({});
-  const [userId] = useState(auth().id);
+  //UseEffect triggers
+  const [getCampaignReadyToStartTrigger, setGetCampaignReadyToStartTrigger] =
+    useState(true);
+  const [getCampaignActiveTrigger, setGetCampaignActiveTrigger] =
+    useState(true);
+  const [getCampaignListExternalTrigger, setGetCampaignListExternalTrigger] =
+    useState(true);
 
-  const [campaignRTS, setCampaignRTS] = useState([]);
-  const [RTSbusy, setRTSbusy] = useState(true);
-  const [campaignActive, setCampaignActive] = useState([]);
-  const [Abusy, setAbusy] = useState([]);
-
-  const [customHeaderActionData] = useState({
-    action: "brandCampaigns",
-    id: userid,
+  // Setup General Action information
+  const [customData] = useState({
+    action: "Campaigns - Brand",
   });
-  const [RTSTableActionData] = useState({
-    action: "RTSbuttons"
-  })
 
-  const [ActiveTableActionData] = useState({})
+  //Setup Table Action Data
+  const [CustomDataReadyToStart] = useState({
+    action: "Campaigns - Ready To Start - Brand",
+  });
+  const [ActiveTableActionData] = useState({});
 
+  //Setup popup information
+
+  //UseEffect to get List of Ready To Start Campaigns
   useEffect(() => {
-    setRTSbusy(true);
-    const getCampaignRTS = async () => {
+    setGetCampaignReadyToStartTrigger(true);
+    const getCampaignReadyToStart = async () => {
       try {
         const res = await axios.get(
           `${process.env.REACT_APP_ROUTE}/api/campaign/getlist`,
           {
             params: {
-              brand_owner_id: userId,
+              brand_owner_id: loggedInUserId,
               status: "Ready to Start",
             },
           }
@@ -46,27 +54,27 @@ function Dashboardcampaigns() {
         if (res.data.err) {
           console.log(res.data.err);
         } else {
-          setCampaignRTS(res.data.campaign_list);
-          setRTSbusy(false);
+          setCampaignReadyToStartList(res.data.campaign_list);
+          setGetCampaignReadyToStartTrigger(false);
         }
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getCampaignRTS();
-  }, [userId]);
+    getCampaignReadyToStart();
+  }, [loggedInUserId]);
 
+  //UseEffect to get List of Active Campaigns
   useEffect(() => {
-    setAbusy(true);
-    const getCampaignRTS = async () => {
+    setGetCampaignActiveTrigger(true);
+    const getCampaignActive = async () => {
       try {
         const res = await axios.get(
           `${process.env.REACT_APP_ROUTE}/api/campaign/getlist`,
           {
             params: {
-              brand_owner_id: userId,
+              brand_owner_id: loggedInUserId,
               status: "Active",
             },
           }
@@ -74,38 +82,38 @@ function Dashboardcampaigns() {
         if (res.data.err) {
           console.log(res.data.err);
         } else {
-          setCampaignActive(res.data.campaign_list);
-          setAbusy(false);
+          setCampaignActiveList(res.data.campaign_list);
+          setGetCampaignActiveTrigger(false);
         }
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
     };
-
-    getCampaignRTS();
-  }, [userId]);
+    getCampaignActive();
+  }, [loggedInUserId, getCampaignListExternalTrigger]);
 
   return (
     <div className="h-screen flex relative">
-      <Dashboardnav Link="Campaigns" Type={auth().user_type} />
+      <Dashboardnav ActiveLink="Campaigns" ViewerUserType={viewerUserType} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <Dashboardheader Title="Campaigns" />
         {auth().user_type === "Brand" && (
-          <Generalactioncontainer SetPopup={setPopup} CustomData={customHeaderActionData} />
+          <Generalactioncontainer CustomData={customData} />
         )}
-        {!Abusy && auth().user_type === "Brand" && (
+        {!getCampaignActiveTrigger && auth().user_type === "Brand" && (
           <Campaignlist
-            Campaigns={campaignActive}
-            Title={{ color: "ctm-bg-color-6", text: "Active" }}
+            CampaignList={campaignActiveList}
+            TableTitle={{ color: "ctm-bg-color-6", text: "Active" }}
             CustomData={ActiveTableActionData}
           />
         )}
-        {!RTSbusy && auth().user_type === "Brand" && (
+        {!getCampaignReadyToStartTrigger && viewerUserType === "Brand" && (
           <Campaignlist
-            Campaigns={campaignRTS}
-            Title={{ color: "ctm-bg-color-5", text: "Ready to Start" }}
-            CustomData={RTSTableActionData}
+            CampaignList={campaignReadyToStartList}
+            TableTitle={{ color: "ctm-bg-color-5", text: "Ready to Start" }}
+            CustomData={CustomDataReadyToStart}
+            SetTrigger1={setGetCampaignListExternalTrigger}
+            Trigger1={getCampaignListExternalTrigger}
           />
         )}
       </div>

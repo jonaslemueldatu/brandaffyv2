@@ -14,6 +14,7 @@ function Createcampaignform(props) {
   const [invitationBox, setInvitationBox] = useState("");
   const [error, setError] = useState("")
 
+  //Selected box to automatically send invitations to
   const [box] = useState(props.Box);
 
   const handleCreateCampaign = async (e) => {

@@ -4,11 +4,14 @@
 //3. ClickedProfileId = ID of the clicked affilaite in the List
 //4. SetGetAffiliateListTrigger = Will contain custom data for usage when configuring the Table Action
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
+//6. ClickedCampaignId = ID of the clicked campaign in the List
 
 import React from "react";
 import axios from "axios";
 
 function TableAction(props) {
+
+  //Influencer Box Functions
   const handleRemove = async (e, id) => {
     e.stopPropagation();
     try {
@@ -29,16 +32,17 @@ function TableAction(props) {
     }
   };
 
-  const RTSButtonsStart = async (e) => {
+  // Campaigns Functions
+  const handleStart = async (e) => {
     try {
       const res = await axios.post(`${process.env.REACT_APP_ROUTE}/api/campaign/update`, {
-        campaign_id: props.Id,
-        status: "Active"
+        campaign_id: props.ClickedCampaignId,
+        change_to_status: "Active"
       })
       if (res.data.err) {
         console.log(res.data.err)
       } else {
-        console.log(res.data)
+        props.SetTrigger1(!props.Trigger1)
       }
     } catch (error) {
       console.log(error)
@@ -46,8 +50,8 @@ function TableAction(props) {
   }
 
   return (
-    // Influencer Box - Details - Brand Actions
     <div className="flex justify-center">
+      {/* Influencer Box - Details - Brand Actions */}
       {props.CustomData.action === "Influencer Box - Details - Brand" && (
         <button
           onClick={(e) => handleRemove(e)}
@@ -69,11 +73,11 @@ function TableAction(props) {
           <button className="ctm-btn ctm-btn-1">Invite</button>
         </div>
       )}
-      
-      {props.CustomData.action === "RTSbuttons" && (
+      {/* Campaigns - Brand - Ready To Start buttons */}
+      {props.CustomData.action === "Campaigns - Ready To Start - Brand" && (
         <div className="flex">
           <button className="ctm-btn mx-2 ctm-btn-2">Cancel</button>
-          <button onClick={() => RTSButtonsStart()} className="ctm-btn ctm-btn-1">Start</button>
+          <button onClick={() => handleStart()} className="ctm-btn ctm-btn-1">Start</button>
         </div>
       )}
     </div>
