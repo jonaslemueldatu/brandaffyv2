@@ -79,7 +79,9 @@ function InfoCardBrand(props) {
   const updateProfile = async (e) => {
     try {
       setProfileStillLoading(true);
-      newProfilePicture === "" ? setProfilePicture(oldProfilePicture) : console.log("");
+      newProfilePicture === ""
+        ? setProfilePicture(oldProfilePicture)
+        : console.log("");
       e.preventDefault();
       const formData = new FormData();
       if (newProfilePicture) {
@@ -94,7 +96,7 @@ function InfoCardBrand(props) {
       formData.append("user_type", "Brand");
 
       await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/updateprofile`,
+        `${process.env.REACT_APP_ROUTE}/api/profile/update`,
         formData
       );
       setProfileStillLoading(false);
@@ -107,7 +109,7 @@ function InfoCardBrand(props) {
   const updateContact = async (e) => {
     setContactStillLoading(true);
     try {
-      await axios.post(`${process.env.REACT_APP_ROUTE}/api/updateprofile`, {
+      await axios.post(`${process.env.REACT_APP_ROUTE}/api/profile/update`, {
         type: "contact",
         id: props.ViewedProfileId,
         phone_number: phonenumber,

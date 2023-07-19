@@ -21,7 +21,7 @@ function FormCreateCampaign(props) {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/brand/campaign/create`,
+        `${process.env.REACT_APP_ROUTE}/api/campaign/create`,
         {
           brand_owner_id: props.OwnerId,
           campaign_name: campaignName,

@@ -35,7 +35,7 @@ function DashboardInfluencerBox() {
     const getBoxList = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_ROUTE}/api/brand/box/getlist`,
+          `${process.env.REACT_APP_ROUTE}/api/box/getlist`,
           {
             params: {
               brand_owner_id: loggedInUserId,

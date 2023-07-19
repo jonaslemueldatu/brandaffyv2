@@ -22,7 +22,7 @@ function PopupAddTobox(props) {
   const handleAddButton = async () => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/brand/box/addaffiliate`,
+        `${process.env.REACT_APP_ROUTE}/api/box/addaffiliate`,
         {
           id: props.ViewedProfileId,
           box_id: boxChoice,
@@ -44,7 +44,7 @@ function PopupAddTobox(props) {
     const getBoxList = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_ROUTE}/api/brand/box/getlist`,
+          `${process.env.REACT_APP_ROUTE}/api/box/getlist`,
           {
             params: {
               brand_owner_id: boxOwnerId,

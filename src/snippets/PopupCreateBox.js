@@ -16,7 +16,7 @@ function PopupCreateBox(props) {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/brand/box/create`,
+        `${process.env.REACT_APP_ROUTE}/api/box/create`,
         {
           brand_owner_id: props.BoxOwnerId,
           box_label: boxLabel,

@@ -35,7 +35,7 @@ function DashboardBoxDetails() {
     const getBoxDetails = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_ROUTE}/api/brand/box/getbox`,
+          `${process.env.REACT_APP_ROUTE}/api/box/getbox`,
           {
             params: {
               box_id: boxid,
@@ -48,7 +48,7 @@ function DashboardBoxDetails() {
           setBox(res.data.box_details);
           if (res.data.box_details.affiliate_list.length !== 0) {
             const res2 = await axios.get(
-              `${process.env.REACT_APP_ROUTE}/api/affiliate/getlist`,
+              `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
               {
                 params: {
                   _id: {

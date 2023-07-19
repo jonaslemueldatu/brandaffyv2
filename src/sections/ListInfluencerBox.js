@@ -19,7 +19,7 @@ function ListInfluencerBox(props) {
   const handleRemoveBox = async (boxId) => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/brand/box/delete`,
+        `${process.env.REACT_APP_ROUTE}/api/box/delete`,
         {
           box_id: boxId,
         }

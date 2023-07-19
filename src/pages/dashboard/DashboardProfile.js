@@ -40,7 +40,7 @@ function DashboardProfile() {
     const getProfileToDisplay = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_ROUTE}/api/getprofile`,
+          `${process.env.REACT_APP_ROUTE}/api/profile/get`,
           {
             params: {
               _id: viewedProfileId,
