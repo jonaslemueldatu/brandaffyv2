@@ -4,7 +4,10 @@
 //3. ClickedProfileId = ID of the clicked affilaite in the List
 //4. SetGetAffiliateListTrigger = Will contain custom data for usage when configuring the Table Action
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
-//6. ClickedCampaignId = ID of the clicked campaign in the List
+//6. Trigger1 =
+//7. ClickedCampaignId =
+//8. SetTrigger2 = ID of the clicked campaign in the List
+//9. Trigger2
 
 import React from "react";
 import axios from "axios";

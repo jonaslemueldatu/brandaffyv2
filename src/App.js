@@ -11,7 +11,7 @@ import DashboardProfile from "./pages/dashboard/DashboardProfile";
 import Dashboardinfluencerhub from "./pages/dashboard/DashboardInfluencerHub";
 import DashboardInfluencerBox from "./pages/dashboard/brands/DashboardInfluencerBox";
 import DashboardBoxDetails from "./pages/dashboard/brands/DashboardBoxDetails";
-import Dashboardcampaigns from "./pages/dashboard/DashboardCampaigns";
+import DashboardBrandCampaigns from "./pages/dashboard/DashboardBrandCampaigns";
 import Dashboardcreatecampaign from "./pages/dashboard/brands/DashboardCreateCampaign";
 import Brandlandingpage from "./pages/brands/BrandLandingPage";
 
@@ -57,15 +57,15 @@ function App() {
           }
         />
         <Route
-          path="/dashboard/campaigns"
+          path="/dashboard/campaigns/brand"
           element={
             <RequireAuth loginPath="/affiliate/login">
-              <Dashboardcampaigns />
+              <DashboardBrandCampaigns />
             </RequireAuth>
           }
         />
         <Route
-          path="/dashboard/campaigns/create"
+          path="/dashboard/campaigns/brand/create"
           element={
             <RequireAuth loginPath="/affiliate/login">
               <Dashboardcreatecampaign />
