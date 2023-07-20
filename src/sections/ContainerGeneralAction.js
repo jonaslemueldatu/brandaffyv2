@@ -1,5 +1,6 @@
 // Props
 // 1. SetPopup1 = Toggle the display of the Add to Cart Popup
+// 2. SetPopup2 = Toggle the display of the 2nd Popup
 // 2. CustomData = can contain Custom Data to configure the display of the action buttons
 
 import React from "react";
@@ -13,6 +14,7 @@ function ContainerActionGeneral(props) {
       <Generalaction
         CustomData={props.CustomData}
         SetPopup1={props.SetPopup1}
+        SetPopup2={props.SetPopup2}
       />
     </div>
   );

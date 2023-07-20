@@ -1,6 +1,7 @@
 //Props
 //1. AffiliateList = List affilaites to be displayed on the section - Array
-//2. SetAddToBoxPopup = Used to toggle the display of the Add to Box Popup
+//2. SetPopup1 = Used to toggle the display of the Add to Box Popup
+//3. SetPopup2
 //3. SetClickedProfileId = Used to set the ID of the clicked Affiliate. This will be passed onto the parent
 //4. CustomData = Will contain custom data for usage when configuring the Table Action
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
@@ -98,7 +99,8 @@ function ListAffiliates(props) {
                       <ActionTable
                         CustomData={props.CustomData}
                         ClickedProfileId={affiliate._id.toString()}
-                        SetAddToBoxPopup={props.SetAddToBoxPopup}
+                        SetPopup1={props.SetPopup1}
+                        SetPopup2={props.SetPopup2}
                         SetClickedProfileId={props.SetClickedProfileId}
                         SetTrigger1={props.SetTrigger1}
                         Trigger1={props.Trigger1}

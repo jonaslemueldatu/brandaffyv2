@@ -108,13 +108,22 @@ function ActionTable(props) {
             onClick={(e) => {
               e.stopPropagation();
               props.SetClickedProfileId(props.ClickedProfileId);
-              props.SetAddToBoxPopup(true);
+              props.SetPopup1(true);
             }}
             className="ctm-btn mx-2 ctm-btn-4"
           >
             Add to Box
           </button>
-          <button className="ctm-btn ctm-btn-1">Invite</button>
+          <button
+            className="ctm-btn ctm-btn-1"
+            onClick={(e) => {
+              e.stopPropagation();
+              props.SetClickedProfileId(props.ClickedProfileId);
+              props.SetPopup2(true);
+            }}
+          >
+            Invite
+          </button>
         </div>
       )}
       {/* Campaigns - Brand - Ready To Start buttons */}
@@ -152,11 +161,7 @@ function ActionTable(props) {
       {/* Campaigns - Brand - Active buttons */}
       {props.CustomData.action === "Campaigns - Ended - Brand" && (
         <div className="flex">
-          <button
-            className="ctm-btn mx-2 ctm-btn-1 "
-          >
-            View Report
-          </button>
+          <button className="ctm-btn mx-2 ctm-btn-1 ">View Report</button>
         </div>
       )}
     </div>

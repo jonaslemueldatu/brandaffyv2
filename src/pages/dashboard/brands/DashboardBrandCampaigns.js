@@ -198,7 +198,7 @@ function Dashboardcampaigns() {
         {!getCampaignCancelledTrigger && viewerUserType === "Brand" && (
           <ListCampaigns
             CampaignList={campaignCancelledList}
-            TableTitle={{ color: "ctm-bg-color-10", text: "Archived" }}
+            TableTitle={{ color: "ctm-bg-color-10", text: "Cancelled" }}
             CustomData={{}}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}

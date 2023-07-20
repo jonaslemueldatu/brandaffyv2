@@ -9,6 +9,7 @@ import ListAffiliates from "../../sections/ListAffiliates";
 
 //Snippet imports
 import PopupAddTobox from "../../snippets/PopupAddToBox";
+import PopupInviteCampaign from "../../snippets/PopupInviteCampaign";
 
 function Dashboardinfluencerhub() {
   const auth = useAuthUser();
@@ -21,6 +22,8 @@ function Dashboardinfluencerhub() {
 
   // Popup information
   const [addToBoxPopup, setAddToBoxPopup] = useState(false);
+  const [inviteCampaignPopup, setInviteCampaignPopup] = useState(false);
+
   const [clickedProfileId, setClickedProfileId] = useState("");
   // Action displayed may differ based on Viewer user type
   const [customData] = useState({
@@ -63,7 +66,8 @@ function Dashboardinfluencerhub() {
           <ListAffiliates
             AffiliateList={affiliateList}
             CustomData={customData}
-            SetAddToBoxPopup={setAddToBoxPopup}
+            SetPopup1={setAddToBoxPopup}
+            SetPopup2={setInviteCampaignPopup}
             SetClickedProfileId={setClickedProfileId}
           />
         )}
@@ -71,6 +75,12 @@ function Dashboardinfluencerhub() {
       {addToBoxPopup && !getAffiliateListTrigger && (
         <PopupAddTobox
           SetAddToBoxPopup={setAddToBoxPopup}
+          ViewedProfileId={clickedProfileId}
+        />
+      )}
+      {inviteCampaignPopup && !getAffiliateListTrigger && (
+        <PopupInviteCampaign
+          SetInviteCampaignPopup={setInviteCampaignPopup}
           ViewedProfileId={clickedProfileId}
         />
       )}

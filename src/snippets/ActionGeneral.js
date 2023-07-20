@@ -19,7 +19,7 @@ function ActionGeneral(props) {
           >
             Add to Box
           </button>
-          <button className="ctm-btn ctm-btn-1">Invite</button>
+          <button className="ctm-btn ctm-btn-1" onClick={() => props.SetPopup2(true)}>Invite</button>
         </div>
       )}
       {/* Brand inluencer box action button */}

@@ -13,6 +13,7 @@ import ContainerActionGeneral from "../../sections/ContainerGeneralAction";
 
 // Snippet imports
 import PopupAddTobox from "../../snippets/PopupAddToBox";
+import PopupInviteCampaign from "../../snippets/PopupInviteCampaign";
 
 function DashboardProfile() {
   const auth = useAuthUser();
@@ -30,6 +31,8 @@ function DashboardProfile() {
 
   // Popup information
   const [addToBoxPopup, setAddToBoxPopup] = useState(false);
+  const [inviteCampaignPopup, setInviteCampaignPopup] = useState(false);
+
   const [customData] = useState({
     action: "Influencer Profile - Brand",
   });
@@ -80,6 +83,7 @@ function DashboardProfile() {
           viewerUserType === "Brand" &&
           !isThisMyProfile && (
             <ContainerActionGeneral
+              SetPopup2={setInviteCampaignPopup}
               SetPopup1={setAddToBoxPopup}
               CustomData={customData}
             />
@@ -103,6 +107,12 @@ function DashboardProfile() {
       {addToBoxPopup && !GetProfileTrigger && (
         <PopupAddTobox
           SetAddToBoxPopup={setAddToBoxPopup}
+          ViewedProfileId={viewedProfileId}
+        />
+      )}
+      {inviteCampaignPopup && !GetProfileTrigger && (
+        <PopupInviteCampaign
+          SetInviteCampaignPopup={setInviteCampaignPopup}
           ViewedProfileId={viewedProfileId}
         />
       )}
