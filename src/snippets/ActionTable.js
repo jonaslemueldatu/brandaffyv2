@@ -73,6 +73,25 @@ function ActionTable(props) {
     }
   };
 
+  const handleEnd = async (e) => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
+        {
+          campaign_id: props.ClickedCampaignId,
+          change_to_status: "Ended",
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+      } else {
+        props.SetTrigger1(!props.Trigger1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex justify-center">
       {/* Influencer Box - Details - Brand Actions */}
@@ -109,6 +128,34 @@ function ActionTable(props) {
           </button>
           <button onClick={() => handleStart()} className="ctm-btn ctm-btn-1">
             Start
+          </button>
+        </div>
+      )}
+      {/* Campaigns - Affiliate - Invited buttons */}
+      {props.CustomData.action === "Campaigns - Invited - Brand" && (
+        <div className="flex">
+          <button className="ctm-btn mx-2 ctm-btn-2 ">Decline</button>
+          <button className="ctm-btn ctm-btn-1">Accept</button>
+        </div>
+      )}
+      {/* Campaigns - Brand - Active buttons */}
+      {props.CustomData.action === "Campaigns - Active - Brand" && (
+        <div className="flex">
+          <button
+            className="ctm-btn mx-2 ctm-btn-4 "
+            onClick={(e) => handleEnd(e)}
+          >
+            End
+          </button>
+        </div>
+      )}
+      {/* Campaigns - Brand - Active buttons */}
+      {props.CustomData.action === "Campaigns - Ended - Brand" && (
+        <div className="flex">
+          <button
+            className="ctm-btn mx-2 ctm-btn-1 "
+          >
+            View Report
           </button>
         </div>
       )}

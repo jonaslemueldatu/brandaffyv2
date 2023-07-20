@@ -13,14 +13,14 @@ function Dashboardcampaigns() {
   const [viewerUserType] = useState(auth().user_type);
   const [loggedInUserId] = useState(auth().id);
   const [campaignInvitedList, setCampaignInvitedList] = useState([]);
-  //   const [campaignActiveList, setCampaignActiveList] = useState([]);
+  const [campaignAcceptedList, setCampaignAcceptedList] = useState([]);
   //   const [campaignCancelledList, setCampaignCancelledList] = useState([]);
 
   //UseEffect triggers
   const [getCampaignInvitedTrigger, setGetCampaignInvitedTrigger] =
     useState(true);
-  //   const [getCampaignActiveTrigger, setGetCampaignActiveTrigger] =
-  //     useState(true);
+  const [getCampaignAcceptedTrigger, setGetCampaignAcceptedTrigger] =
+    useState(true);
   //   const [getCampaignCancelledTrigger, setGetCampaignCancelledTrigger] =
   //     useState(true);
   const [getCampaignListExternalTrigger, setGetCampaignListExternalTrigger] =
@@ -28,9 +28,9 @@ function Dashboardcampaigns() {
 
   // Setup Table Action Data
   const [CustomDataInvited] = useState({
-    action: "Campaigns - Ready To Start - Brand",
+    action: "Campaigns - Invited - Brand",
   });
-  const [ActiveTableActionData] = useState({});
+  const [AcceptedTableActionData] = useState({});
 
   //Setup popup information
 
@@ -61,32 +61,32 @@ function Dashboardcampaigns() {
     getCampaignInvited();
   }, [loggedInUserId]);
 
-  //UseEffect to get List of Active Campaigns
-  //   useEffect(() => {
-  //     setGetCampaignActiveTrigger(true);
-  //     const getCampaignActive = async () => {
-  //       try {
-  //         const res = await axios.get(
-  //           `${process.env.REACT_APP_ROUTE}/api/campaign/getlist`,
-  //           {
-  //             params: {
-  //               brand_owner_id: loggedInUserId,
-  //               status: "Active",
-  //             },
-  //           }
-  //         );
-  //         if (res.data.err) {
-  //           console.log(res.data.err);
-  //         } else {
-  //           setCampaignActiveList(res.data.campaign_list);
-  //           setGetCampaignActiveTrigger(false);
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     getCampaignActive();
-  //   }, [loggedInUserId, getCampaignListExternalTrigger]);
+  // UseEffect to get List of Accepted Campaigns
+  useEffect(() => {
+    setGetCampaignAcceptedTrigger(true);
+    const getCampaignAccepted = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_ROUTE}/api/campaign/getlistaggregate`,
+          {
+            params: {
+              brand_owner_id: loggedInUserId,
+              status: "Accepted",
+            },
+          }
+        );
+        if (res.data.err) {
+          console.log(res.data.err);
+        } else {
+          setCampaignAcceptedList(res.data.campaign_list);
+          setGetCampaignAcceptedTrigger(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCampaignAccepted();
+  }, [loggedInUserId]);
 
   //Useeffect to get list of cancelled campaigns
   //   useEffect(() => {
@@ -123,13 +123,13 @@ function Dashboardcampaigns() {
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title="Campaigns" />
-        {/* {!getCampaignActiveTrigger && auth().user_type === "Brand" && (
+        {!getCampaignAcceptedTrigger && auth().user_type === "Affiliate" && (
           <ListCampaigns
-            CampaignList={campaignActiveList}
-            TableTitle={{ color: "ctm-bg-color-6", text: "Active" }}
-            CustomData={ActiveTableActionData}
+            CampaignList={campaignAcceptedList}
+            TableTitle={{ color: "ctm-bg-color-1", text: "Accepted" }}
+            CustomData={AcceptedTableActionData}
           />
-        )} */}
+        )}
         {!getCampaignInvitedTrigger && viewerUserType === "Affiliate" && (
           <ListCampaigns
             CampaignList={campaignInvitedList}

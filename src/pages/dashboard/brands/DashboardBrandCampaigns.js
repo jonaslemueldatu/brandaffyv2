@@ -15,6 +15,7 @@ function Dashboardcampaigns() {
   const [loggedInUserId] = useState(auth().id);
   const [campaignReadyToStartList, setCampaignReadyToStartList] = useState([]);
   const [campaignActiveList, setCampaignActiveList] = useState([]);
+  const [campaignEndedList, setCampaignEndedList] = useState([]);
   const [campaignCancelledList, setCampaignCancelledList] = useState([]);
 
   //UseEffect triggers
@@ -23,6 +24,8 @@ function Dashboardcampaigns() {
   const [getCampaignActiveTrigger, setGetCampaignActiveTrigger] =
     useState(true);
   const [getCampaignCancelledTrigger, setGetCampaignCancelledTrigger] =
+    useState(true);
+    const [getCampaignEndedTrigger, setGetCampaignEndedTrigger] =
     useState(true);
   const [getCampaignListExternalTrigger, setGetCampaignListExternalTrigger] =
     useState(true);
@@ -36,7 +39,12 @@ function Dashboardcampaigns() {
   const [CustomDataReadyToStart] = useState({
     action: "Campaigns - Ready To Start - Brand",
   });
-  const [ActiveTableActionData] = useState({});
+  const [CustomDataActive] = useState({
+    action: "Campaigns - Active - Brand",
+  });
+  const [CustomDataEnded] = useState({
+    action: "Campaigns - Ended - Brand",
+  });
 
   //Setup popup information
 
@@ -97,6 +105,33 @@ function Dashboardcampaigns() {
 
   //Useeffect to get list of cancelled campaigns
   useEffect(() => {
+    setGetCampaignEndedTrigger(true);
+    const getCampaignEnded = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_ROUTE}/api/campaign/getlist`,
+          {
+            params: {
+              brand_owner_id: loggedInUserId,
+              status: "Ended",
+            },
+          }
+        );
+        if (res.data.err) {
+          console.log(res.data.err);
+        } else {
+          setCampaignEndedList(res.data.campaign_list);
+          setGetCampaignEndedTrigger(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCampaignEnded();
+  }, [loggedInUserId, getCampaignListExternalTrigger]);
+
+  //Useeffect to get list of cancelled campaigns
+  useEffect(() => {
     setGetCampaignCancelledTrigger(true);
     const getCampaignCancelled = async () => {
       try {
@@ -137,7 +172,9 @@ function Dashboardcampaigns() {
           <ListCampaigns
             CampaignList={campaignActiveList}
             TableTitle={{ color: "ctm-bg-color-6", text: "Active" }}
-            CustomData={ActiveTableActionData}
+            CustomData={CustomDataActive}
+            SetTrigger1={setGetCampaignListExternalTrigger}
+            Trigger1={getCampaignListExternalTrigger}
           />
         )}
         {!getCampaignReadyToStartTrigger && viewerUserType === "Brand" && (
@@ -145,6 +182,15 @@ function Dashboardcampaigns() {
             CampaignList={campaignReadyToStartList}
             TableTitle={{ color: "ctm-bg-color-5", text: "Ready to Start" }}
             CustomData={CustomDataReadyToStart}
+            SetTrigger1={setGetCampaignListExternalTrigger}
+            Trigger1={getCampaignListExternalTrigger}
+          />
+        )}
+        {!getCampaignEndedTrigger && viewerUserType === "Brand" && (
+          <ListCampaigns
+            CampaignList={campaignEndedList}
+            TableTitle={{ color: "ctm-bg-color-1", text: "Ended" }}
+            CustomData={CustomDataEnded}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
           />
