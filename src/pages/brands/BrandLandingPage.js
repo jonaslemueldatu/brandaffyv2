@@ -105,7 +105,7 @@ function Brandlandingpage() {
         <div className="flex-1"></div>
       </div>
       <img
-            className="w-screen"
+        className="w-screen"
         alt="Purple Curved Design Separator"
         src={purpleBottomCurvedDesign}
       ></img>
@@ -181,7 +181,7 @@ function Brandlandingpage() {
       </div>
       {/* Features */}
       <img
-            className="w-screen"
+        className="w-screen"
         alt="Purple Curved Design Separator"
         src={purpleTopCurvedDesign}
       ></img>
@@ -243,7 +243,7 @@ function Brandlandingpage() {
           </Link>
         </div>
         <img
-              className="w-screen"
+          className="w-screen"
           alt="Cream Curved Design Separator"
           src={creamTopCurvedDesign}
         ></img>
@@ -590,7 +590,7 @@ function Brandlandingpage() {
                 </a>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                Terms of Service
+                <Link to={"brand/pages/terms"}>Terms of Service</Link>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
                 Privacy Policy
