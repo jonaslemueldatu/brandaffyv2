@@ -105,6 +105,7 @@ function Brandlandingpage() {
         <div className="flex-1"></div>
       </div>
       <img
+            className="w-screen"
         alt="Purple Curved Design Separator"
         src={purpleBottomCurvedDesign}
       ></img>
@@ -180,6 +181,7 @@ function Brandlandingpage() {
       </div>
       {/* Features */}
       <img
+            className="w-screen"
         alt="Purple Curved Design Separator"
         src={purpleTopCurvedDesign}
       ></img>
@@ -241,6 +243,7 @@ function Brandlandingpage() {
           </Link>
         </div>
         <img
+              className="w-screen"
           alt="Cream Curved Design Separator"
           src={creamTopCurvedDesign}
         ></img>
@@ -327,7 +330,10 @@ function Brandlandingpage() {
                       </li>
                     </ul>
                     <div className="rounded-md shadow">
-                      <Link to={"brand/register"} className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100">
+                      <Link
+                        to={"brand/register"}
+                        className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100"
+                      >
                         Subscribe
                       </Link>
                     </div>
@@ -412,7 +418,10 @@ function Brandlandingpage() {
                       </li>
                     </ul>
                     <div className="rounded-md shadow">
-                      <Link to={"brand/register"} className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100">
+                      <Link
+                        to={"brand/register"}
+                        className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100"
+                      >
                         Subscribe
                       </Link>
                     </div>
@@ -497,7 +506,10 @@ function Brandlandingpage() {
                       </li>
                     </ul>
                     <div className="rounded-md shadow">
-                      <Link to={"brand/register"} className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100">
+                      <Link
+                        to={"brand/register"}
+                        className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100"
+                      >
                         Subscribe
                       </Link>
                     </div>
@@ -508,11 +520,13 @@ function Brandlandingpage() {
           </div>
         </div>
         <p className="my-8 text-lg text-center">
-            You don't have to decide now! Enjoy your 1 month free trial and launch your UGC campaigns with Brandaffy for FREE! 
-          </p>
+          You don't have to decide now! Enjoy your 1 month free trial and launch
+          your UGC campaigns with Brandaffy for FREE!
+        </p>
       </div>
       {/* Tag Phrase */}
       <img
+        className="w-screen"
         alt="Purple Curved Design Separator"
         src={blueBottomCurvedDesign}
       ></img>
