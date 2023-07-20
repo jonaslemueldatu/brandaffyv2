@@ -72,7 +72,7 @@ function NavigationDashboard(props) {
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink("/dashboard/campaigns/")}
+              onClick={() => handleLink(`/dashboard/campaigns/${viewerUserType}`)}
             >
               Campaigns
             </Link>

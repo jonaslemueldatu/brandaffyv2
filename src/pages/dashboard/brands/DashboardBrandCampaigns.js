@@ -3,10 +3,10 @@ import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
 // Section imports
-import NavigationDashboard from "../../sections/NavigationDashboard";
-import ContainerHeader from "../../sections/ContainerHeader";
-import ContainerActionGeneral from "../../sections/ContainerGeneralAction";
-import ListCampaigns from "../../sections/ListCampaigns";
+import NavigationDashboard from "../../../sections/NavigationDashboard";
+import ContainerHeader from "../../../sections/ContainerHeader";
+import ContainerActionGeneral from "../../../sections/ContainerGeneralAction";
+import ListCampaigns from "../../../sections/ListCampaigns";
 
 function Dashboardcampaigns() {
   const auth = useAuthUser();
@@ -152,7 +152,7 @@ function Dashboardcampaigns() {
         {!getCampaignCancelledTrigger && viewerUserType === "Brand" && (
           <ListCampaigns
             CampaignList={campaignCancelledList}
-            TableTitle={{ color: "ctm-bg-color-10", text: "Cancelled" }}
+            TableTitle={{ color: "ctm-bg-color-10", text: "Archived" }}
             CustomData={{}}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}

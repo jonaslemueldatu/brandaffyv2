@@ -3,12 +3,17 @@
 // 2. CustomData = CustomData unique to be passed on
 // 3. TableTitle = The title of the table, and the color of the header
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthUser } from "react-auth-kit";
 
 //Snippet Imports
 import ActionTable from "../snippets/ActionTable";
+import IndicatorStatus from "../snippets/IndicatorStatus";
 
 function ListCampaigns(props) {
+  const auth = useAuthUser();
+
+  const [viewerUserType] = useState(auth().user_type);
   const [campaignList] = useState(props.CampaignList);
 
   return (
@@ -42,7 +47,11 @@ function ListCampaigns(props) {
             </tr>
           </thead>
           <tbody>
-            {campaignList.map((campaign) => {
+            {campaignList.map((campaigns) => {
+              const campaign =
+                viewerUserType === "Brand"
+                  ? campaigns
+                  : campaigns.campaign_details[0];
               return (
                 <tr
                   key={campaign._id.toString()}
@@ -73,14 +82,14 @@ function ListCampaigns(props) {
                       <span>--</span>
                     )}
                   </td>
-                  <td className="px-4 text-center">{campaign.status}</td>
+                  <td className="px-4 text-center"><IndicatorStatus CampaignStatus={campaign.status}/></td>
                   <td className="px-4 text-center">
-                    <ActionTable
+                    {/* <ActionTable
                       ClickedCampaignId={campaign._id.toString()}
                       CustomData={props.CustomData}
                       SetTrigger1={props.SetTrigger1}
                       Trigger1={props.Trigger1}
-                    />
+                    /> */}
                   </td>
                 </tr>
               );
