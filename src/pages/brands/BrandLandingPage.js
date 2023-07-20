@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // Components
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Brandlandingpage() {
   // Assets
@@ -24,6 +25,10 @@ function Brandlandingpage() {
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/design-cream-top-curve.svg"
   );
 
+  const [blueBottomCurvedDesign] = useState(
+    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/design-curve-top.svg"
+  );
+
   // State to handle display of Mobile Menu
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -40,14 +45,14 @@ function Brandlandingpage() {
             <li className="mx-5 font-semibold hover:underline cursor-pointer">
               <a href={"/#features"}>Features</a>
             </li>
-            <li className="mx-5 font-semibold hover:underline cursor-pointer">
+            {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               How it Works
-            </li>
+            </li> */}
             {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Why We
             </li> */}
             <li className="mx-5 font-semibold hover:underline cursor-pointer">
-              Pricing
+              <a href={"/#pricing"}>Pricing</a>
             </li>
             {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Upcoming Features
@@ -240,6 +245,294 @@ function Brandlandingpage() {
           src={creamTopCurvedDesign}
         ></img>
       </div>
+      {/* Pricing */}
+      <div
+        id="pricing"
+        className="flex-col ctm-bg-color-12 w-full flex p-8 lg:p-20 xl:px-24 xl:py-10"
+      >
+        <h2 className="text-center font-extrabold leading-none text-5xl">
+          Brandaffy: Fast. Simple. Smart
+        </h2>
+        <p className="my-10 text-lg ctm-font-color-6 text-center">
+          Imagine… If you’re not getting buried by links and spreadsheets
+          everyday, how many more powerful connections can you make?
+        </p>
+        <div className="mt-4 pb-4 sm:pb-8 lg:pb-2">
+          <div className="relative">
+            <div className="absolute inset-0"></div>
+            <div className="relative mx-auto max-w-7xl px-6 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-md space-y-4 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:space-y-0">
+                <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
+                  <div className="bg-indigo-500 px-6 pt-8 sm:p-10 sm:pb-2">
+                    <div>
+                      <h3 className="inline-flex rounded-full py-1 text-xl text-white">
+                        Starter Plan
+                      </h3>
+                    </div>
+                    <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
+                      $29
+                      <span className="ml-1 text-2xl font-medium tracking-normal text-white">
+                        /mo
+                      </span>
+                    </div>
+                    <p className="mt-5 text-lg text-white">
+                      Best for getting started
+                    </p>
+                  </div>
+                  <div className="flex flex-1 flex-col justify-between space-y-6 bg-indigo-500 px-6 pt-6 pb-8 sm:p-10 sm:pt-6">
+                    <ul className="space-y-4">
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          3 Active Campaigns
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          5 Influencer Boxes
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          Unlimited access to partner influencers
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          Tiktok Integration
+                        </p>
+                      </li>
+                    </ul>
+                    <div className="rounded-md shadow">
+                      <Link to={"brand/register"} className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100">
+                        Subscribe
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
+                  <div className="bg-violet-700 px-6 pt-8 sm:p-10 sm:pb-2">
+                    <div>
+                      <h3 className="inline-flex rounded-full py-1 text-xl text-white">
+                        Growth Plan
+                      </h3>
+                    </div>
+                    <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
+                      $49
+                      <span className="ml-1 text-2xl font-medium tracking-normal text-white">
+                        /mo
+                      </span>
+                    </div>
+                    <p className="mt-5 text-lg text-white">
+                      Best for your growing teams
+                    </p>
+                  </div>
+                  <div className="flex flex-1 flex-col justify-between space-y-6 bg-violet-700 px-6 pt-6 pb-8 sm:p-10 sm:pt-6">
+                    <ul className="space-y-4">
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          7 Active Campaigns
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          15 Influencer Boxes
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          Unlimited access to partner influencers
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          Tiktok Integration
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white ctm-font-color-1">
+                          Instagram Integration{" "}
+                          <span className="ml-3 text-sm text-red-400">
+                            soon!
+                          </span>
+                        </p>
+                      </li>
+                    </ul>
+                    <div className="rounded-md shadow">
+                      <Link to={"brand/register"} className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100">
+                        Subscribe
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
+                  <div className="bg-blue-700 px-6 pt-8 sm:p-10 sm:pb-2">
+                    <div>
+                      <h3 className="inline-flex rounded-full py-1 text-xl text-white">
+                        Beyond Plan
+                      </h3>
+                    </div>
+                    <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
+                      $79
+                      <span className="ml-1 text-2xl font-medium tracking-normal text-white">
+                        /mo
+                      </span>
+                    </div>
+                    <p className="mt-5 text-lg text-white">
+                      Best for going beyond
+                    </p>
+                  </div>
+                  <div className="flex flex-1 flex-col justify-between space-y-6 bg-blue-700 px-6 pt-6 pb-8 sm:p-10 sm:pt-6">
+                    <ul className="space-y-4">
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          15 Active Campaigns
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          25 Influencer Boxes
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          Unlimited access to partner influencers
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          Tiktok Integration
+                        </p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white ctm-font-color-1">
+                          Instagram Integration{" "}
+                          <span className="ml-3 text-sm text-red-400">
+                            soon!
+                          </span>
+                        </p>
+                      </li>
+                    </ul>
+                    <div className="rounded-md shadow">
+                      <Link to={"brand/register"} className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100">
+                        Subscribe
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p className="my-8 text-lg text-center">
+            You don't have to decide now! Enjoy your 1 month free trial and launch your UGC campaigns with Brandaffy for FREE! 
+          </p>
+      </div>
+      {/* Tag Phrase */}
+      <img
+        alt="Purple Curved Design Separator"
+        src={blueBottomCurvedDesign}
+      ></img>
+      <div id="features" className="ctm-bg-color-11">
+        <div className="p-8 lg:p-20 xl:px-24 xl:py-10 max-w-7xl m-auto flex flex-col items-center">
+          <h2 className="text-center font-extrabold leading-none text-5xl text-white">
+            Try Brandaffy today
+          </h2>
+          <p className="my-8 text-lg text-white text-center">
+            Join Brandaffy today and enjoy your 1 MONTH FREE TRIAL while having
+            complete access to all existing and upcoming features.
+          </p>
+          <Link
+            to={"/brand/register"}
+            className="shadow-lg bg-indigo-100 text-indigo-700 ctm-btn text-lg my-4 w-fit"
+          >
+            Sign Up Today
+          </Link>
+        </div>
+      </div>
       {/* Footer */}
       <div className="p-10 sm:p-18 flex flex-col sm:flex-row bg-white justify-evenly">
         <div>
@@ -255,13 +548,16 @@ function Brandlandingpage() {
               <li className="my-4 hover:underline cursor-pointer">
                 <a href={"/#features"}>Features</a>
               </li>
-              <li className="my-4 hover:underline cursor-pointer">
+              {/* <li className="my-4 hover:underline cursor-pointer">
                 How it Works
-              </li>
+              </li> */}
               {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Why We
             </li> */}
-              <li className="my-4 hover:underline cursor-pointer">Pricing</li>
+              <li className="my-4 hover:underline cursor-pointer">
+                {" "}
+                <a href={"/#pricing"}>Pricing</a>
+              </li>
               {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Upcoming Features
             </li> */}
@@ -315,7 +611,10 @@ function Brandlandingpage() {
               </li>
               {/* <li className="font-semibold hover:underline">How it Works</li> */}
               {/* <li className="font-semibold hover:underline">Why We</li> */}
-              <li className="font-semibold hover:underline">Pricing</li>
+              <li className="font-semibold hover:underline">
+                {" "}
+                <a href={"/#pricing"}>Pricing</a>
+              </li>
               {/* <li className="font-semibold hover:underline">
                 Upcoming Features
               </li> */}
