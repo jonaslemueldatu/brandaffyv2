@@ -213,28 +213,3 @@ html {
     opacity: 0;
   }
 }
-
-/* Custom Table Sticky style */
-
-table#campaignList tbody td:nth-child(-n + 3) {
-  position: sticky;
-  background-color: rgb(250, 250, 250);
-  z-index: 99;
-}
-table#campaignList thead th:nth-child(-n + 3) {
-  position: sticky;
-  background-color: rgb(250, 250, 250);
-  z-index: 99;
-}
-table#campaignList tbody td:first-child,
-table#campaignList thead th:first-child {
-  left: 0;
-}
-table#campaignList tbody td:nth-child(2),
-table#campaignList thead th:nth-child(2) {
-  left: 81px;
-}
-table#campaignList tbody td:nth-child(3),
-table#campaignList thead th:nth-child(3) {
-  left: 190px;
-}

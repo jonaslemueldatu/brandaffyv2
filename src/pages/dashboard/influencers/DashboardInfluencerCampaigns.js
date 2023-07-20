@@ -14,15 +14,19 @@ function Dashboardcampaigns() {
   const [loggedInUserId] = useState(auth().id);
   const [campaignInvitedList, setCampaignInvitedList] = useState([]);
   const [campaignAcceptedList, setCampaignAcceptedList] = useState([]);
-  //   const [campaignCancelledList, setCampaignCancelledList] = useState([]);
+  const [campaignAppliedList, setCampaignAppliedList] = useState([]);
+  const [campaignDeclinedList, setCampaignDeclinedList] = useState([]);
+
 
   //UseEffect triggers
   const [getCampaignInvitedTrigger, setGetCampaignInvitedTrigger] =
     useState(true);
   const [getCampaignAcceptedTrigger, setGetCampaignAcceptedTrigger] =
     useState(true);
-  //   const [getCampaignCancelledTrigger, setGetCampaignCancelledTrigger] =
-  //     useState(true);
+  const [getCampaignAppliedTrigger, setGetCampaignAppliedTrigger] =
+    useState(true);
+    const [getCampaignDeclinedTrigger, setGetCampaignDeclinedTrigger] =
+    useState(true);
   const [getCampaignListExternalTrigger, setGetCampaignListExternalTrigger] =
     useState(true);
 
@@ -34,7 +38,7 @@ function Dashboardcampaigns() {
 
   //Setup popup information
 
-  //UseEffect to get List of Ready To Start Campaigns
+  //UseEffect to get List of Invited Campaigns
   useEffect(() => {
     setGetCampaignInvitedTrigger(true);
     const getCampaignInvited = async () => {
@@ -59,7 +63,7 @@ function Dashboardcampaigns() {
     };
 
     getCampaignInvited();
-  }, [loggedInUserId]);
+  }, [loggedInUserId, getCampaignListExternalTrigger]);
 
   // UseEffect to get List of Accepted Campaigns
   useEffect(() => {
@@ -70,8 +74,8 @@ function Dashboardcampaigns() {
           `${process.env.REACT_APP_ROUTE}/api/campaign/getlistaggregate`,
           {
             params: {
-              brand_owner_id: loggedInUserId,
-              status: "Accepted",
+              affiliate_id: loggedInUserId,
+              relationship_status: "Accepted",
             },
           }
         );
@@ -86,34 +90,62 @@ function Dashboardcampaigns() {
       }
     };
     getCampaignAccepted();
-  }, [loggedInUserId]);
+  }, [loggedInUserId, getCampaignListExternalTrigger]);
 
-  //Useeffect to get list of cancelled campaigns
-  //   useEffect(() => {
-  //     setGetCampaignCancelledTrigger(true);
-  //     const getCampaignCancelled = async () => {
-  //       try {
-  //         const res = await axios.get(
-  //           `${process.env.REACT_APP_ROUTE}/api/campaign/getlist`,
-  //           {
-  //             params: {
-  //               brand_owner_id: loggedInUserId,
-  //               status: "Cancelled",
-  //             },
-  //           }
-  //         );
-  //         if (res.data.err) {
-  //           console.log(res.data.err);
-  //         } else {
-  //           setCampaignCancelledList(res.data.campaign_list);
-  //           setGetCampaignCancelledTrigger(false);
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     getCampaignCancelled();
-  //   }, [loggedInUserId, getCampaignListExternalTrigger]);
+  // Useeffect to get list of Applied campaigns
+  useEffect(() => {
+    setGetCampaignAppliedTrigger(true);
+    const getCampaignApplied = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_ROUTE}/api/campaign/getlistaggregate`,
+          {
+            params: {
+              affiliate_id: loggedInUserId,
+              relationship_status: "Applied",
+            },
+          }
+        );
+        if (res.data.err) {
+          console.log(res.data.err);
+        } else {
+          setCampaignAppliedList(res.data.campaign_list);
+          setGetCampaignAppliedTrigger(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCampaignApplied();
+  }, [loggedInUserId, getCampaignListExternalTrigger]);
+
+    // Useeffect to get list of Declined campaigns
+    useEffect(() => {
+      setGetCampaignDeclinedTrigger(true);
+      const getCampaignDeclined = async () => {
+        try {
+          const res = await axios.get(
+            `${process.env.REACT_APP_ROUTE}/api/campaign/getlistaggregate`,
+            {
+              params: {
+                affiliate_id: loggedInUserId,
+                relationship_status: "Declined",
+              },
+            }
+          );
+          if (res.data.err) {
+            console.log(res.data.err);
+          } else {
+            console.log(res.data.campaign_list)
+            setCampaignDeclinedList(res.data.campaign_list);
+            setGetCampaignDeclinedTrigger(false);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getCampaignDeclined();
+    }, [loggedInUserId, getCampaignListExternalTrigger]);
 
   return (
     <div className="h-screen flex relative">
@@ -139,15 +171,24 @@ function Dashboardcampaigns() {
             Trigger1={getCampaignListExternalTrigger}
           />
         )}
-        {/* {!getCampaignCancelledTrigger && viewerUserType === "Brand" && (
+        {!getCampaignAppliedTrigger && viewerUserType === "Affiliate" && (
           <ListCampaigns
-            CampaignList={campaignCancelledList}
-            TableTitle={{ color: "ctm-bg-color-10", text: "Cancelled" }}
+            CampaignList={campaignAppliedList}
+            TableTitle={{ color: "ctm-bg-color-1", text: "Applied" }}
             CustomData={{}}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
           />
-        )} */}
+        )}
+        {!getCampaignDeclinedTrigger && viewerUserType === "Affiliate" && (
+          <ListCampaigns
+            CampaignList={campaignDeclinedList}
+            TableTitle={{ color: "ctm-bg-color-1", text: "Declined" }}
+            CustomData={{}}
+            SetTrigger1={setGetCampaignListExternalTrigger}
+            Trigger1={getCampaignListExternalTrigger}
+          />
+        )}
       </div>
     </div>
   );

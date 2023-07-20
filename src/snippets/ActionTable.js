@@ -9,10 +9,15 @@
 //8. SetTrigger2 = ID of the clicked campaign in the List
 //9. Trigger2
 
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useAuthUser } from "react-auth-kit";
 
 function ActionTable(props) {
+  const auth = useAuthUser();
+
+  const [loggedInUserId] = useState(auth().id);
+
   //Influencer Box Functions
   const handleRemove = async (e, id) => {
     e.stopPropagation();
@@ -34,7 +39,48 @@ function ActionTable(props) {
     }
   };
 
-  // Campaigns Functions
+  //Campaigns Functions Affilaite
+  const handleAccept = async (e) => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
+        {
+          campaign_id: props.ClickedCampaignId,
+          change_to_status: "Accepted",
+          accepted_affiliate: loggedInUserId,
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+      } else {
+        props.SetTrigger1(!props.Trigger1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDecline = async (e) => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
+        {
+          campaign_id: props.ClickedCampaignId,
+          change_to_status: "Declined",
+          declined_affiliate: loggedInUserId,
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+      } else {
+        props.SetTrigger1(!props.Trigger1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Campaigns Functions Brand
   const handleStart = async (e) => {
     try {
       const res = await axios.post(
@@ -143,8 +189,18 @@ function ActionTable(props) {
       {/* Campaigns - Affiliate - Invited buttons */}
       {props.CustomData.action === "Campaigns - Invited - Brand" && (
         <div className="flex">
-          <button className="ctm-btn mx-2 ctm-btn-2 ">Decline</button>
-          <button className="ctm-btn ctm-btn-1">Accept</button>
+          <button
+            className="ctm-btn mx-2 ctm-btn-2"
+            onClick={(e) => handleDecline(e)}
+          >
+            Decline
+          </button>
+          <button
+            className="ctm-btn ctm-btn-1"
+            onClick={(e) => handleAccept(e)}
+          >
+            Accept
+          </button>
         </div>
       )}
       {/* Campaigns - Brand - Active buttons */}
