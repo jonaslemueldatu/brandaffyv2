@@ -8,6 +8,7 @@
 //7. ClickedCampaignId =
 //8. SetTrigger2 = ID of the clicked campaign in the List
 //9. Trigger2
+//10. Status = The status of the campaign line item being sent to render
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -187,7 +188,7 @@ function ActionTable(props) {
         </div>
       )}
       {/* Campaigns - Affiliate - Invited buttons */}
-      {props.CustomData.action === "Campaigns - Invited - Brand" && (
+      {props.CustomData.action === "Campaigns - Invited - Affiliate" && (
         <div className="flex">
           <button
             className="ctm-btn mx-2 ctm-btn-2"
@@ -203,6 +204,19 @@ function ActionTable(props) {
           </button>
         </div>
       )}
+      {/* Campaigns - Affiliate - Accepted buttons */}
+      {props.CustomData.action === "Campaigns - Accepted - Affiliate" &&
+        props.Status === "Active" && (
+          <div className="flex">
+            <button className="ctm-btn ctm-btn-4">View Progress</button>
+          </div>
+        )}
+      {props.CustomData.action === "Campaigns - Accepted - Affiliate" &&
+        props.Status === "Ended" && (
+          <div className="flex">
+            <button className="ctm-btn ctm-btn-4">View Report</button>
+          </div>
+        )}
       {/* Campaigns - Brand - Active buttons */}
       {props.CustomData.action === "Campaigns - Active - Brand" && (
         <div className="flex">

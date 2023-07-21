@@ -9,7 +9,7 @@ import { useAuthUser } from "react-auth-kit";
 //Snippet Imports
 import ActionTable from "../snippets/ActionTable";
 import IndicatorStatus from "../snippets/IndicatorStatus";
-import IndicatorPlatform from "../snippets/IndicatorPlatform"
+import IndicatorPlatform from "../snippets/IndicatorPlatform";
 
 function ListCampaigns(props) {
   const auth = useAuthUser();
@@ -28,6 +28,9 @@ function ListCampaigns(props) {
             <tr className="h-20 ctm-border-color-3 border-b">
               <th className="w-12 px-4 text-center">Select</th>
               <th className="w-12 px-4 text-center">Platform</th>
+              <th className="ctm-min-width-1 ctm-max-width-1 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">
+                Brand
+              </th>
               <th className="ctm-min-width-3 ctm-max-width-3 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">
                 Title
               </th>
@@ -35,7 +38,9 @@ function ListCampaigns(props) {
               <th className="w-80 whitespace-nowrap px-4 center">
                 Create Date
               </th>
-              <th className="w-80 whitespace-nowrap px-4 text-center ctm-max-width-1">Start Date</th>
+              <th className="w-80 whitespace-nowrap px-4 text-center ctm-max-width-1">
+                Start Date
+              </th>
               <th className="w-80 whitespace-nowrap px-4 text-center ctm-max-width-1">
                 End Date
               </th>
@@ -68,6 +73,9 @@ function ListCampaigns(props) {
                   </td>
                   <td className="w-12 px-4 text-center">
                     <IndicatorPlatform Platform={campaign.platform} />
+                  </td>
+                  <td className="ctm-min-width-1 ctm-max-width-1 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">
+                    {campaign.brand_name}
                   </td>
                   <td className="ctm-min-width-3 ctm-max-width-3 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">
                     {campaign.campaign_name}
@@ -110,6 +118,7 @@ function ListCampaigns(props) {
                       CustomData={props.CustomData}
                       SetTrigger1={props.SetTrigger1}
                       Trigger1={props.Trigger1}
+                      Status={campaign.status}
                     />
                   </td>
                 </tr>
