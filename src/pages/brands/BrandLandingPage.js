@@ -35,7 +35,7 @@ function Brandlandingpage() {
   return (
     <div className="relative">
       {/* Top Navigation Bar */}
-      <div className="sticky top-0 xl:relative justify-between ctm-bg-color-7 w-full p-4 flex xl:justify-evenly z-10">
+      <div className="sticky top-0 p-0 xl:relative justify-between ctm-bg-color-7 w-full xl:p-4 flex xl:justify-evenly z-10">
         <img alt="Brandaffy logo" src={brandlogo} className="h-28 w-28"></img>
         <div className="hidden xl:flex">
           <ul className="flex items-center">
@@ -593,7 +593,7 @@ function Brandlandingpage() {
                 <Link to={"brand/pages/terms"}>Terms of Service</Link>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                Privacy Policy
+                <Link to={"brand/pages/privacy"}>Privacy Policy</Link>
               </li>
             </ul>
           </div>

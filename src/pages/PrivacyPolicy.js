@@ -31,7 +31,7 @@ function TermsOfService() {
   return (
     <div className="relative">
       {/* Top Navigation bar */}
-      <div className="sticky p-0  top-0 xl:relative justify-between ctm-bg-color-7 w-full xl:p-4 flex xl:justify-evenly z-10">
+      <div className="sticky p-0 top-0 xl:relative justify-between ctm-bg-color-7 w-full xl:p-4 flex xl:justify-evenly z-10">
         <div onClick={(e) => handleLink(e, linkBack)}>
           <img
             alt="Brandaffy logo"
@@ -98,167 +98,124 @@ function TermsOfService() {
 
       <div>
         <h1 className="text-center font-extrabold leading-none text-5xl mt-16">
-          BrandAffy Terms of Service
+          BrandAffy Privacy Policy
         </h1>
         <div className="mx-auto max-w-7xl space-y-4 my-24 text-base">
           <p>
             <strong>Effective Date:</strong> July 15, 2023
           </p>
           <p>
-            Welcome to BrandAffy ("we," "our," or "us"). BrandAffy is a
-            subscription-based Software-as-a-Service (SAAS) tool designed to
-            connect brands ("Brand(s)") with user-generated content ("UGC(s)").
-            By accessing and using the website http://brandaffy.com/ (the
-            "Site") and its services (the "Services"), you agree to be bound by
-            these Terms of Service ("Terms") and any additional terms and
-            conditions referenced herein. Please read these Terms carefully
-            before using our Services.
-          </p>
-          <h2 className="font-bold">1. Acceptance of Terms</h2>
-          <p>
-            1.1. By accessing or using the Site and Services, you acknowledge
-            that you have read, understood, and agree to be bound by these
-            Terms. If you do not agree with any part of these Terms, you may not
-            access or use the Site or Services.
+            Thank you for choosing BrandAffy ("we," "our," or "us"). This
+            Privacy Policy explains how we collect, use, disclose, and safeguard
+            your personal information when you access and use our website
+            http://brandaffy.com/ (the "Site") and its services (the
+            "Services").
           </p>
           <p>
-            1.2. These Terms, along with our Privacy Policy, govern your use of
-            BrandAffy's Site and Services. Please review our Privacy Policy to
-            understand our practices concerning your privacy.
+            By accessing or using the Site and Services, you consent to the
+            practices described in this Privacy Policy. If you do not agree with
+            the terms of this Privacy Policy, please refrain from using our Site
+            and Services.
           </p>
-          <h2 className="font-bold">2. Account Registration</h2>
+          <h2 className="font-bold">1. Information We Collect</h2>
           <p>
-            2.1. To use our Services, you must create an account ("Account") on
-            BrandAffy. You agree to provide accurate, complete, and current
-            information during the registration process and to keep your Account
-            information updated.
+            1.1. Personal Information: When you create an account on BrandAffy,
+            we may collect certain personal information, such as your name,
+            email address, and billing information.
           </p>
           <p>
-            2.2. You are solely responsible for safeguarding your Account
-            credentials and are liable for all activities performed under your
-            Account. Notify us immediately of any unauthorized use or suspected
-            breach of security.
+            1.2. User-Generated Content (UGC): As a subscription-based SAAS tool
+            meant to connect Brands to User-Generated Content (UGC), we collect
+            and process the UGCs you post on the Site.
           </p>
-          <h2 className="font-bold">3. Subscription and Billing</h2>
           <p>
-            {" "}
-            3.1. BrandAffy offers subscription plans with varying features and
-            durations. By subscribing to our Services, you agree to pay the
-            applicable fees associated with your selected plan.
+            1.3. Automatically Collected Information: We may automatically
+            collect certain information about your device and usage of the Site,
+            such as your IP address, browser type, operating system, and pages
+            visited. This information is used for analytical purposes and to
+            improve the functionality of our Services.
+          </p>
+          <h2 className="font-bold">2. Use of Information</h2>
+          <p>2.1. We use the collected information to:</p>
+          <p>
+            a. Provide and maintain the Services;<br></br>
+            b. Process and manage your subscriptions;<br></br>
+            c. Facilitate the connection between Brands and UGCs;<br></br>
+            d. Respond to your inquiries and provide customer support;<br></br>
+            e. Send you updates, newsletters, and promotional materials;
+            <br></br>
+            f. Improve the quality and performance of our Site and Services;
+            <br></br>
+            g. Enforce our Terms of Service and other applicable policies.
+            <br></br>
+          </p>
+          <h2 className="font-bold">3. Sharing of Information</h2>
+          <p>
+            3.1. We may share your personal information and UGCs with the
+            following parties:
           </p>{" "}
           <p>
-            3.2. Payment is due in advance for the chosen billing cycle. Failure
-            to make timely payments may result in suspension or termination of
-            your Account.{" "}
+            a. Brands: We share UGCs with Brands seeking to connect with
+            user-generated content for their marketing and promotional
+            activities.<br></br>
+            b. Service Providers: We may engage third-party service providers to
+            assist with our operations and Services, such as payment processing
+            and analytics. These providers are contractually obligated to
+            safeguard your information and are not allowed to use it for any
+            other purpose.<br></br>
+            c. Legal Compliance: We may disclose your information when required
+            by law, court order, or government request.<br></br>
           </p>
+          <h2 className="font-bold">4. Data Retention</h2>
           <p>
-            3.3. All fees are non-refundable, and we do not provide refunds or
-            credits for partial subscription periods.{" "}
+            4.1. We retain your personal information and UGCs for as long as
+            necessary to fulfill the purposes outlined in this Privacy Policy,
+            or as required by applicable laws and regulations.
           </p>
-          <h2 className="font-bold">4. Use of Services</h2>
+          <h2 className="font-bold">5. Security</h2>
           <p>
-            {" "}
-            4.1. BrandAffy grants you a non-exclusive, non-transferable, and
-            revocable license to access and use the Services for your internal
-            business purposes only.
-          </p>{" "}
-          <p>4.2. You agree not to:</p>
-          <p>
-            a. Modify, copy, reproduce, distribute, or create derivative works
-            based on the Site or Services;<br></br>
-            b. Reverse engineer, decompile, or disassemble any portion of the
-            Site or Services;<br></br>
-            c. Use the Site or Services for any unlawful or unauthorized
-            purpose;<br></br>
-            d. Engage in any activity that interferes with or disrupts the
-            integrity or performance of the Site or Services;<br></br>
-            e. Upload or transmit any harmful, infringing, or otherwise
-            objectionable content;<br></br>
-            f. Use automated tools or software to access the Site or Services
-            without our express written consent;<br></br>
-            g. Violate any applicable laws, regulations, or third-party rights.
+            5.1. We take reasonable measures to protect your information from
+            unauthorized access, disclosure, alteration, or destruction.
+            However, please be aware that no method of transmission over the
+            internet or electronic storage is 100% secure, and we cannot
+            guarantee absolute security.
           </p>
-          <h2 className="font-bold">5. User-Generated Content</h2>
+          <h2 className="font-bold">6. Third-Party Links</h2>
           <p>
-            {" "}
-            5.1. BrandAffy facilitates the connection between Brands and UGCs.
-            However, we do not endorse, guarantee the accuracy of, or assume any
-            responsibility for the UGCs posted by users.
+            6.1. Our Site may contain links to third-party websites. We are not
+            responsible for the privacy practices or content of these websites.
+            We encourage you to review the privacy policies of any third-party
+            sites you visit.
           </p>
+          <h2 className="font-bold">7. Children's Privacy</h2>
           <p>
-            5.2. By using the Services, you grant BrandAffy a worldwide,
-            royalty-free, non-exclusive license to use, reproduce, modify,
-            distribute, and display UGCs solely for the purpose of providing the
-            Services.
+            7.1. BrandAffy's Site and Services are not intended for individuals
+            under the age of [Insert Minimum Age]. We do not knowingly collect
+            personal information from minors. If you are a parent or guardian
+            and believe your child has provided us with personal information,
+            please contact us immediately.
           </p>
+          <h2 className="font-bold">8. Changes to the Privacy Policy</h2>
           <p>
-            5.3. You represent and warrant that you have the necessary rights,
-            permissions, and consents to post UGCs on the Site and to grant the
-            license specified in Section 5.2.
+            8.1. We may update this Privacy Policy from time to time. Any
+            changes will be effective upon posting the revised Privacy Policy on
+            the Site. Your continued use of the Services following the posting
+            of changes constitutes your acceptance of such changes.
           </p>
-          <h2 className="font-bold">6. Intellectual Property Rights</h2>
+          <h2 className="font-bold">9. Contact Us</h2>
           <p>
-            {" "}
-            6.1. BrandAffy and its licensors own all rights, title, and interest
-            in the Site and Services, including all intellectual property
-            rights. You may not use our trademarks, logos, or copyrighted
-            material without our prior written consent.
-          </p>
-          <h2 className="font-bold">7. Termination</h2>
-          <p>
-            7.1. You may terminate your Account at any time by following the
-            instructions on the Site. Upon termination, your access to the
-            Services will cease.
-          </p>{" "}
-          <p>
-            7.2. We reserve the right to suspend or terminate your Account and
-            access to the Services at our sole discretion, with or without
-            cause.
-          </p>
-          <h2 className="font-bold">8. Disclaimer of Warranties</h2>
-          <p>
-            8.1. The Site and Services are provided "as is" and "as available,"
-            without warranties of any kind, either express or implied. We do not
-            warrant that the Services will be uninterrupted, error-free, or
-            secure.
-          </p>{" "}
-          <h2 className="font-bold">9. Limitation of Liability</h2>
-          <p>
-            9.1. To the maximum extent permitted by law, BrandAffy and its
-            affiliates, directors, officers, employees, and agents shall not be
-            liable for any direct, indirect, incidental, special, or
-            consequential damages arising out of or related to the use or
-            inability to use the Services.
-          </p>
-          <h2 className="font-bold">10. Modifications to the Terms</h2>
-          <p>
-            10.1. We reserve the right to update or modify these Terms from time
-            to time. Any changes will be effective upon posting the revised
-            Terms on the Site. Your continued use of the Services following the
-            posting of changes constitutes your acceptance of such changes.
-          </p>
-          <h2 className="font-bold">
-            11. Governing Law and Dispute Resolution
-          </h2>
-          <p>
-            11.1. These Terms shall be governed by and construed in accordance
-            with the laws of the country of Philippines, without regard to its
-            conflict of laws principles.
-          </p>
-          <p>
-            11.2. Any dispute arising out of or relating to these Terms or the
-            Services shall be subject to the exclusive jurisdiction of the
-            courts located in the country of Philippines.
+            9.1. If you have any questions or concerns about this Privacy Policy
+            or our data practices, please contact us at{" "}
+            <span className="font-bold">
+              <a href="mailto:jonas.lemuel.datu@eee.upd.edu.ph">
+                jonas.lemuel.datu@eee.upd.edu.ph
+              </a>
+            </span>
+            .
           </p>
         </div>
         <div className="text-center mb-16">
-          Thank you for choosing BrandAffy. If you have any questions or
-          concerns regarding these Terms or our Services, please contact us at{" "}
-          <span className="font-bold">
-            <a href="mailto:jonas.lemuel.datu@eee.upd.edu.ph">
-              jonas.lemuel.datu@eee.upd.edu.ph
-            </a>
-          </span>
+          Thank you for choosing BrandAffy.
         </div>
       </div>
 
@@ -331,12 +288,12 @@ function TermsOfService() {
                 </a>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                Terms of Service
+                <div onClick={(e) => handleLink(e, `/brand/pages/terms`)}>
+                  Terms of Service
+                </div>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                <div onClick={(e) => handleLink(e, `/brand/pages/privacy`)}>
-                  Privacy Policy
-                </div>
+                Privacy Policy
               </li>
             </ul>
           </div>

@@ -12,10 +12,11 @@ import Dashboardinfluencerhub from "./pages/dashboard/DashboardInfluencerHub";
 import DashboardInfluencerBox from "./pages/dashboard/brands/DashboardInfluencerBox";
 import DashboardBoxDetails from "./pages/dashboard/brands/DashboardBoxDetails";
 import DashboardBrandCampaigns from "./pages/dashboard/brands/DashboardBrandCampaigns";
-import DashboardInfluencerCampaigns from "./pages/dashboard/influencers/DashboardInfluencerCampaigns"
+import DashboardInfluencerCampaigns from "./pages/dashboard/influencers/DashboardInfluencerCampaigns";
 import Dashboardcreatecampaign from "./pages/dashboard/brands/DashboardCreateCampaign";
 import Brandlandingpage from "./pages/brands/BrandLandingPage";
 import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/brand/register" element={<BrandRegisterPage />} />
         <Route path="/affiliate/register" element={<AffiliateRegisterPage />} />
         <Route path="/:type/pages/terms" element={<TermsOfService />} />
+        <Route path="/:type/pages/privacy" element={<PrivacyPolicy />} />
         <Route
           path="/dashboard/profile/:id?"
           element={
