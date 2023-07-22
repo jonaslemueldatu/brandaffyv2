@@ -29,6 +29,8 @@ function Brandlandingpage() {
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/design-curve-top.svg"
   );
 
+  const [heroImage] = useState("https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/svg+images/2850942.jpg")
+
   // State to handle display of Mobile Menu
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -87,7 +89,7 @@ function Brandlandingpage() {
       </div>
       {/* Hero Section */}
       <div className="flex-col lg:flex-row ctm-bg-color-7 w-full flex">
-        <div className="p-8 lg:p-20 xl:px-24 xl:pt-24 xl:pb-4 flex-1">
+        <div className="p-8 lg:p-20 xl:px-24 xl:pt-24 xl:pb-4 flex-1 flex flex-col justify-center">
           <h1 className="font-extrabold leading-none text-5xl">
             Connect With Hundreds Of Creators In Less Than 30 Minutes
           </h1>
@@ -102,7 +104,9 @@ function Brandlandingpage() {
             Start Your UGC Campaign Today
           </Link>
         </div>
-        <div className="flex-1"></div>
+        <div className="p-8 lg:p-20 xl:px-24 xl:pt-24 xl:pb-4 flex-1">
+          <img alt="Hero social media" className="rounded-l" src={heroImage}></img>
+        </div>
       </div>
       <img
         className="w-screen"
