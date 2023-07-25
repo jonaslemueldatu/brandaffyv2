@@ -24,7 +24,7 @@ function ActionTable(props) {
     e.stopPropagation();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/brand/box/removeAffiliate`,
+        `${process.env.REACT_APP_ROUTE}/api/box/removeAffiliate`,
         {
           affiliate_to_remove: props.ClickedProfileId,
           box_Id: props.CustomData.boxId,
