@@ -19,7 +19,12 @@ function ActionGeneral(props) {
           >
             Add to Box
           </button>
-          <button className="ctm-btn ctm-btn-1" onClick={() => props.SetPopup2(true)}>Invite</button>
+          <button
+            className="ctm-btn ctm-btn-1"
+            onClick={() => props.SetPopup2(true)}
+          >
+            Invite
+          </button>
         </div>
       )}
       {/* Brand inluencer box action button */}
@@ -41,6 +46,18 @@ function ActionGeneral(props) {
             className="ctm-btn ctm-btn-1"
           >
             Create Campaign
+          </button>
+        </div>
+      )}
+
+      {/* Campaign Details - Link Post */}
+      {props.CustomData.action === "Campaign Details - Link Post" && (
+        <div className="flex">
+          <button
+            className="ctm-btn ctm-btn-1"
+            onClick={() => props.SetPopup1(true)}
+          >
+            Link Tiktok Video
           </button>
         </div>
       )}

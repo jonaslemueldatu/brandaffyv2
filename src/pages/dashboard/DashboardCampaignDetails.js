@@ -8,6 +8,10 @@ import NavigationDashboard from "../../sections/NavigationDashboard";
 import ContainerHeader from "../../sections/ContainerHeader";
 import InfoCardCampaign from "../../sections/InfoCardCampaign";
 import ConnectorTiktokPosts from "../../sections/ConnectorTiktokPosts";
+import ContainerGeneralAction from "../../sections/ContainerGeneralAction";
+
+//Snippet Imports
+import PopupLinkTiktokVid from "../../snippets/PopupLinkTiktokVid"
 
 function DashboardCampaignDetails() {
   const auth = useAuthUser();
@@ -21,6 +25,13 @@ function DashboardCampaignDetails() {
   //useEffect states
   const [gettingCampaignDetails, setGettingCampaignDetails] = useState(true);
 
+  //Popup States
+  const [linkTiktokPopup, setLinkTiktokPopup] = useState(false)
+
+  //Action states
+  const [customData] = useState({
+    action: "Campaign Details - Link Post",
+  });
   useEffect(() => {
     setGettingCampaignDetails(true);
     const getCampaignDetails = async () => {
@@ -41,7 +52,7 @@ function DashboardCampaignDetails() {
     };
 
     getCampaignDetails();
-  }, []);
+  }, [campaignid]);
 
   return (
     <div className="h-screen flex relative">
@@ -52,6 +63,9 @@ function DashboardCampaignDetails() {
             Title={`Campaign - ${campaignDetails.campaign_name}`}
           />
         )}
+        {!gettingCampaignDetails && viewerUserType === "Affiliate" && (
+          <ContainerGeneralAction CustomData={customData} SetPopup1={setLinkTiktokPopup} />
+        )}
         {!gettingCampaignDetails && (
           <InfoCardCampaign CampaignDetails={campaignDetails} />
         )}
@@ -59,6 +73,12 @@ function DashboardCampaignDetails() {
           <ConnectorTiktokPosts />
         )}
       </div>
+      {linkTiktokPopup && !gettingCampaignDetails && (
+        <PopupLinkTiktokVid
+          SetLinkTiktokPopup={setLinkTiktokPopup}
+          BrandOwnerId={campaignDetails.brand_owner_id}
+        />
+      )}
     </div>
   );
 }
