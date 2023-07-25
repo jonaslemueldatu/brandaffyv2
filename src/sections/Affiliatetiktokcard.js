@@ -30,6 +30,7 @@ function Affiliatetiktokcard(props) {
           console.log(res.data.err);
         } else {
           navigate("/dashboard/profile");
+          window.location.reload(false);
         }
       };
 
