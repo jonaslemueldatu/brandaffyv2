@@ -14,6 +14,7 @@ import DashboardBoxDetails from "./pages/dashboard/brands/DashboardBoxDetails";
 import DashboardBrandCampaigns from "./pages/dashboard/brands/DashboardBrandCampaigns";
 import DashboardInfluencerCampaigns from "./pages/dashboard/influencers/DashboardInfluencerCampaigns";
 import Dashboardcreatecampaign from "./pages/dashboard/brands/DashboardCreateCampaign";
+import Dashboardcampaigndetails from "./pages/dashboard/DashboardCampaignDetails"
 import Brandlandingpage from "./pages/brands/BrandLandingPage";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -82,6 +83,22 @@ function App() {
           element={
             <RequireAuth loginPath="/affiliate/login">
               <Dashboardcreatecampaign />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard/campaigns/affiliate/:campaignid?"
+          element={
+            <RequireAuth loginPath="/affiliate/login">
+              <Dashboardcampaigndetails />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard/campaigns/brand/:campaignid?"
+          element={
+            <RequireAuth loginPath="/affiliate/login">
+              <Dashboardcampaigndetails />
             </RequireAuth>
           }
         />

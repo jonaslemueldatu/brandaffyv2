@@ -5,6 +5,7 @@
 
 import React, { useState } from "react";
 import { useAuthUser } from "react-auth-kit";
+import { useNavigate } from "react-router-dom";
 
 //Snippet Imports
 import ActionTable from "../snippets/ActionTable";
@@ -12,10 +13,16 @@ import IndicatorStatus from "../snippets/IndicatorStatus";
 import IndicatorPlatform from "../snippets/IndicatorPlatform";
 
 function ListCampaigns(props) {
+  const navigate = useNavigate();
   const auth = useAuthUser();
 
   const [viewerUserType] = useState(auth().user_type);
   const [campaignList] = useState(props.CampaignList);
+
+  const campaignNav = (e, campaignId) => {
+    e.preventDefault();
+    navigate(campaignId);
+  };
 
   return (
     <div className="mb-4 flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-visible">
@@ -63,6 +70,7 @@ function ListCampaigns(props) {
                 <tr
                   key={campaign._id.toString()}
                   className="h-20 cursor-pointer ctm-border-color-3 border-b"
+                  onClick={(e) => campaignNav(e, campaign._id.toString())}
                 >
                   <td className="w-12 px-4 text-center">
                     {" "}

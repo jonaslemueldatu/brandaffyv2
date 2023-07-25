@@ -83,6 +83,7 @@ function ActionTable(props) {
 
   // Campaigns Functions Brand
   const handleStart = async (e) => {
+    e.stopPropagation();
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
@@ -102,6 +103,7 @@ function ActionTable(props) {
   };
 
   const handleCancel = async (e) => {
+    e.stopPropagation();
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
@@ -121,6 +123,7 @@ function ActionTable(props) {
   };
 
   const handleEnd = async (e) => {
+    e.stopPropagation();
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
@@ -182,7 +185,7 @@ function ActionTable(props) {
           >
             Cancel
           </button>
-          <button onClick={() => handleStart()} className="ctm-btn ctm-btn-1">
+          <button onClick={(e) => handleStart(e)} className="ctm-btn ctm-btn-1">
             Start
           </button>
         </div>
