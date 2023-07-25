@@ -44,7 +44,7 @@ function ConnectorTiktok(props) {
   // URL for Tiktok Log-in Kit
   let url = "https://www.tiktok.com/v2/auth/authorize/";
   url += `?client_key=${process.env.REACT_APP_TIKTOK_CLIENT_KEY}`;
-  url += "&scope=user.info.basic";
+  url += "&scope=user.info.basic,user.info.stats,video.list";
   url += "&response_type=code";
   url += `&redirect_uri=${REDIRECT_URI}`;
   url += "&state=" + csrfState;
