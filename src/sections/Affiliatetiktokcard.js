@@ -3,9 +3,11 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useAuthUser } from "react-auth-kit";
+import { Navigate } from "react-router-dom";
 
 function Affiliatetiktokcard(props) {
   const useAuth = useAuthUser();
+  const navigate = useNavigate()
 
   const id = useAuth().id;
 
@@ -16,12 +18,24 @@ function Affiliatetiktokcard(props) {
   const codes = new URLSearchParams(window.location.search);
   useEffect(() => {
     if (codes.get("code")) {
-      axios.post(`${process.env.REACT_APP_ROUTE}/api/tiktokaccesstoken`, {
-        code: codes.get("code"),
-        user_id: id,
-      }, []);
+      const getTiktokToken = async () => {
+        const res = await axios.post(
+          `${process.env.REACT_APP_ROUTE}/api/tiktokaccesstoken`,
+          {
+            code: codes.get("code"),
+            user_id: id,
+          }
+        );
+        if (res.data.err) {
+          console.log(res.data.err)
+        } else {
+          navigate('/dashboard/profile')
+        }
+      };
+
+      getTiktokToken();
     }
-  });
+  }, []);
 
   // URL for Tiktok Log-in Kit
   let url = "https://www.tiktok.com/v2/auth/authorize/";
