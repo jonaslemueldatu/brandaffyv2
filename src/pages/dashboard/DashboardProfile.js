@@ -10,11 +10,12 @@ import ContainerHeader from "../../sections/ContainerHeader";
 import InfoCardAffiliate from "../../sections/InfoCardAffiliate";
 import InfoCardBrand from "../../sections/InfoCardBrand";
 import ContainerActionGeneral from "../../sections/ContainerGeneralAction";
-import Affiliatetiktokcard from "../../sections/Affiliatetiktokcard";
+import ConnectorTiktok from "../../sections/ConnectorTiktok";
 
 // Snippet imports
 import PopupAddTobox from "../../snippets/PopupAddToBox";
 import PopupInviteCampaign from "../../snippets/PopupInviteCampaign";
+import InfoCardTiktok from "../../sections/InfoCardTiktok";
 
 function DashboardProfile() {
   const auth = useAuthUser();
@@ -108,8 +109,12 @@ function DashboardProfile() {
             ViewedProfileId={viewedProfileId}
           />
         )}
-        {!GetProfileTrigger && isThisMyProfile && !linkedTiktok && (
-          <Affiliatetiktokcard />
+        {!GetProfileTrigger &&
+          isThisMyProfile &&
+          viewedProfileUserType === "Affiliate" &&
+          !linkedTiktok && <ConnectorTiktok />}
+        {!GetProfileTrigger && linkedTiktok && (
+          <InfoCardTiktok ViewedProfileId={viewedProfileId} />
         )}
       </div>
       {addToBoxPopup && !GetProfileTrigger && (

@@ -10,19 +10,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
+import axios from "axios";
 
 //Snippet imports
 import IndicatorActive from "../snippets/IndicatorActive";
 import IndicatorGender from "../snippets/IndicatorGender";
 import ActionTable from "../snippets/ActionTable";
-import axios from "axios";
+import IndicatorPlatform from "../snippets/IndicatorPlatform";
 
 function ListAffiliates(props) {
   const navigate = useNavigate();
   const auth = useAuthUser();
 
   const [affiliateList, setAffiliateList] = useState(props.AffiliateList);
-
 
   // Search Feature
   const [searchValue, setSearchValue] = useState("");
@@ -144,7 +144,10 @@ function ListAffiliates(props) {
                   <td className="w-12 px-4 text-center">
                     <IndicatorActive Status={affiliate.logged_in} />
                   </td>
-                  <td className="w-12 px-4"></td>
+                  <td className="w-12 px-4 text-center">
+                    {" "}
+                    <IndicatorPlatform Platform={affiliate.social_tiktok ? "Tiktok" : ""} />
+                  </td>
                   <td className="w-80 px-4">
                     {props.CustomData.displayActionButtons && (
                       <ActionTable

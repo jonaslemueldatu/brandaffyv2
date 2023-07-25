@@ -5,19 +5,22 @@ import axios from "axios";
 import { useAuthUser } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 
-function Affiliatetiktokcard(props) {
+function ConnectorTiktok(props) {
   const useAuth = useAuthUser();
   const navigate = useNavigate();
 
   const id = useAuth().id;
+  const codes = new URLSearchParams(window.location.search);
+
 
   //Needed for Tiktok access authentication
   const REDIRECT_URI = `${process.env.REACT_APP_CLIENT_ROUTE}/dashboard/profile/`;
   const csrfState = Math.random().toString(36).substring(2);
 
-  const codes = new URLSearchParams(window.location.search);
+  
   useEffect(() => {
     if (codes.get("code")) {
+
       const getTiktokToken = async () => {
         const res = await axios.post(
           `${process.env.REACT_APP_ROUTE}/api/tiktokaccesstoken`,
@@ -36,7 +39,7 @@ function Affiliatetiktokcard(props) {
 
       getTiktokToken();
     }
-  }, []);
+  });
 
   // URL for Tiktok Log-in Kit
   let url = "https://www.tiktok.com/v2/auth/authorize/";
@@ -55,4 +58,4 @@ function Affiliatetiktokcard(props) {
   );
 }
 
-export default Affiliatetiktokcard;
+export default ConnectorTiktok;
