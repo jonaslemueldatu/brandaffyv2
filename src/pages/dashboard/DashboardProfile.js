@@ -30,6 +30,9 @@ function DashboardProfile() {
   // Trigger the useEffect
   const [GetProfileTrigger, setGetProfileTrigger] = useState(true);
 
+  //State trigger
+  const [linkedTiktok, setLinkedTiktok] = useState(false);
+
   // Popup information
   const [addToBoxPopup, setAddToBoxPopup] = useState(false);
   const [inviteCampaignPopup, setInviteCampaignPopup] = useState(false);
@@ -56,6 +59,7 @@ function DashboardProfile() {
           console.log(res.data.err);
         } else {
           setProfileToDisplay(res.data.user_profile);
+          setLinkedTiktok(res.data.user_profile.social_tiktok);
           setGetProfileTrigger(false);
         }
       } catch (error) {
@@ -104,7 +108,7 @@ function DashboardProfile() {
             ViewedProfileId={viewedProfileId}
           />
         )}
-        {!GetProfileTrigger && viewedProfileUserType === "Affiliate" && (
+        {!GetProfileTrigger && isThisMyProfile && !linkedTiktok && (
           <Affiliatetiktokcard />
         )}
       </div>
