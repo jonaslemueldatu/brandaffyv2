@@ -26,7 +26,7 @@ function Affiliatetiktokcard(props) {
         };
         const data = await axios.post(
           "https://open.tiktokapis.com/v2/oauth/token/",
-          querystring.stringify(params),
+          JSON.stringify(params),
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
