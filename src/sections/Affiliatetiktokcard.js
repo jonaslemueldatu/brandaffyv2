@@ -17,18 +17,20 @@ function Affiliatetiktokcard(props) {
   useEffect(() => {
     if (codes.get("code")) {
       const getTiktokToken = async () => {
+        const params = {
+          client_key: "aw1wx231u89y4wq3",
+          client_secret: "220b6aa55075674137b7a4ab24d9932b",
+          code: codes.get("code"),
+          grant_type: "authorization_code",
+          redirect_uri: REDIRECT_URI,
+        };
         const data = await axios.post(
           "https://open.tiktokapis.com/v2/oauth/token/",
-          {
-            client_key: "aw1wx231u89y4wq3",
-            client_secret: "220b6aa55075674137b7a4ab24d9932b",
-            code: codes.get("code"),
-            grant_type: "authorization_code",
-            redirect_uri: REDIRECT_URI,
-          },
+          querystring.stringify(params),
           {
             headers: {
-              "content-type": "application/x-www-form-urlencoded",
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Cache-Control": "no-cache",
             },
           }
         );
