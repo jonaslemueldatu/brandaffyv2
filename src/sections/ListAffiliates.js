@@ -38,6 +38,7 @@ function ListAffiliates(props) {
               $or: [
                 { first_name: { $regex: searchValue, $options: "i" } },
                 { last_name: { $regex: searchValue, $options: "i" } },
+                { email: { $regex: searchValue, $options: "i" } },
               ],
             },
           }
@@ -79,8 +80,9 @@ function ListAffiliates(props) {
       <div className="overflow-x-scroll flex flex-col">
         <input
           type="text"
-          placeholder="search"
+          placeholder="Search..."
           onChange={(e) => handleSearch(e)}
+          className="p-4 rounded-lg ctm-border-color-3 border drop-shadow-sm max-w-lg bg-gray-100"
         ></input>
         <table className="flex-1">
           <thead>
