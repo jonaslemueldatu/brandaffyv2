@@ -7,7 +7,7 @@
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
 //6. Trigger1 = goes hand in hand with SetTrigger1
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 
@@ -15,12 +15,58 @@ import { useAuthUser } from "react-auth-kit";
 import IndicatorActive from "../snippets/IndicatorActive";
 import IndicatorGender from "../snippets/IndicatorGender";
 import ActionTable from "../snippets/ActionTable";
+import axios from "axios";
 
 function ListAffiliates(props) {
   const navigate = useNavigate();
   const auth = useAuthUser();
 
-  const [affiliateList] = useState(props.AffiliateList);
+  const [affiliateList, setAffiliateList] = useState(props.AffiliateList);
+
+
+  // Search Feature
+  const [searchValue, setSearchValue] = useState("");
+  const [searchEnabled, setSearchEnabled] = useState(false);
+
+  useEffect(() => {
+    const getSearchList = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
+          {
+            params: {
+              $or: [
+                { first_name: { $regex: searchValue, $options: "i" } },
+                { last_name: { $regex: searchValue, $options: "i" } },
+              ],
+            },
+          }
+        );
+        setAffiliateList(res.data.affiliate_list);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (searchEnabled) {
+      const delayDebounceFn = setTimeout(() => {
+        getSearchList();
+      }, 1500);
+      return () => clearTimeout(delayDebounceFn);
+    }
+  }, [searchValue, searchEnabled]);
+
+  // End of Search Feature
+
+  function handleSearch(e) {
+    if (e.target.value === "") {
+      setSearchEnabled(false);
+      setAffiliateList(props.AffiliateList);
+    } else {
+      setSearchEnabled(true);
+      setSearchValue(e.target.value);
+    }
+  }
 
   const handleRowClick = (id) => {
     id === auth().id.toString()
@@ -30,7 +76,12 @@ function ListAffiliates(props) {
 
   return (
     <div className="flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-visible">
-      <div className="overflow-x-scroll flex">
+      <div className="overflow-x-scroll flex flex-col">
+        <input
+          type="text"
+          placeholder="search"
+          onChange={(e) => handleSearch(e)}
+        ></input>
         <table className="flex-1">
           <thead>
             <tr className="h-20 ctm-border-color-3 border-b">
