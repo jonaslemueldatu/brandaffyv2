@@ -10,6 +10,7 @@ import ContainerHeader from "../../sections/ContainerHeader";
 import InfoCardAffiliate from "../../sections/InfoCardAffiliate";
 import InfoCardBrand from "../../sections/InfoCardBrand";
 import ContainerActionGeneral from "../../sections/ContainerGeneralAction";
+import Affiliatetiktokcard from "../../sections/Affiliatetiktokcard";
 
 // Snippet imports
 import PopupAddTobox from "../../snippets/PopupAddToBox";
@@ -102,6 +103,9 @@ function DashboardProfile() {
             IsThisMyProfile={isThisMyProfile}
             ViewedProfileId={viewedProfileId}
           />
+        )}
+        {!GetProfileTrigger && viewedProfileUserType === "Affiliate" && (
+          <Affiliatetiktokcard />
         )}
       </div>
       {addToBoxPopup && !GetProfileTrigger && (
