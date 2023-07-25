@@ -32,9 +32,11 @@ function Affiliatetiktokcard(props) {
     //     console.log(err);
     //   }}
     // >
+    <a href={url} target="_blank">
       <div className="flex justify-center py-4 bg-black text-white my-4 rounded-lg cursor-pointer">
         Connect Tiktok Account
       </div>
+      </a>
     // </LoginSocialTiktok>
   );
 }
