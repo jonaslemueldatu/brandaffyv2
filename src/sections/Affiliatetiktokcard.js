@@ -3,11 +3,11 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useAuthUser } from "react-auth-kit";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Affiliatetiktokcard(props) {
   const useAuth = useAuthUser();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const id = useAuth().id;
 
@@ -27,9 +27,9 @@ function Affiliatetiktokcard(props) {
           }
         );
         if (res.data.err) {
-          console.log(res.data.err)
+          console.log(res.data.err);
         } else {
-          navigate('/dashboard/profile')
+          navigate("/dashboard/profile");
         }
       };
 
