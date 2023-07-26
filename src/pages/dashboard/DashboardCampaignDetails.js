@@ -12,6 +12,7 @@ import ContainerGeneralAction from "../../sections/ContainerGeneralAction";
 
 //Snippet Imports
 import PopupLinkTiktokVid from "../../snippets/PopupLinkTiktokVid";
+import ListAffiliates from "../../sections/ListAffiliates";
 
 function DashboardCampaignDetails() {
   const auth = useAuthUser();
@@ -29,6 +30,14 @@ function DashboardCampaignDetails() {
   const [gettingCampaignDetails, setGettingCampaignDetails] = useState(true);
   const [videoListTrigger, setVideoListTrigger] = useState(true);
   const [isGettingVidList, setIsGettingVidList] = useState(true);
+  const [isGettingAcceptedUser, setIsGettingAcceptedUser] = useState(true);
+  const [isGettingInvitedUser, setIsGettingInvitedUser] = useState(true);
+
+
+  const [acceptedUserIds, setAcceptedUserIds] = useState([]);
+  const [acceptedUserList, setAcceptedUserList] = useState([]);
+  const [invitedUserIds, setInvitedUserIds] = useState([]);
+  const [invitedUserList, setInvitedUserList] = useState([]);
 
   //Popup States
   const [linkTiktokPopup, setLinkTiktokPopup] = useState(false);
@@ -41,6 +50,17 @@ function DashboardCampaignDetails() {
   const [customDataAffiliateReady] = useState({
     action: "Campaign Details - Affiliate - Ready",
   });
+
+  const [customDataBrandAccepted] = useState({
+    action: "Campaign Details - Brand - Accepted",
+    displayActionButtons: false,
+  });
+
+  const [customDataBrandInvited] = useState({
+    action: "Campaign Details - Brand - Invited",
+    displayActionButtons: false,
+  });
+
 
   //Get Campaign Details
   useEffect(() => {
@@ -58,6 +78,9 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
       } else {
         setCampaignDetails(res.data.campaign_details);
+        console.log(res.data.campaign_details.affiliate_list_accepted);
+        setAcceptedUserIds(res.data.campaign_details.affiliate_list_accepted);
+        setInvitedUserIds(res.data.campaign_details.affiliate_list_invited);
         setGettingCampaignDetails(false);
       }
     };
@@ -95,6 +118,66 @@ function DashboardCampaignDetails() {
     getVideoList();
   }, [loggedInUserID, campaignid, viewerUserType, videoListTrigger]);
 
+  //Get Accepted user list
+  useEffect(() => {
+    setIsGettingAcceptedUser(true);
+
+    const getAcceptedUserList = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
+        {
+          params: {
+            _id: {
+              $in: acceptedUserIds,
+            },
+          },
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+        setIsGettingAcceptedUser(false);
+      } else {
+        setAcceptedUserList(res.data.affiliate_list);
+        setIsGettingAcceptedUser(false);
+      }
+    };
+    if (acceptedUserIds.length > 0) {
+      getAcceptedUserList();
+    } else {
+      setIsGettingAcceptedUser(false);
+    }
+  }, [acceptedUserIds]);
+
+    //Get Invited user list
+    useEffect(() => {
+      setIsGettingInvitedUser(true);
+  
+      const getInvitedUserList = async () => {
+        const res = await axios.get(
+          `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
+          {
+            params: {
+              _id: {
+                $in: invitedUserIds,
+              },
+            },
+          }
+        );
+        if (res.data.err) {
+          console.log(res.data.err);
+          setIsGettingInvitedUser(false);
+        } else {
+          setInvitedUserList(res.data.affiliate_list);
+          setIsGettingInvitedUser(false);
+        }
+      };
+      if (invitedUserIds.length > 0) {
+        getInvitedUserList();
+      } else {
+        setIsGettingInvitedUser(false);
+      }
+    }, [invitedUserIds]);
+
   return (
     <div className="h-screen flex relative">
       <NavigationDashboard ViewerUserType={viewerUserType} />
@@ -115,15 +198,37 @@ function DashboardCampaignDetails() {
         {!gettingCampaignDetails && (
           <InfoCardCampaign CampaignDetails={campaignDetails} />
         )}
-        {!isGettingVidList && !gettingCampaignDetails && viewerUserType === "Affiliate" && (
-          <ListTiktokVideos
-            VideoList={videoList}
-            CustomData={customDataAffiliateReady}
-            SetTrigger1={setVideoListTrigger}
-            Trigger1={videoListTrigger}
-            CampaignStatus={campaignDetails.status}
-          />
-        )}
+        {!isGettingAcceptedUser &&
+          viewerUserType === "Brand" &&
+          !gettingCampaignDetails && (
+            <ListAffiliates
+              CustomData={customDataBrandAccepted}
+              AffiliateList={acceptedUserList}
+              Title="Accepted"
+            />
+          )}
+
+        {!isGettingInvitedUser &&
+          viewerUserType === "Brand" &&
+          !gettingCampaignDetails && (
+            <ListAffiliates
+              CustomData={customDataBrandInvited}
+              AffiliateList={invitedUserList}
+              Title="Invited"
+            />
+          )}
+
+        {!isGettingVidList &&
+          !gettingCampaignDetails &&
+          viewerUserType === "Affiliate" && (
+            <ListTiktokVideos
+              VideoList={videoList}
+              CustomData={customDataAffiliateReady}
+              SetTrigger1={setVideoListTrigger}
+              Trigger1={videoListTrigger}
+              CampaignStatus={campaignDetails.status}
+            />
+          )}
       </div>
       {linkTiktokPopup && !gettingCampaignDetails && (
         <PopupLinkTiktokVid

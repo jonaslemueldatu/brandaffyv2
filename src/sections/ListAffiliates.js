@@ -6,6 +6,7 @@
 //4. CustomData = Will contain custom data for usage when configuring the Table Action
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
 //6. Trigger1 = goes hand in hand with SetTrigger1
+//7. Title
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -35,10 +36,21 @@ function ListAffiliates(props) {
           `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
           {
             params: {
-              $or: [
-                { first_name: { $regex: searchValue, $options: "i" } },
-                { last_name: { $regex: searchValue, $options: "i" } },
-                { email: { $regex: searchValue, $options: "i" } },
+              $and: [
+                {
+                  _id: {
+                    $in: affiliateList.map(function (o) {
+                      return o._id;
+                    }),
+                  },
+                },
+                {
+                  $or: [
+                    { first_name: { $regex: searchValue, $options: "i" } },
+                    { last_name: { $regex: searchValue, $options: "i" } },
+                    { email: { $regex: searchValue, $options: "i" } },
+                  ],
+                },
               ],
             },
           }
@@ -76,14 +88,21 @@ function ListAffiliates(props) {
   };
 
   return (
-    <div className="flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 overflow-visible">
+    <div className="flex-col flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4 mb-4 overflow-visible">
       <div className="overflow-x-scroll flex flex-col">
-        <input
-          type="text"
-          placeholder="Search..."
-          onChange={(e) => handleSearch(e)}
-          className="p-4 rounded-lg ctm-border-color-3 border drop-shadow-sm max-w-lg bg-gray-100"
-        ></input>
+        {props.Title ? (
+          <span className="px-4 font-bold mb-4 ">{props.Title}</span>
+        ) : (
+          ""
+        )}
+        <div>
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => handleSearch(e)}
+            className="p-4 rounded-lg ctm-border-color-3 border drop-shadow-sm max-w-lg bg-gray-100"
+          ></input>
+        </div>
         <table className="flex-1">
           <thead>
             <tr className="h-20 ctm-border-color-3 border-b">
@@ -148,7 +167,9 @@ function ListAffiliates(props) {
                   </td>
                   <td className="w-12 px-4 text-center">
                     {" "}
-                    <IndicatorPlatform Platform={affiliate.social_tiktok ? "Tiktok" : ""} />
+                    <IndicatorPlatform
+                      Platform={affiliate.social_tiktok ? "Tiktok" : ""}
+                    />
                   </td>
                   <td className="w-80 px-4">
                     {props.CustomData.displayActionButtons && (

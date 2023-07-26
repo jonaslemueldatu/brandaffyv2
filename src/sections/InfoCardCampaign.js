@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import IndicatorStatus from "../snippets/IndicatorStatus";
 
 function InfoCardCampaign(props) {
-  const [campaignDetails, setCampaignDetails] = useState(props.CampaignDetails);
+  const [campaignDetails] = useState(props.CampaignDetails);
 
   return (
     <div className="mb-4 flex-col md:flex-row flex rounded-lg bg-white drop-shadow-sm border ctm-border-color-2 p-4">
@@ -42,7 +42,9 @@ function InfoCardCampaign(props) {
         </div>
         <div className="flex flex-1 flex-col my-4">
           <label className="my-2 font-bold">Objectives</label>
-          {campaignDetails.campaign_objectives}
+          <div className="p-4 ctm-min-width-1">
+            {campaignDetails.campaign_objectives}
+          </div>
         </div>
         <div className="flex gap-3 flex-wrap">
           <div className="flex flex-1 flex-col my-4">
@@ -55,7 +57,9 @@ function InfoCardCampaign(props) {
         </div>
         <div className="flex flex-1 flex-col my-4">
           <label className="my-2 font-bold">Terms and Conditions</label>
-          {campaignDetails.campaign_terms}
+          <div className="p-4 ctm-min-width-1">
+            {campaignDetails.campaign_terms}
+          </div>
         </div>
       </div>
     </div>
