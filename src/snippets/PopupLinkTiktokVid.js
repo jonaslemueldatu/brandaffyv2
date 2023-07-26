@@ -1,6 +1,8 @@
 //Props
 //1. SetLinkTiktokPopup = Triggers the popup
 //2. BrandOwnerId = Owner of the campaign
+//3. SetTrigger1 = Triggers a parent child component
+//4. Trigger1
 
 import React, { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
@@ -63,7 +65,8 @@ function PopupLinkTiktokvids(props) {
         console.log(res.data.err);
         setError(res.data.err);
       } else {
-        alert("Success");
+        props.SetLinkTiktokPopup(false);
+        props.SetTrigger1(!props.Trigger1);
       }
     } catch (error) {
       console.log(error);

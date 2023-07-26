@@ -6,6 +6,7 @@
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
 //6. Trigger1 =
 //7. ClickedCampaignId =
+//   ClickedVideoId =
 //8. SetTrigger2 = ID of the clicked campaign in the List
 //9. Trigger2
 //10. Status = The status of the campaign line item being sent to render
@@ -13,14 +14,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuthUser } from "react-auth-kit";
+import { useParams } from "react-router-dom";
 
 function ActionTable(props) {
   const auth = useAuthUser();
 
   const [loggedInUserId] = useState(auth().id);
+  const { campaignid } = useParams();
 
   //Influencer Box Functions
-  const handleRemove = async (e, id) => {
+  const handleRemove = async (e) => {
     e.stopPropagation();
     try {
       const res = await axios.post(
@@ -34,6 +37,7 @@ function ActionTable(props) {
         console.log(res.data.err);
       } else {
         props.SetTrigger1(!props.Trigger1);
+        alert("removed!")
       }
     } catch (error) {
       console.log(error);
@@ -42,6 +46,7 @@ function ActionTable(props) {
 
   //Campaigns Functions Affilaite
   const handleAccept = async (e) => {
+    e.stopPropagation();
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/campaign/update`,
@@ -130,6 +135,27 @@ function ActionTable(props) {
         {
           campaign_id: props.ClickedCampaignId,
           change_to_status: "Ended",
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+      } else {
+        props.SetTrigger1(!props.Trigger1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRemoveVideo = async (e) => {
+    e.stopPropagation();
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/campaign/unlinkvideo`,
+        {
+          campaign_id: campaignid,
+          video_id: props.ClickedVideoId,
+          affiliate_id: loggedInUserId,
         }
       );
       if (res.data.err) {
@@ -235,6 +261,17 @@ function ActionTable(props) {
       {props.CustomData.action === "Campaigns - Ended - Brand" && (
         <div className="flex">
           <button className="ctm-btn mx-2 ctm-btn-1 ">View Report</button>
+        </div>
+      )}
+      {/* Campaign Details - Affiliate - Ready */}
+      {props.CustomData.action === "Campaign Details - Affiliate - Ready" && (
+        <div className="flex">
+          <button
+            className="ctm-btn mx-2 ctm-btn-2"
+            onClick={(e) => handleRemoveVideo(e)}
+          >
+            Remove
+          </button>
         </div>
       )}
     </div>
