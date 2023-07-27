@@ -13,6 +13,7 @@ import ContainerGeneralAction from "../../sections/ContainerGeneralAction";
 //Snippet Imports
 import PopupLinkTiktokVid from "../../snippets/PopupLinkTiktokVid";
 import ListAffiliates from "../../sections/ListAffiliates";
+import InfoCardCampaignSummary from "../../sections/InfoCardCampaignSummary";
 
 function DashboardCampaignDetails() {
   const auth = useAuthUser();
@@ -32,12 +33,14 @@ function DashboardCampaignDetails() {
   const [isGettingVidList, setIsGettingVidList] = useState(true);
   const [isGettingAcceptedUser, setIsGettingAcceptedUser] = useState(true);
   const [isGettingInvitedUser, setIsGettingInvitedUser] = useState(true);
-
+  const [isGettingRequestedUser, setIsGettingRequestedUser] = useState(true);
 
   const [acceptedUserIds, setAcceptedUserIds] = useState([]);
   const [acceptedUserList, setAcceptedUserList] = useState([]);
   const [invitedUserIds, setInvitedUserIds] = useState([]);
   const [invitedUserList, setInvitedUserList] = useState([]);
+  const [requestedUserIds, setRequestedUserIds] = useState([]);
+  const [requestedUserList, setRequestedUserList] = useState([]);
 
   //Popup States
   const [linkTiktokPopup, setLinkTiktokPopup] = useState(false);
@@ -61,6 +64,10 @@ function DashboardCampaignDetails() {
     displayActionButtons: false,
   });
 
+  const [customDataBrandRequested] = useState({
+    action: "Campaign Details - Brand - Requested",
+    displayActionButtons: false,
+  });
 
   //Get Campaign Details
   useEffect(() => {
@@ -81,6 +88,7 @@ function DashboardCampaignDetails() {
         console.log(res.data.campaign_details.affiliate_list_accepted);
         setAcceptedUserIds(res.data.campaign_details.affiliate_list_accepted);
         setInvitedUserIds(res.data.campaign_details.affiliate_list_invited);
+        setRequestedUserIds(res.data.campaign_details.affiliate_list_applied);
         setGettingCampaignDetails(false);
       }
     };
@@ -148,35 +156,65 @@ function DashboardCampaignDetails() {
     }
   }, [acceptedUserIds]);
 
-    //Get Invited user list
-    useEffect(() => {
-      setIsGettingInvitedUser(true);
-  
-      const getInvitedUserList = async () => {
-        const res = await axios.get(
-          `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
-          {
-            params: {
-              _id: {
-                $in: invitedUserIds,
-              },
+  //Get Invited user list
+  useEffect(() => {
+    setIsGettingInvitedUser(true);
+
+    const getInvitedUserList = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
+        {
+          params: {
+            _id: {
+              $in: invitedUserIds,
             },
-          }
-        );
-        if (res.data.err) {
-          console.log(res.data.err);
-          setIsGettingInvitedUser(false);
-        } else {
-          setInvitedUserList(res.data.affiliate_list);
-          setIsGettingInvitedUser(false);
+          },
         }
-      };
-      if (invitedUserIds.length > 0) {
-        getInvitedUserList();
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+        setIsGettingInvitedUser(false);
       } else {
+        setInvitedUserList(res.data.affiliate_list);
         setIsGettingInvitedUser(false);
       }
-    }, [invitedUserIds]);
+    };
+    if (invitedUserIds.length > 0) {
+      getInvitedUserList();
+    } else {
+      setIsGettingInvitedUser(false);
+    }
+  }, [invitedUserIds]);
+
+  //Get Requested user list
+  useEffect(() => {
+    setIsGettingRequestedUser(true);
+
+    const getRequestedUserList = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
+        {
+          params: {
+            _id: {
+              $in: requestedUserIds,
+            },
+          },
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+        setIsGettingRequestedUser(false);
+      } else {
+        setRequestedUserList(res.data.affiliate_list);
+        setIsGettingRequestedUser(false);
+      }
+    };
+    if (requestedUserIds.length > 0) {
+      getRequestedUserList();
+    } else {
+      setIsGettingRequestedUser(false);
+    }
+  }, [requestedUserIds]);
 
   return (
     <div className="h-screen flex relative">
@@ -189,7 +227,8 @@ function DashboardCampaignDetails() {
         )}
         {!gettingCampaignDetails &&
           viewerUserType === "Affiliate" &&
-          campaignDetails.status === "Ready to Start" && (
+          campaignDetails.status === "Ready to Start" &&
+          acceptedUserIds.indexOf(loggedInUserID) >= 0 && (
             <ContainerGeneralAction
               CustomData={customData}
               SetPopup1={setLinkTiktokPopup}
@@ -198,9 +237,13 @@ function DashboardCampaignDetails() {
         {!gettingCampaignDetails && (
           <InfoCardCampaign CampaignDetails={campaignDetails} />
         )}
+
+        {!gettingCampaignDetails && <InfoCardCampaignSummary />}
+
         {!isGettingAcceptedUser &&
           viewerUserType === "Brand" &&
-          !gettingCampaignDetails && (
+          !gettingCampaignDetails &&
+          campaignDetails.status !== "Cancelled" && (
             <ListAffiliates
               CustomData={customDataBrandAccepted}
               AffiliateList={acceptedUserList}
@@ -210,11 +253,23 @@ function DashboardCampaignDetails() {
 
         {!isGettingInvitedUser &&
           viewerUserType === "Brand" &&
-          !gettingCampaignDetails && (
+          !gettingCampaignDetails &&
+          campaignDetails.status === "Ready to Start" && (
             <ListAffiliates
               CustomData={customDataBrandInvited}
               AffiliateList={invitedUserList}
               Title="Invited"
+            />
+          )}
+
+        {!isGettingRequestedUser &&
+          viewerUserType === "Brand" &&
+          !gettingCampaignDetails &&
+          campaignDetails.status === "Ready to Start" && (
+            <ListAffiliates
+              CustomData={customDataBrandRequested}
+              AffiliateList={requestedUserList}
+              Title="Requested"
             />
           )}
 
