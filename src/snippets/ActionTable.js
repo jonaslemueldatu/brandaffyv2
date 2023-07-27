@@ -57,6 +57,7 @@ function ActionTable(props) {
         }
       );
       if (res.data.err) {
+        alert(res.data.err)
         console.log(res.data.err);
       } else {
         props.SetTrigger1(!props.Trigger1);
@@ -207,7 +208,7 @@ function ActionTable(props) {
         <div className="flex">
           <button
             className="ctm-btn mx-2 ctm-btn-2 "
-            onClick={() => handleCancel()}
+            onClick={(e) => handleCancel(e)}
           >
             Cancel
           </button>
