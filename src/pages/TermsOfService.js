@@ -334,7 +334,7 @@ function TermsOfService() {
                 Terms of Service
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                <div onClick={(e) => handleLink(e, `/brand/pages/privacy`)}>
+                <div onClick={(e) => handleLink(e, `/${type}/pages/privacy`)}>
                   Privacy Policy
                 </div>
               </li>

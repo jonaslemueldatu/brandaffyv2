@@ -16,6 +16,7 @@ import DashboardInfluencerCampaigns from "./pages/dashboard/influencers/Dashboar
 import Dashboardcreatecampaign from "./pages/dashboard/brands/DashboardCreateCampaign";
 import Dashboardcampaigndetails from "./pages/dashboard/DashboardCampaignDetails"
 import Brandlandingpage from "./pages/brands/BrandLandingPage";
+import Affiliatelandingpage from "./pages/influencers/AffiliateLandingPage"
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
@@ -24,6 +25,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Brandlandingpage />} />
+        <Route path="/affiliate" element={<Affiliatelandingpage />} />
         <Route path="/affiliate/login" element={<AffiliateLoginPage />} />
         <Route path="/brand/login" element={<BrandLoginPage />} />
         <Route path="/brand/register" element={<BrandRegisterPage />} />

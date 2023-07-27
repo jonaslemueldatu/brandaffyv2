@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
-function Brandlandingpage() {
+function Affiliatelandingpage() {
   // Assets
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
@@ -61,6 +61,9 @@ function Brandlandingpage() {
             {/* <li className="mx-5 font-semibold hover:underline cursor-pointer">
               Upcoming Features
             </li> */}
+            <li className="mx-5 font-semibold hover:underline cursor-pointer">
+              {" "}
+            </li>
           </ul>
         </div>
         <div
@@ -73,19 +76,18 @@ function Brandlandingpage() {
         <div className="hidden xl:flex items-center">
           <Link
             className="mx-5 font-semibold hover:underline text-lg underline cursor-pointer"
-            to={"/affiliate"}
+            to={"/"}
           >
-            UGC Creator Portal
+            Brand Portal
           </Link>
-
           <Link
-            to={"/brand/login"}
+            to={"/affiliate/login"}
             className="mx-5 font-bold cursor-pointer text-lg  hover:underline"
           >
             Login
           </Link>
           <Link
-            to={"/brand/register"}
+            to={"/affiliate/register"}
             className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg"
           >
             Sign Up
@@ -96,17 +98,17 @@ function Brandlandingpage() {
       <div className="flex-col lg:flex-row ctm-bg-color-7 w-full flex">
         <div className="p-8 lg:p-20 xl:px-24 xl:pt-24 xl:pb-4 flex-1 flex flex-col justify-center">
           <h1 className="font-extrabold leading-none text-5xl">
-            Connect With Hundreds Of Creators In Less Than 30 Minutes
+            Boost Your Creative Exposure - Partner with Brands in Minutes{" "}
           </h1>
           <p className="my-10 text-lg ctm-font-color-6">
-            Connect at scale with thousands of active UGC creators, influencers,
-            affiliates for your marketing campaigns.
+            Connect with Thousands of Brands, Influencers, and Affiliates to
+            Scale Up Your Creations and Expand Your Reach.
           </p>
           <Link
             to={"/brand/register"}
             className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4 w-fit"
           >
-            Start Your UGC Campaign Today
+            Kickstart Your Creative Journey with Brands Today
           </Link>
         </div>
         <div className="p-8 lg:p-20 xl:px-24 xl:pt-24 xl:pb-4 flex-1">
@@ -128,19 +130,21 @@ function Brandlandingpage() {
         className="p-8 lg:p-20 xl:px-24 xl:py-10 max-w-6xl m-auto"
       >
         <h2 className="text-center font-extrabold leading-none text-5xl">
-          Discover, Curate, And Amplify<br></br> Authentic Content With Ease
+          Create, Connect, and Showcase<br></br> Your Authentic Content with
+          Ease
         </h2>
         <div className="flex flex-col-reverse md:flex-row py-8">
           <img alt="placeholder" src={brandlogo} className="flex-1 m-4"></img>
           <div className="flex-1 flex flex-col justify-center">
             <h2 className="text-2xl font-extrabold">
-              Unlock the Potential of UGC
+              Unlock Your Creative Potential with UGC
             </h2>
             <p className="my-4 text-lg ctm-font-color-6">
-              Are you tired of searching high and low for captivating content
-              that resonates with your target audience? Brandaffy empowers
-              brands like yours to effortlessly find, collect, and leverage UGC
-              that reflects the genuine experiences of your customers.
+              Feeling exhausted from trying to create captivating content that
+              truly resonates with your audience? Brandaffy empowers creators
+              like you to effortlessly showcase your UGC, reflecting your unique
+              experiences, and connecting with brands that appreciate your
+              authenticity.
             </p>
           </div>
         </div>
@@ -148,15 +152,15 @@ function Brandlandingpage() {
           <img alt="placeholder" src={brandlogo} className="flex-1 m-4"></img>
           <div className="flex-1 flex flex-col justify-center">
             <h2 className="text-2xl font-extrabold">
-              Effortless Campaign Creation
+              Campaign Participation Made Easy for Creators{" "}
             </h2>
             <p className="my-4 text-lg ctm-font-color-6">
-              Say goodbye to complex campaign planning. With Brandaffy, creating
-              compelling UGC campaigns is a breeze. Our intuitive campaign
-              creation platform enables you to define your goals, set campaign
-              parameters, and establish guidelines, all in one centralized hub.
-              Unleash your creativity, set the rules, and watch as the UGC
-              starts pouring in.
+              Say goodbye to the complexities of finding the right brand
+              campaigns. With Brandaffy, joining compelling UGC campaigns is a
+              breeze. Our intuitive platform allows you to understand the
+              campaign goals, parameters, and guidelines, all in one centralized
+              hub. Unleash your creativity, follow the rules, and watch as
+              opportunities start pouring in.
             </p>
           </div>
         </div>
@@ -164,30 +168,13 @@ function Brandlandingpage() {
           <img alt="placeholder" src={brandlogo} className="flex-1 m-4"></img>
           <div className="flex-1 flex flex-col justify-center">
             <h2 className="text-2xl font-extrabold">
-              Seamless Influencer Connections
+              Build Seamless Relationships with Leading Brands{" "}
             </h2>
             <p className="my-4 text-lg ctm-font-color-6">
-              Our comprehensive influencer database allows you to seamlessly
-              connect and collaborate with top-tier influencers. From
-              micro-influencers to industry experts, build lasting partnerships
-              that ignite brand advocacy and unlock new levels of growth.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-col-reverse md:flex-row-reverse py-8">
-          <img alt="placeholder" src={brandlogo} className="flex-1 m-4"></img>
-          <div className="flex-1 flex flex-col justify-center">
-            <h2 className="text-2xl font-extrabold">
-              Elevate Your Strategy with Influencer Boxes
-            </h2>
-            <p className="my-4 text-lg ctm-font-color-6">
-              Stay ahead of the competition by creating customized influencer
-              groups on Brandaffy. Harness the power of targeted influencer
-              communities to amplify your campaigns and drive exceptional
-              results. Assign specific campaigns to dedicated influencer groups
-              and maximize the impact of your UGC initiatives. Get ready to
-              witness exponential growth fueled by the collective power of your
-              influencers.
+              Our extensive database allows you to seamlessly connect and
+              collaborate with top-tier brands. From small businesses to
+              industry giants, build lasting partnerships that ignite your
+              creative growth and unlock new levels of exposure.
             </p>
           </div>
         </div>
@@ -201,55 +188,46 @@ function Brandlandingpage() {
       <div id="features" className="ctm-bg-color-9">
         <div className="p-8 lg:p-20 xl:px-24 xl:py-10 max-w-7xl m-auto flex flex-col items-center">
           <h2 className="text-center font-extrabold leading-none text-5xl">
-            A Faster, Simpler UGC Management Tool
+            A Quicker, Easier Way to Handle Your UGC Partnerships{" "}
           </h2>
           <div className="grid justify-items-center">
             <dl className="mt-12 space-y-6 sm:grid sm:grid-cols-1 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-2 lg:gap-x-6">
               <div className="relative">
                 <dt className="my-4 text-lg ctm-font-color-6">
                   <span className="font-bold">
-                    Comprehensive UGC Discovery:
+                    Comprehensive Campaign Discovery:{" "}
                   </span>
-                  Effortlessly find compelling content that aligns with your
-                  brand's voice and values.
+                  Effortlessly find exciting campaigns that align with your
+                  creative voice and values.
                 </dt>
               </div>
               <div className="relative">
                 <dt className="my-4 text-lg ctm-font-color-6">
                   <span className="font-bold">
-                    Intuitive Campaign Creation:
+                    Effortless Campaign Engagement:{" "}
                   </span>
-                  Craft captivating campaigns and watch the UGC flood in with
-                  our user-friendly platform.
+                  Immerse yourself in captivating campaigns and let the
+                  opportunities roll in through our user-friendly platform.
                 </dt>
               </div>
               <div className="relative">
                 <dt className="my-4 text-lg ctm-font-color-6">
-                  <span className="font-bold">Influencer Collaboration:</span>{" "}
-                  Forge valuable relationships with influencers, expanding your
-                  brand's reach and impact.
+                  <span className="font-bold"> Brand Collaboration:</span> Forge
+                  valuable relationships with top brands, expanding your
+                  creative reach and impact.
                 </dt>
               </div>
               <div className="relative">
                 <dt className="my-4 text-lg ctm-font-color-6">
-                  <span className="font-bold">
-                    Customized Influencer Groups:
-                  </span>{" "}
-                  Amplify the effectiveness of your campaigns by targeting
-                  specific influencer communities.
-                </dt>
-              </div>
-              <div className="relative">
-                <dt className="my-4 text-lg ctm-font-color-6">
-                  <span className="font-bold">Analytics and Insights:</span>{" "}
+                  <span className="font-bold"> Analytics and Insights: </span>{" "}
                   Access real-time performance metrics to track the success of
-                  your UGC initiatives and make data-driven decisions.
+                  your creative contributions and make data-driven decisions.
                 </dt>
               </div>
             </dl>
           </div>
           <Link
-            to={"/brand/register"}
+            to={"/affiliate/register"}
             className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4 w-fit"
           >
             Create Your Account Now
@@ -270,8 +248,8 @@ function Brandlandingpage() {
           Brandaffy: Fast. Simple. Smart
         </h2>
         <p className="my-10 text-lg ctm-font-color-6 text-center">
-          Imagine… If you’re not getting buried by links and spreadsheets
-          everyday, how many more powerful connections can you make?
+          Imagine... If you're not constantly juggling your content, how many
+          more influential connections could you create?
         </p>
         <div className="mt-4 pb-4 sm:pb-8 lg:pb-2">
           <div className="relative">
@@ -286,7 +264,7 @@ function Brandlandingpage() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
-                      $29
+                      $2
                       <span className="ml-1 text-2xl font-medium tracking-normal text-white">
                         /mo
                       </span>
@@ -305,7 +283,7 @@ function Brandlandingpage() {
                           />
                         </div>
                         <p className="ml-3 text-xl text-white">
-                          3 Active Campaigns
+                          5 Active Campaigns
                         </p>
                       </li>
                       <li className="flex items-start">
@@ -316,18 +294,7 @@ function Brandlandingpage() {
                           />
                         </div>
                         <p className="ml-3 text-xl text-white">
-                          5 Influencer Boxes
-                        </p>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="flex-shrink-0">
-                          <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            className="text-white"
-                          />
-                        </div>
-                        <p className="ml-3 text-xl text-white">
-                          Unlimited access to partner influencers
+                          Unlimited access to brand campaigns
                         </p>
                       </li>
                       <li className="flex items-start">
@@ -344,7 +311,7 @@ function Brandlandingpage() {
                     </ul>
                     <div className="rounded-md shadow">
                       <Link
-                        to={"brand/register"}
+                        to={"affiliate/register"}
                         className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100"
                       >
                         Subscribe
@@ -360,7 +327,7 @@ function Brandlandingpage() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
-                      $49
+                      $9
                       <span className="ml-1 text-2xl font-medium tracking-normal text-white">
                         /mo
                       </span>
@@ -379,7 +346,7 @@ function Brandlandingpage() {
                           />
                         </div>
                         <p className="ml-3 text-xl text-white">
-                          7 Active Campaigns
+                          10 Active Campaigns
                         </p>
                       </li>
                       <li className="flex items-start">
@@ -390,18 +357,7 @@ function Brandlandingpage() {
                           />
                         </div>
                         <p className="ml-3 text-xl text-white">
-                          15 Influencer Boxes
-                        </p>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="flex-shrink-0">
-                          <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            className="text-white"
-                          />
-                        </div>
-                        <p className="ml-3 text-xl text-white">
-                          Unlimited access to partner influencers
+                          Unlimited access to brand campaigns
                         </p>
                       </li>
                       <li className="flex items-start">
@@ -448,7 +404,7 @@ function Brandlandingpage() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
-                      $79
+                      $15
                       <span className="ml-1 text-2xl font-medium tracking-normal text-white">
                         /mo
                       </span>
@@ -478,18 +434,7 @@ function Brandlandingpage() {
                           />
                         </div>
                         <p className="ml-3 text-xl text-white">
-                          25 Influencer Boxes
-                        </p>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="flex-shrink-0">
-                          <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            className="text-white"
-                          />
-                        </div>
-                        <p className="ml-3 text-xl text-white">
-                          Unlimited access to partner influencers
+                          Unlimited access to brand campaigns
                         </p>
                       </li>
                       <li className="flex items-start">
@@ -533,7 +478,7 @@ function Brandlandingpage() {
           </div>
         </div>
         <p className="my-8 text-lg text-center">
-          You don't have to decide now! Enjoy your 1 month free trial and launch
+          You don't have to decide now! Enjoy your 2 MONTHS FREE trial and launch
           your UGC campaigns with Brandaffy for FREE!
         </p>
       </div>
@@ -549,11 +494,11 @@ function Brandlandingpage() {
             Try Brandaffy today
           </h2>
           <p className="my-8 text-lg text-white text-center">
-            Join Brandaffy today and enjoy your 1 MONTH FREE TRIAL while having
+            Join Brandaffy today and enjoy your 2 MONTHS FREE TRIAL while having
             complete access to all existing and upcoming features.
           </p>
           <Link
-            to={"/brand/register"}
+            to={"/affiliate/register"}
             className="shadow-lg bg-indigo-100 text-indigo-700 ctm-btn text-lg my-4 w-fit"
           >
             Sign Up Today
@@ -603,10 +548,10 @@ function Brandlandingpage() {
                 </a>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                <Link to={"brand/pages/terms"}>Terms of Service</Link>
+                <Link to={"/affiliate/pages/terms"}>Terms of Service</Link>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                <Link to={"brand/pages/privacy"}>Privacy Policy</Link>
+                <Link to={"/affiliate/pages/privacy"}>Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -646,18 +591,18 @@ function Brandlandingpage() {
                 Upcoming Features
               </li> */}
               <li className="font-semibold hover:underline">
-                <Link to={"/affiliate"}>UGC Creator Portal</Link>
+                <Link to={"/"}>Brand Portal</Link>
               </li>
             </ul>
             <div className="flex flex-col">
               <Link
-                to={"/brand/login"}
+                to={"/affiliate/login"}
                 className="font-bold mx-auto  hover:underline"
               >
                 Login &#x28;Brands&#x29;
               </Link>
               <Link
-                to={"brand/register"}
+                to={"affiliate/register"}
                 className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4"
               >
                 Sign Up
@@ -670,4 +615,4 @@ function Brandlandingpage() {
   );
 }
 
-export default Brandlandingpage;
+export default Affiliatelandingpage;

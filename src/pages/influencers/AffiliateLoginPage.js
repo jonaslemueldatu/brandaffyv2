@@ -46,9 +46,10 @@ function AffiliateLoginPage() {
     <div className="flex h-screen">
       <div className="flex-1 h-full flex flex-col">
         <img
-          className="h-40 w-40 m-7"
+          className="h-40 w-40 m-7 cursor-pointer"
           alt="Brandaffy colored logo"
           src={brandlogo}
+          onClick={() => navigate("/affiliate")}
         ></img>
         <div className="flex-1 flex justify-start flex-col">
           <form
