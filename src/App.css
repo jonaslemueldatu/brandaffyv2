@@ -188,6 +188,10 @@ html {
   min-width: 450px;
 }
 
+.ctm-min-width-5 {
+  min-width: 1000px;
+}
+
 /* Custom max-width */
 .ctm-max-width-0 {
   max-width: 100px;
@@ -207,6 +211,11 @@ html {
 
 .ctm-max-width-4 {
   max-width: 450px;
+}
+
+/* Custom min-width */
+.ctm-min-height-1 {
+  min-height: 500px;
 }
 
 /* Custom animations */

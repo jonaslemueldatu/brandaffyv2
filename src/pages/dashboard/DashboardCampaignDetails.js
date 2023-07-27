@@ -85,7 +85,6 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
       } else {
         setCampaignDetails(res.data.campaign_details);
-        console.log(res.data.campaign_details.affiliate_list_accepted);
         setAcceptedUserIds(res.data.campaign_details.affiliate_list_accepted);
         setInvitedUserIds(res.data.campaign_details.affiliate_list_invited);
         setRequestedUserIds(res.data.campaign_details.affiliate_list_applied);
@@ -238,7 +237,9 @@ function DashboardCampaignDetails() {
           <InfoCardCampaign CampaignDetails={campaignDetails} />
         )}
 
-        {!gettingCampaignDetails && <InfoCardCampaignSummary />}
+        {!gettingCampaignDetails && viewerUserType === "Brand" && (
+          <InfoCardCampaignSummary />
+        )}
 
         {!isGettingAcceptedUser &&
           viewerUserType === "Brand" &&

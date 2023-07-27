@@ -67,7 +67,7 @@ function ListAffiliates(props) {
       }, 1500);
       return () => clearTimeout(delayDebounceFn);
     }
-  }, [searchValue, searchEnabled]);
+  }, [searchValue, searchEnabled, affiliateList]);
 
   // End of Search Feature
 
