@@ -264,7 +264,7 @@ function Affiliatelandingpage() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
-                      $2
+                      $0
                       <span className="ml-1 text-2xl font-medium tracking-normal text-white">
                         /mo
                       </span>
@@ -478,8 +478,7 @@ function Affiliatelandingpage() {
           </div>
         </div>
         <p className="my-8 text-lg text-center">
-          You don't have to decide now! Enjoy your 2 MONTHS FREE trial and launch
-          your UGC campaigns with Brandaffy for FREE!
+          You don't have to decide now! FREE Plan is available for creators who are just getting started!
         </p>
       </div>
       {/* Tag Phrase */}
