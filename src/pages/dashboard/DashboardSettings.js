@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import NavigationDashboard from "../../sections/NavigationDashboard";
 import ContainerHeader from "../../sections/ContainerHeader";
 import NavigationSettings from "../../sections/NavigationSettings";
+import InfoCardBrandPlan from "../../sections/InfoCardBrandPlan";
 
 function DashboardSettings() {
   const auth = useAuthUser();
@@ -13,7 +14,7 @@ function DashboardSettings() {
   const { search } = useLocation();
   const subSettings = new URLSearchParams(search);
 
-  const [currentSetting, setCurrentSetting] = useState(
+  const [currentSetting] = useState(
     subSettings.get("subsettings")
   );
   const [viewerUserType] = useState(auth().user_type);
@@ -30,7 +31,9 @@ function DashboardSettings() {
           <div className="my-3 px-3 w-full overflow-hidden sm:my-8 sm:px-8 sm:w-full md:my-2 md:px-2 md:w-4/12 lg:my-8 lg:px-8 xl:my-8 xl:px-8">
             <NavigationSettings ActiveLink={currentSetting} />
           </div>
-          <div className="my-3 px-3 w-full overflow-hidden sm:my-8 sm:px-8 sm:w-full md:my-2 md:px-2 md:w-8/12 lg:my-8 lg:px-8 xl:my-8 xl:px-8"></div>
+          <div className="my-3 px-3 w-full overflow-hidden sm:my-8 sm:px-8 sm:w-full md:my-2 md:px-2 md:w-8/12 lg:my-8 lg:px-8 xl:my-8 xl:px-8">
+            <InfoCardBrandPlan />
+          </div>
         </div>
       </div>
     </div>

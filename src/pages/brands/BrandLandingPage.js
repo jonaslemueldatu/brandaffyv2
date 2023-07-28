@@ -286,7 +286,7 @@ function Brandlandingpage() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
-                      $29
+                      ₱1499
                       <span className="ml-1 text-2xl font-medium tracking-normal text-white">
                         /mo
                       </span>
@@ -341,6 +341,17 @@ function Brandlandingpage() {
                           Tiktok Integration
                         </p>
                       </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            className="text-white"
+                          />
+                        </div>
+                        <p className="ml-3 text-xl text-white">
+                          1 MONTH FREE trial{" "}
+                        </p>
+                      </li>
                     </ul>
                     <div className="rounded-md shadow">
                       <Link
@@ -360,7 +371,7 @@ function Brandlandingpage() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
-                      $49
+                      ₱2699
                       <span className="ml-1 text-2xl font-medium tracking-normal text-white">
                         /mo
                       </span>
@@ -448,7 +459,7 @@ function Brandlandingpage() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-white">
-                      $79
+                      ₱4299
                       <span className="ml-1 text-2xl font-medium tracking-normal text-white">
                         /mo
                       </span>

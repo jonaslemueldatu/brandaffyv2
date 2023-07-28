@@ -5,8 +5,25 @@
 html {
   scroll-behavior: smooth;
 }
+/* Global Table styles */
+.ctm-table-1 table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: #fafaff;
+  margin-top: 20px;
+}
 
-/* Global styles */
+.ctm-table-1 table tr:first-child td {
+  border-bottom: 1px solid #ddd;
+}
+
+.ctm-table-1 table tr td {
+  padding: 8px;
+  text-align: center;
+}
+
+/* Global Button styles */
 .ctm-btn {
   cursor: pointer;
   align-items: center;
