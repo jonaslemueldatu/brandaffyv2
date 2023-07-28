@@ -143,7 +143,7 @@ function NavigationDashboard(props) {
                 ? "rounded-lg text-black ctm-bg-color-1"
                 : "ctm-font-color-1"
             }`}
-            onClick={() => handleLink("/dashboard/settings/subscription")}
+            onClick={() => handleLink("/dashboard/settings?subsettings=Subscription")}
           >
             Account Settings
           </Link>
