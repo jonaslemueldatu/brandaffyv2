@@ -31,7 +31,7 @@ function PopupCreateBox(props) {
         `${process.env.REACT_APP_ROUTE}/api/subscription/getdetails`,
         {
           params: {
-            profile_id: loggedInUser,
+            brand_profile_id: loggedInUser,
             user_type: loggedInUserType,
           },
         }
@@ -40,7 +40,7 @@ function PopupCreateBox(props) {
         console.log(res.data.err);
         setIsGettingPlanData(false);
       } else {
-        setSubscriptionData(res.data.subscription_data[0]);
+        setSubscriptionData(res.data.subscription_data);
         setIsGettingPlanData(false);
       }
     };
@@ -105,8 +105,8 @@ function PopupCreateBox(props) {
           <div className="my-4 text-red-500">{error}</div>
 
           {!isGettingPlanData &&
-            (subscriptionData.brand_current_active_boxes <
-            subscriptionData.brand_active_boxes ? (
+            (subscriptionData.plan_current_active_boxes <
+            subscriptionData.plan_active_boxes ? (
               <div className="flex justify-end">
                 <button
                   onClick={() => props.SetCreateBoxPopup(false)}
@@ -117,7 +117,9 @@ function PopupCreateBox(props) {
                 <button className="ctm-btn ctm-btn-3">Create</button>
               </div>
             ) : (
-              <div className=" text-red-500">Plan limit reached! Upgrade plan or Delete existing boxes.</div>
+              <div className=" text-red-500">
+                Plan limit reached! Upgrade plan or Delete existing boxes.
+              </div>
             ))}
         </form>
       </div>

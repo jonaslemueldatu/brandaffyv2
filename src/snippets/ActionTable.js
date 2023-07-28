@@ -37,7 +37,6 @@ function ActionTable(props) {
         console.log(res.data.err);
       } else {
         props.SetTrigger1(!props.Trigger1);
-        alert("removed!");
       }
     } catch (error) {
       console.log(error);
