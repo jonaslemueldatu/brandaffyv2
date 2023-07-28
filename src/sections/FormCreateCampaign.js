@@ -152,7 +152,7 @@ function FormCreateCampaign(props) {
             required
             rows="4"
             onChange={(e) => setTermsConditions(e.target.value)}
-            placeholder="Terms and Conditions between the brand and the Influencer"
+            placeholder="Terms and Conditions between the brand and the Creator"
             className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border"
           ></textarea>
         </div>

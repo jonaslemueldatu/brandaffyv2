@@ -236,7 +236,7 @@ function InfoCardBrandPlan() {
                 <tr>
                   <td>
                     <p className="text-left">
-                      Number of <br></br> Influencer Boxes
+                      Number of <br></br> Creator Boxes
                     </p>
                   </td>
                   <td

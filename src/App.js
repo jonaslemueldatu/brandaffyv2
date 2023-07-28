@@ -18,7 +18,7 @@ import Dashboardcampaigndetails from "./pages/dashboard/DashboardCampaignDetails
 import DashboardSettings from "./pages/dashboard/DashboardSettings";
 
 import Brandlandingpage from "./pages/brands/BrandLandingPage";
-import Affiliatelandingpage from "./pages/creators/CreatorLandingPage";
+import Creatorlandingpage from "./pages/creators/CreatorLandingPage";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
@@ -27,7 +27,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Brandlandingpage />} />
-        <Route path="/creator" element={<Affiliatelandingpage />} />
+        <Route path="/creator" element={<Creatorlandingpage />} />
         <Route path="/creator/login" element={<CreatorLoginPage />} />
         <Route path="/brand/login" element={<BrandLoginPage />} />
         <Route path="/brand/register" element={<BrandRegisterPage />} />
@@ -43,7 +43,7 @@ function App() {
           }
         />
         <Route
-          path="/dashboard/influencerhub"
+          path="/dashboard/creatorhub"
           element={
             <RequireAuth loginPath="/creator/login">
               <Dashboardcreatorhub />
@@ -51,7 +51,7 @@ function App() {
           }
         />
         <Route
-          path="/dashboard/influencerbox"
+          path="/dashboard/creatorbox"
           element={
             <RequireAuth loginPath="/creator/login">
               <DashboardCreatorBox />
@@ -59,7 +59,7 @@ function App() {
           }
         />
         <Route
-          path="/dashboard/influencerbox/:boxid"
+          path="/dashboard/creatorbox/:boxid"
           element={
             <RequireAuth loginPath="/creator/login">
               <DashboardBoxDetails />

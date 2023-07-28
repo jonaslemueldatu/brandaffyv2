@@ -1,5 +1,5 @@
 // Props
-// 1. ProfileToDisplay = The profile information to be displayed when accessing the affiliate profile
+// 1. ProfileToDisplay = The profile information to be displayed when accessing the creator profile
 // 2. IsThisMyProfile = boolean if logged-user is viewing own profile page
 // 3. ViewedProfileId = Id of the profile being Viewed
 

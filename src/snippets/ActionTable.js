@@ -1,8 +1,8 @@
 //Props
 //1. SetAddToBoxPopup = Used to toggle the display of the Add to Box Popup
-//2. SetClickedProfileId = Used to set the ID of the clicked Affiliate. This will be passed onto the parent
+//2. SetClickedProfileId = Used to set the ID of the clicked Creator. This will be passed onto the parent
 //3. ClickedProfileId = ID of the clicked affilaite in the List
-//4. SetGetAffiliateListTrigger = Will contain custom data for usage when configuring the Table Action
+//4. SetGetCreatorListTrigger = Will contain custom data for usage when configuring the Table Action
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
 //6. Trigger1 =
 //7. ClickedCampaignId =
@@ -22,14 +22,14 @@ function ActionTable(props) {
   const [loggedInUserId] = useState(auth().id);
   const { campaignid } = useParams();
 
-  //Influencer Box Functions
+  //Creator Box Functions
   const handleRemove = async (e) => {
     e.stopPropagation();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/box/removeAffiliate`,
+        `${process.env.REACT_APP_ROUTE}/api/box/removeCreator`,
         {
-          affiliate_to_remove: props.ClickedProfileId,
+          creator_to_remove: props.ClickedProfileId,
           box_Id: props.CustomData.boxId,
         }
       );
@@ -53,7 +53,7 @@ function ActionTable(props) {
         {
           campaign_id: props.ClickedCampaignId,
           change_to_status: "Accepted",
-          accepted_affiliate: loggedInUserId,
+          accepted_creator: loggedInUserId,
         }
       );
       if (res.data.err) {
@@ -74,7 +74,7 @@ function ActionTable(props) {
         {
           campaign_id: props.ClickedCampaignId,
           change_to_status: "Declined",
-          declined_affiliate: loggedInUserId,
+          declined_creator: loggedInUserId,
         }
       );
       if (res.data.err) {
@@ -159,7 +159,7 @@ function ActionTable(props) {
         {
           campaign_id: campaignid,
           video_id: props.ClickedVideoId,
-          affiliate_id: loggedInUserId,
+          creator_id: loggedInUserId,
         }
       );
       if (res.data.err) {
@@ -174,15 +174,15 @@ function ActionTable(props) {
 
   return (
     <div className="flex justify-center">
-      {/* Influencer Box - Details - Brand Actions */}
-      {props.CustomData.action === "Influencer Box - Details - Brand" && (
+      {/* Creator Box - Details - Brand Actions */}
+      {props.CustomData.action === "Creator Box - Details - Brand" && (
         <button onClick={(e) => handleRemove(e)} className="ctm-btn ctm-btn-2">
           Remove
         </button>
       )}
 
-      {/* Influencer Hub - Brand Actions */}
-      {props.CustomData.action === "Influencer Hub - Brand" && (
+      {/* Creator Hub - Brand Actions */}
+      {props.CustomData.action === "Creator Hub - Brand" && (
         <div className="flex">
           <button
             onClick={(e) => {
@@ -220,8 +220,8 @@ function ActionTable(props) {
           </button>
         </div>
       )}
-      {/* Campaigns - Affiliate - Invited buttons */}
-      {props.CustomData.action === "Campaigns - Invited - Affiliate" && (
+      {/* Campaigns - Creator - Invited buttons */}
+      {props.CustomData.action === "Campaigns - Invited - Creator" && (
         <div className="flex">
           <button
             className="ctm-btn mx-2 ctm-btn-2"
@@ -237,14 +237,14 @@ function ActionTable(props) {
           </button>
         </div>
       )}
-      {/* Campaigns - Affiliate - Accepted buttons */}
-      {props.CustomData.action === "Campaigns - Accepted - Affiliate" &&
+      {/* Campaigns - Creator - Accepted buttons */}
+      {props.CustomData.action === "Campaigns - Accepted - Creator" &&
         props.Status === "Active" && (
           <div className="flex">
             <button className="ctm-btn ctm-btn-4">View Progress</button>
           </div>
         )}
-      {props.CustomData.action === "Campaigns - Accepted - Affiliate" &&
+      {props.CustomData.action === "Campaigns - Accepted - Creator" &&
         props.Status === "Ended" && (
           <div className="flex">
             <button className="ctm-btn ctm-btn-4">View Report</button>
@@ -267,8 +267,8 @@ function ActionTable(props) {
           <button className="ctm-btn mx-2 ctm-btn-1 ">View Report</button>
         </div>
       )}
-      {/* Campaign Details - Affiliate - Ready */}
-      {props.CustomData.action === "Campaign Details - Affiliate - Ready" && (
+      {/* Campaign Details - Creator - Ready */}
+      {props.CustomData.action === "Campaign Details - Creator - Ready" && (
         <div className="flex">
           <button
             className="ctm-btn mx-2 ctm-btn-2"

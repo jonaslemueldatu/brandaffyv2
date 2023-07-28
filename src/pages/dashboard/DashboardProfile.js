@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
-
 import axios from "axios";
 
 // Section imports
@@ -19,31 +18,32 @@ import InfoCardTiktok from "../../sections/InfoCardTiktok";
 
 function DashboardProfile() {
   const auth = useAuthUser();
-  // Get logged-in user ID from params
+  // Get profile ID From params (when viewing as a 3rd party)
   const { id } = useParams();
 
+  //Main section states
   const [isThisMyProfile] = useState(id ? false : true);
   const [viewedProfileId] = useState(id ? id : auth().id);
   const [viewedProfileUserType] = useState(id ? "Creator" : auth().user_type);
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
+  //Profile information to display
   const [profileToDisplay, setProfileToDisplay] = useState({});
+  //Check if tiktok is linked
+  const [linkedTiktok, setLinkedTiktok] = useState(false);
 
   // Trigger the useEffect
-  const [GetProfileTrigger, setGetProfileTrigger] = useState(true);
-
-  //State trigger
-  const [linkedTiktok, setLinkedTiktok] = useState(false);
+  const [isGettingProfileDetails, setIsGettingProfileDetails] = useState(true);
 
   // Popup information
   const [addToBoxPopup, setAddToBoxPopup] = useState(false);
   const [inviteCampaignPopup, setInviteCampaignPopup] = useState(false);
 
   const [customData] = useState({
-    action: "Influencer Profile - Brand",
+    action: "Creator Profile - Brand",
   });
 
   useEffect(() => {
-    setGetProfileTrigger(true);
+    setIsGettingProfileDetails(true);
 
     const getProfileToDisplay = async () => {
       try {
@@ -61,7 +61,7 @@ function DashboardProfile() {
         } else {
           setProfileToDisplay(res.data.user_profile);
           setLinkedTiktok(res.data.user_profile.social_tiktok);
-          setGetProfileTrigger(false);
+          setIsGettingProfileDetails(false);
         }
       } catch (error) {
         console.log(error);
@@ -75,18 +75,18 @@ function DashboardProfile() {
     <div className="h-screen flex relative">
       <NavigationDashboard
         ActiveLink={id ? "" : "My Profile"}
-        ViewerUserType={viewerUserType}
+        LoggedInUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader
           Title={
             viewedProfileUserType === "Creator"
-              ? "Influencer Profile"
+              ? "Creator Profile"
               : "Brand Profile"
           }
         />
-        {!GetProfileTrigger &&
-          viewerUserType === "Brand" &&
+        {!isGettingProfileDetails &&
+          loggedInUserType === "Brand" &&
           !isThisMyProfile && (
             <ContainerActionGeneral
               SetPopup2={setInviteCampaignPopup}
@@ -95,35 +95,35 @@ function DashboardProfile() {
             />
           )}
 
-        {!GetProfileTrigger && viewedProfileUserType === "Creator" && (
+        {!isGettingProfileDetails && viewedProfileUserType === "Creator" && (
           <InfoCardCreator
             ProfileToDisplay={profileToDisplay}
             IsThisMyProfile={isThisMyProfile}
             ViewedProfileId={viewedProfileId}
           />
         )}
-        {!GetProfileTrigger && viewedProfileUserType === "Brand" && (
+        {!isGettingProfileDetails && viewedProfileUserType === "Brand" && (
           <InfoCardBrand
             ProfileToDisplay={profileToDisplay}
             IsThisMyProfile={isThisMyProfile}
             ViewedProfileId={viewedProfileId}
           />
         )}
-        {!GetProfileTrigger &&
+        {!isGettingProfileDetails &&
           isThisMyProfile &&
           viewedProfileUserType === "Creator" &&
           !linkedTiktok && <ConnectorTiktok />}
-        {!GetProfileTrigger && linkedTiktok && (
+        {!isGettingProfileDetails && linkedTiktok && (
           <InfoCardTiktok ViewedProfileId={viewedProfileId} />
         )}
       </div>
-      {addToBoxPopup && !GetProfileTrigger && (
+      {addToBoxPopup && !isGettingProfileDetails && (
         <PopupAddTobox
           SetAddToBoxPopup={setAddToBoxPopup}
           ViewedProfileId={viewedProfileId}
         />
       )}
-      {inviteCampaignPopup && !GetProfileTrigger && (
+      {inviteCampaignPopup && !isGettingProfileDetails && (
         <PopupInviteCampaign
           SetInviteCampaignPopup={setInviteCampaignPopup}
           ViewedProfileId={viewedProfileId}

@@ -19,7 +19,7 @@ function DashboardCampaignDetails() {
   const auth = useAuthUser();
   const { campaignid } = useParams();
 
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
   const [loggedInUserID] = useState(auth().id);
 
   //Main data states
@@ -50,8 +50,8 @@ function DashboardCampaignDetails() {
     action: "Campaign Details - Link Post",
   });
 
-  const [customDataAffiliateReady] = useState({
-    action: "Campaign Details - Affiliate - Ready",
+  const [customDataCreatorReady] = useState({
+    action: "Campaign Details - Creator - Ready",
   });
 
   const [customDataBrandAccepted] = useState({
@@ -85,9 +85,9 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
       } else {
         setCampaignDetails(res.data.campaign_details);
-        setAcceptedUserIds(res.data.campaign_details.affiliate_list_accepted);
-        setInvitedUserIds(res.data.campaign_details.affiliate_list_invited);
-        setRequestedUserIds(res.data.campaign_details.affiliate_list_applied);
+        setAcceptedUserIds(res.data.campaign_details.creator_list_accepted);
+        setInvitedUserIds(res.data.campaign_details.creator_list_invited);
+        setRequestedUserIds(res.data.campaign_details.creator_list_applied);
         setGettingCampaignDetails(false);
       }
     };
@@ -106,7 +106,7 @@ function DashboardCampaignDetails() {
             params: {
               user_id: loggedInUserID,
               campaign_id: campaignid,
-              user_type: viewerUserType,
+              user_type: loggedInUserType,
             },
           }
         );
@@ -123,7 +123,7 @@ function DashboardCampaignDetails() {
     };
 
     getVideoList();
-  }, [loggedInUserID, campaignid, viewerUserType, videoListTrigger]);
+  }, [loggedInUserID, campaignid, loggedInUserType, videoListTrigger]);
 
   //Get Accepted user list
   useEffect(() => {
@@ -144,7 +144,7 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
         setIsGettingAcceptedUser(false);
       } else {
-        setAcceptedUserList(res.data.affiliate_list);
+        setAcceptedUserList(res.data.creator_list);
         setIsGettingAcceptedUser(false);
       }
     };
@@ -174,7 +174,7 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
         setIsGettingInvitedUser(false);
       } else {
-        setInvitedUserList(res.data.affiliate_list);
+        setInvitedUserList(res.data.creator_list);
         setIsGettingInvitedUser(false);
       }
     };
@@ -204,7 +204,7 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
         setIsGettingRequestedUser(false);
       } else {
-        setRequestedUserList(res.data.affiliate_list);
+        setRequestedUserList(res.data.creator_list);
         setIsGettingRequestedUser(false);
       }
     };
@@ -217,7 +217,7 @@ function DashboardCampaignDetails() {
 
   return (
     <div className="h-screen flex relative">
-      <NavigationDashboard ViewerUserType={viewerUserType} />
+      <NavigationDashboard LoggedInUserType={loggedInUserType} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         {!gettingCampaignDetails && (
           <ContainerHeader
@@ -225,7 +225,7 @@ function DashboardCampaignDetails() {
           />
         )}
         {!gettingCampaignDetails &&
-          viewerUserType === "Creator" &&
+          loggedInUserType === "Creator" &&
           campaignDetails.status === "Ready to Start" &&
           acceptedUserIds.indexOf(loggedInUserID) >= 0 && (
             <ContainerGeneralAction
@@ -237,49 +237,49 @@ function DashboardCampaignDetails() {
           <InfoCardCampaign CampaignDetails={campaignDetails} />
         )}
 
-        {!gettingCampaignDetails && viewerUserType === "Brand" && (
+        {!gettingCampaignDetails && loggedInUserType === "Brand" && (
           <InfoCardCampaignSummary />
         )}
 
         {!isGettingAcceptedUser &&
-          viewerUserType === "Brand" &&
+          loggedInUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status !== "Cancelled" && (
             <ListCreators
               CustomData={customDataBrandAccepted}
-              AffiliateList={acceptedUserList}
+              CreatorList={acceptedUserList}
               Title="Accepted"
             />
           )}
 
         {!isGettingInvitedUser &&
-          viewerUserType === "Brand" &&
+          loggedInUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status === "Ready to Start" && (
             <ListCreators
               CustomData={customDataBrandInvited}
-              AffiliateList={invitedUserList}
+              CreatorList={invitedUserList}
               Title="Invited"
             />
           )}
 
         {!isGettingRequestedUser &&
-          viewerUserType === "Brand" &&
+          loggedInUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status === "Ready to Start" && (
             <ListCreators
               CustomData={customDataBrandRequested}
-              AffiliateList={requestedUserList}
+              CreatorList={requestedUserList}
               Title="Requested"
             />
           )}
 
         {!isGettingVidList &&
           !gettingCampaignDetails &&
-          viewerUserType === "Creator" && (
+          loggedInUserType === "Creator" && (
             <ListTiktokVideos
               VideoList={videoList}
-              CustomData={customDataAffiliateReady}
+              CustomData={customDataCreatorReady}
               SetTrigger1={setVideoListTrigger}
               Trigger1={videoListTrigger}
               CampaignStatus={campaignDetails.status}

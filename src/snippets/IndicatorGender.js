@@ -1,5 +1,5 @@
 //Props
-//1. Gender = The gender of the Affiliate (gender? Male/Female/Others)
+//1. Gender = The gender of the Creator (gender? Male/Female/Others)
 
 import React from "react";
 

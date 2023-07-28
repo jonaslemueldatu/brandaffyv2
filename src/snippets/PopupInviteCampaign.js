@@ -56,7 +56,7 @@ function PopupInviteCampaign(props) {
         {
           campaign_id: campaignChoice,
           change_to_status: "Invited",
-          invited_influencer: props.ViewedProfileId,
+          invited_creator: props.ViewedProfileId,
           brand_owner_id: loggedInUserId,
         }
       );
@@ -80,7 +80,7 @@ function PopupInviteCampaign(props) {
         onClick={(e) => e.stopPropagation()}
         className="w-80 sm:w-1/2 max-w-xl rounded-md bg-white drop-shadow-sm  ctm-border-color-2 p-4 absolute"
       >
-        <div className="font-bold">Invite Influencer to Campaign:</div>
+        <div className="font-bold">Invite Creator to Campaign:</div>
         {!getCampaignReadyToStartTrigger &&
           (campaignReadyToStartList.length === 0 ? (
             <div className="text-center my-8 ctm-font-color-1">

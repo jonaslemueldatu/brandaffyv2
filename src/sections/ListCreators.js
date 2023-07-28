@@ -1,8 +1,8 @@
 //Props
-//1. AffiliateList = List affilaites to be displayed on the section - Array
+//1. CreatorList = List affilaites to be displayed on the section - Array
 //2. SetPopup1 = Used to toggle the display of the Add to Box Popup
 //3. SetPopup2
-//3. SetClickedProfileId = Used to set the ID of the clicked Affiliate. This will be passed onto the parent
+//3. SetClickedProfileId = Used to set the ID of the clicked Creator. This will be passed onto the parent
 //4. CustomData = Will contain custom data for usage when configuring the Table Action
 //5. SetTrigger1 = Assign a setState to trigger parent useEffect
 //6. Trigger1 = goes hand in hand with SetTrigger1
@@ -23,7 +23,7 @@ function ListCreators(props) {
   const navigate = useNavigate();
   const auth = useAuthUser();
 
-  const [affiliateList, setAffiliateList] = useState(props.AffiliateList);
+  const [creatorList, setCreatorList] = useState(props.CreatorList);
 
   // Search Feature
   const [searchValue, setSearchValue] = useState("");
@@ -39,7 +39,7 @@ function ListCreators(props) {
               $and: [
                 {
                   _id: {
-                    $in: affiliateList.map(function (o) {
+                    $in: creatorList.map(function (o) {
                       return o._id;
                     }),
                   },
@@ -55,7 +55,7 @@ function ListCreators(props) {
             },
           }
         );
-        setAffiliateList(res.data.affiliate_list);
+        setCreatorList(res.data.creator_list);
       } catch (error) {
         console.log(error);
       }
@@ -67,14 +67,14 @@ function ListCreators(props) {
       }, 1500);
       return () => clearTimeout(delayDebounceFn);
     }
-  }, [searchValue, searchEnabled, affiliateList]);
+  }, [searchValue, searchEnabled, creatorList]);
 
   // End of Search Feature
 
   function handleSearch(e) {
     if (e.target.value === "") {
       setSearchEnabled(false);
-      setAffiliateList(props.AffiliateList);
+      setCreatorList(props.CreatorList);
     } else {
       setSearchEnabled(true);
       setSearchValue(e.target.value);
@@ -124,11 +124,11 @@ function ListCreators(props) {
             </tr>
           </thead>
           <tbody>
-            {affiliateList.map((affiliate) => {
+            {creatorList.map((creator) => {
               return (
                 <tr
-                  key={affiliate._id.toString()}
-                  onClick={() => handleRowClick(affiliate._id.toString())}
+                  key={creator._id.toString()}
+                  onClick={() => handleRowClick(creator._id.toString())}
                   className="h-20 cursor-pointer ctm-border-color-3 border-b"
                 >
                   <td
@@ -144,38 +144,38 @@ function ListCreators(props) {
                     <div className="flex justify-left items-center">
                       <img
                         className="rounded-full h-16"
-                        alt="Affiliate profile per row"
-                        src={affiliate.profile_picture}
+                        alt="Creator profile per row"
+                        src={creator.profile_picture}
                       />{" "}
                       <span className="mx-4">
-                        {affiliate.first_name} {affiliate.last_name}
+                        {creator.first_name} {creator.last_name}
                       </span>
                     </div>
                   </td>
                   <td className="w-80 ctm-min-width-15 whitespace-nowrap overflow-ellipsis px-4 text-left">
-                    {affiliate.email}
+                    {creator.email}
                   </td>
                   <td className="w-12 px-4 text-center">
-                    <IndicatorGender Gender={affiliate.gender} />
+                    <IndicatorGender Gender={creator.gender} />
                   </td>
-                  <td className="w-12 px-4 text-center">{affiliate.age}</td>
+                  <td className="w-12 px-4 text-center">{creator.age}</td>
                   <td className="w-80 ctm-min-width-1 whitespace-nowrap overflow-ellipsis px-4 text-left">
-                    {affiliate.province}
+                    {creator.province}
                   </td>
                   <td className="w-12 px-4 text-center">
-                    <IndicatorActive Status={affiliate.logged_in} />
+                    <IndicatorActive Status={creator.logged_in} />
                   </td>
                   <td className="w-12 px-4 text-center">
                     {" "}
                     <IndicatorPlatform
-                      Platform={affiliate.social_tiktok ? "Tiktok" : ""}
+                      Platform={creator.social_tiktok ? "Tiktok" : ""}
                     />
                   </td>
                   <td className="w-80 px-4">
                     {props.CustomData.displayActionButtons && (
                       <ActionTable
                         CustomData={props.CustomData}
-                        ClickedProfileId={affiliate._id.toString()}
+                        ClickedProfileId={creator._id.toString()}
                         SetPopup1={props.SetPopup1}
                         SetPopup2={props.SetPopup2}
                         SetClickedProfileId={props.SetClickedProfileId}
@@ -190,7 +190,7 @@ function ListCreators(props) {
           </tbody>
         </table>
       </div>
-      {affiliateList.length <= 0 && (
+      {creatorList.length <= 0 && (
         <div className="text-center my-8 ctm-font-color-1">
           No Data to display
         </div>

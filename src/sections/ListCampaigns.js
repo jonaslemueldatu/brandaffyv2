@@ -16,10 +16,10 @@ function ListCampaigns(props) {
   const navigate = useNavigate();
   const auth = useAuthUser();
 
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
   const [campaignList] = useState(props.CampaignList);
 
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const campaignNav = (e, campaignId) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ function ListCampaigns(props) {
               <th className="ctm-min-width-3 ctm-max-width-3 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">
                 Title
               </th>
-              <th className="w-12 px-4 text-center">Influencers</th>
+              <th className="w-12 px-4 text-center">Creators</th>
               <th className="w-80 whitespace-nowrap px-4 center">
                 Create Date
               </th>
@@ -66,7 +66,7 @@ function ListCampaigns(props) {
           <tbody>
             {campaignList.map((campaigns) => {
               const campaign =
-                viewerUserType === "Brand"
+                loggedInUserType === "Brand"
                   ? campaigns
                   : campaigns.campaign_details[0];
               return (
@@ -92,7 +92,7 @@ function ListCampaigns(props) {
                     {campaign.campaign_name}
                   </td>
                   <td className="w-12 px-4 text-center">
-                    {campaign.affiliate_list_accepted.length}
+                    {campaign.creator_list_accepted.length}
                   </td>
                   <td className="w-80 whitespace-nowrap px-4 text-center ctm-max-width-1">
                     {new Date(campaign.create_date).toLocaleDateString("en-CA")}

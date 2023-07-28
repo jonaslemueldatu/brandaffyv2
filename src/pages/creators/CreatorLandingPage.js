@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
-function Affiliatelandingpage() {
+function Creatorlandingpage() {
   // Assets
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
@@ -615,4 +615,4 @@ function Affiliatelandingpage() {
   );
 }
 
-export default Affiliatelandingpage;
+export default Creatorlandingpage;

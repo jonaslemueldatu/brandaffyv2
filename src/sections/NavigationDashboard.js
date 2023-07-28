@@ -1,6 +1,6 @@
 // Props
 //  ActiveLink = Link that will be set to active
-//  ViewerUserType = User Type of Viewer (Brand/Affilaite)
+//  LoggedInUserType = User Type of Viewer (Brand/Affilaite)
 
 import React, { useState } from "react";
 import { useSignOut, useAuthUser } from "react-auth-kit";
@@ -18,7 +18,7 @@ function NavigationDashboard(props) {
   const signOut = useSignOut();
   const navigate = useNavigate();
 
-  const [loggedInUserType] = useState(props.ViewerUserType.toLowerCase());
+  const [loggedInUserType] = useState(props.LoggedInUserType.toLowerCase());
   const [activeLink] = useState(props.ActiveLink);
   const [loggedInUser] = useState(auth().id);
 
@@ -73,19 +73,21 @@ function NavigationDashboard(props) {
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink(`/dashboard/campaigns/${loggedInUserType}`)}
+              onClick={() =>
+                handleLink(`/dashboard/campaigns/${loggedInUserType}`)
+              }
             >
               Campaigns
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                activeLink === "Influencer Hub"
+                activeLink === "Creator Hub"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink("/dashboard/influencerhub")}
+              onClick={() => handleLink("/dashboard/creatorhub")}
             >
-              Influencer Hub
+              Creator Hub
             </Link>
           </div>
         )}
@@ -108,29 +110,31 @@ function NavigationDashboard(props) {
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink(`/dashboard/campaigns/${loggedInUserType}`)}
+              onClick={() =>
+                handleLink(`/dashboard/campaigns/${loggedInUserType}`)
+              }
             >
               Campaigns
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                activeLink === "Influencer Hub"
+                activeLink === "Creator Hub"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink("/dashboard/influencerhub")}
+              onClick={() => handleLink("/dashboard/creatorhub")}
             >
-              Influencer Hub
+              Creator Hub
             </Link>
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
-                activeLink === "Influencer Box"
+                activeLink === "Creator Box"
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink("/dashboard/influencerbox")}
+              onClick={() => handleLink("/dashboard/creatorbox")}
             >
-              Influencer Box
+              Creator Box
             </Link>
           </div>
         )}
@@ -144,7 +148,9 @@ function NavigationDashboard(props) {
                 ? "rounded-lg text-black ctm-bg-color-1"
                 : "ctm-font-color-1"
             }`}
-            onClick={() => handleLink("/dashboard/settings?subsettings=Subscription")}
+            onClick={() =>
+              handleLink("/dashboard/settings?subsettings=Subscription")
+            }
           >
             Account Settings
           </Link>

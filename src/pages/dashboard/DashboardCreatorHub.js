@@ -14,11 +14,11 @@ import PopupInviteCampaign from "../../snippets/PopupInviteCampaign";
 function Dashboardcreatorhub() {
   const auth = useAuthUser();
 
-  const [viewerUserType] = useState(auth().user_type);
-  const [affiliateList, setAffiliateList] = useState({});
+  const [loggedInUserType] = useState(auth().user_type);
+  const [creatorList, setCreatorList] = useState({});
 
   // Trigger the useEffect
-  const [getAffiliateListTrigger, setGetAffiliateListTrigger] = useState(true);
+  const [getCreatorListTrigger, setGetCreatorListTrigger] = useState(true);
 
   // Popup information
   const [addToBoxPopup, setAddToBoxPopup] = useState(false);
@@ -28,15 +28,15 @@ function Dashboardcreatorhub() {
   // Action displayed may differ based on Viewer user type
   const [customData] = useState({
     action:
-      viewerUserType === "Brand"
-        ? "Influencer Hub - Brand"
-        : "Influencer Hub - Affiliate",
-    displayActionButtons: viewerUserType === "Brand" ? true : false,
+      loggedInUserType === "Brand"
+        ? "Creator Hub - Brand"
+        : "Creator Hub - Creator",
+    displayActionButtons: loggedInUserType === "Brand" ? true : false,
   });
 
   useEffect(() => {
-    setGetAffiliateListTrigger(true);
-    const getAffiliateList = async () => {
+    setGetCreatorListTrigger(true);
+    const getCreatorList = async () => {
       try {
         const res = await axios.get(
           `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
@@ -44,27 +44,27 @@ function Dashboardcreatorhub() {
             params: {},
           }
         );
-        setAffiliateList(res.data.affiliate_list);
-        setGetAffiliateListTrigger(false);
+        setCreatorList(res.data.creator_list);
+        setGetCreatorListTrigger(false);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getAffiliateList();
+    getCreatorList();
   }, []);
 
   return (
     <div className="h-screen flex relative">
       <NavigationDashboard
-        ActiveLink="Influencer Hub"
-        ViewerUserType={viewerUserType}
+        ActiveLink="Creator Hub"
+        LoggedInUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <ContainerHeader Title="Influencer Hub" />
-        {!getAffiliateListTrigger && (
+        <ContainerHeader Title="Creator Hub" />
+        {!getCreatorListTrigger && (
           <ListCreators
-            AffiliateList={affiliateList}
+            CreatorList={creatorList}
             CustomData={customData}
             SetPopup1={setAddToBoxPopup}
             SetPopup2={setInviteCampaignPopup}
@@ -72,13 +72,13 @@ function Dashboardcreatorhub() {
           />
         )}
       </div>
-      {addToBoxPopup && !getAffiliateListTrigger && (
+      {addToBoxPopup && !getCreatorListTrigger && (
         <PopupAddTobox
           SetAddToBoxPopup={setAddToBoxPopup}
           ViewedProfileId={clickedProfileId}
         />
       )}
-      {inviteCampaignPopup && !getAffiliateListTrigger && (
+      {inviteCampaignPopup && !getCreatorListTrigger && (
         <PopupInviteCampaign
           SetInviteCampaignPopup={setInviteCampaignPopup}
           ViewedProfileId={clickedProfileId}

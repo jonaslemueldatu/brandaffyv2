@@ -13,9 +13,9 @@ function DashboardBoxDetails() {
   //Get boxid from Link parameters
   const { boxid } = useParams();
 
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
   const [box, setBox] = useState({ box_label: "" });
-  const [affiliateList, setAffiliateList] = useState([]);
+  const [creatorList, setCreatorList] = useState([]);
 
   //Useeffect Triggers
   const [getBoxDetailsTrigger, setGetBoxDetailsTrigger] = useState(true);
@@ -24,7 +24,7 @@ function DashboardBoxDetails() {
 
   //Popup states/information
   const [customData] = useState({
-    action: "Influencer Box - Details - Brand",
+    action: "Creator Box - Details - Brand",
     boxId: boxid,
     displayActionButtons: true,
   });
@@ -46,24 +46,24 @@ function DashboardBoxDetails() {
           console.log(res.data.err);
         } else {
           setBox(res.data.box_details);
-          if (res.data.box_details.affiliate_list.length !== 0) {
+          if (res.data.box_details.creator_list.length !== 0) {
             const res2 = await axios.get(
               `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
               {
                 params: {
                   _id: {
-                    $in: res.data.box_details.affiliate_list,
+                    $in: res.data.box_details.creator_list,
                   },
                 },
               }
             );
             if (res2.data.err) {
             } else {
-              setAffiliateList(res2.data.affiliate_list);
+              setCreatorList(res2.data.creator_list);
               setGetBoxDetailsTrigger(false);
             }
           } else {
-            setAffiliateList([]);
+            setCreatorList([]);
             setGetBoxDetailsTrigger(false);
           }
         }
@@ -78,16 +78,16 @@ function DashboardBoxDetails() {
   return (
     <div className="h-screen flex relative">
       <NavigationDashboard
-        ActiveLink="Influencer Box"
-        ViewerUserType={viewerUserType}
+        ActiveLink="Creator Box"
+        LoggedInUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         {!getBoxDetailsTrigger && (
-          <ContainerHeader Title={`Influencer Box - ${box.box_label}`} />
+          <ContainerHeader Title={`Creator Box - ${box.box_label}`} />
         )}
         {!getBoxDetailsTrigger && (
           <ListCreators
-            AffiliateList={affiliateList}
+            CreatorList={creatorList}
             CustomData={customData}
             SetTrigger1={setGetBoxDetailsExternalTrigger}
             Trigger1={getBoxDetailsExternalTrigger}

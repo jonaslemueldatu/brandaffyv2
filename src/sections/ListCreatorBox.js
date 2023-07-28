@@ -80,7 +80,7 @@ function ListCreatorBox(props) {
                     {box.box_description}
                   </td>
                   <td className="w-12 px-4 text-center">
-                    {box.affiliate_list.length.toString()}
+                    {box.creator_list.length.toString()}
                   </td>
                   <td className="w-80 px-4 text-center">
                     <button

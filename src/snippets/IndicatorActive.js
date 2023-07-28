@@ -1,5 +1,5 @@
 //Props
-//1. Status = The status of the Affiliate (isLogged_in? True/false)
+//1. Status = The status of the Creator (isLogged_in? True/false)
 
 import React from "react";
 import { useState } from "react";

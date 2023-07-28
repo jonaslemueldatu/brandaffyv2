@@ -58,7 +58,7 @@ function PopupLinkTiktokvids(props) {
           brand_owner_id: props.BrandOwnerId,
           campaign_id: campaignid,
           video_id: videoChoice,
-          affiliate_id: loggedInUserID,
+          creator_id: loggedInUserID,
         }
       );
       if (res.data.err) {

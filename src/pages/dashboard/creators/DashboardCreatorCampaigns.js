@@ -10,7 +10,7 @@ import ListCampaigns from "../../../sections/ListCampaigns";
 function Dashboardcampaigns() {
   const auth = useAuthUser();
 
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
   const [loggedInUserId] = useState(auth().id);
   const [campaignInvitedList, setCampaignInvitedList] = useState([]);
   const [campaignAcceptedList, setCampaignAcceptedList] = useState([]);
@@ -28,10 +28,10 @@ function Dashboardcampaigns() {
 
   // Setup Table Action Data
   const [CustomDataInvited] = useState({
-    action: "Campaigns - Invited - Affiliate",
+    action: "Campaigns - Invited - Creator",
   });
   const [AcceptedTableActionData] = useState({
-    action: "Campaigns - Accepted - Affiliate",
+    action: "Campaigns - Accepted - Creator",
   });
 
   //Setup popup information
@@ -45,7 +45,7 @@ function Dashboardcampaigns() {
           `${process.env.REACT_APP_ROUTE}/api/campaign/getlistaggregate`,
           {
             params: {
-              affiliate_id: loggedInUserId,
+              creator_id: loggedInUserId,
               relationship_status: "Invited",
             },
           }
@@ -72,7 +72,7 @@ function Dashboardcampaigns() {
           `${process.env.REACT_APP_ROUTE}/api/campaign/getlistaggregate`,
           {
             params: {
-              affiliate_id: loggedInUserId,
+              creator_id: loggedInUserId,
               relationship_status: "Accepted",
             },
           }
@@ -99,7 +99,7 @@ function Dashboardcampaigns() {
   //         `${process.env.REACT_APP_ROUTE}/api/campaign/getlistaggregate`,
   //         {
   //           params: {
-  //             affiliate_id: loggedInUserId,
+  //             creator_id: loggedInUserId,
   //             relationship_status: "Applied",
   //           },
   //         }
@@ -121,7 +121,7 @@ function Dashboardcampaigns() {
     <div className="h-screen flex relative">
       <NavigationDashboard
         ActiveLink="Campaigns"
-        ViewerUserType={viewerUserType}
+        LoggedInUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title="Campaigns" />
@@ -132,7 +132,7 @@ function Dashboardcampaigns() {
             CustomData={AcceptedTableActionData}
           />
         )}
-        {!getCampaignInvitedTrigger && viewerUserType === "Creator" && (
+        {!getCampaignInvitedTrigger && loggedInUserType === "Creator" && (
           <ListCampaigns
             CampaignList={campaignInvitedList}
             TableTitle={{ color: "ctm-bg-color-1", text: "Invited" }}
@@ -141,7 +141,7 @@ function Dashboardcampaigns() {
             Trigger1={getCampaignListExternalTrigger}
           />
         )}
-        {/* {!getCampaignAppliedTrigger && viewerUserType === "Creator" && (
+        {/* {!getCampaignAppliedTrigger && loggedInUserType === "Creator" && (
           <ListCampaigns
             CampaignList={campaignAppliedList}
             TableTitle={{ color: "ctm-bg-color-1", text: "Applied" }}

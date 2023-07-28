@@ -21,7 +21,7 @@ function DashboardSettings() {
     <div className="h-screen flex relative">
       <NavigationDashboard
         ActiveLink="Account Settings"
-        ViewerUserType={loggedInUserType}
+        LoggedInUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title={`Account Settings - ${currentSetting} `} />

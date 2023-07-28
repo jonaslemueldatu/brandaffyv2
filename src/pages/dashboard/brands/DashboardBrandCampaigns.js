@@ -11,7 +11,7 @@ import ListCampaigns from "../../../sections/ListCampaigns";
 function Dashboardcampaigns() {
   const auth = useAuthUser();
 
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
   const [loggedInUserId] = useState(auth().id);
   const [campaignReadyToStartList, setCampaignReadyToStartList] = useState([]);
   const [campaignActiveList, setCampaignActiveList] = useState([]);
@@ -25,8 +25,7 @@ function Dashboardcampaigns() {
     useState(true);
   const [getCampaignCancelledTrigger, setGetCampaignCancelledTrigger] =
     useState(true);
-    const [getCampaignEndedTrigger, setGetCampaignEndedTrigger] =
-    useState(true);
+  const [getCampaignEndedTrigger, setGetCampaignEndedTrigger] = useState(true);
   const [getCampaignListExternalTrigger, setGetCampaignListExternalTrigger] =
     useState(true);
 
@@ -161,7 +160,7 @@ function Dashboardcampaigns() {
     <div className="h-screen flex relative">
       <NavigationDashboard
         ActiveLink="Campaigns"
-        ViewerUserType={viewerUserType}
+        LoggedInUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title="Campaigns" />
@@ -177,7 +176,7 @@ function Dashboardcampaigns() {
             Trigger1={getCampaignListExternalTrigger}
           />
         )}
-        {!getCampaignReadyToStartTrigger && viewerUserType === "Brand" && (
+        {!getCampaignReadyToStartTrigger && loggedInUserType === "Brand" && (
           <ListCampaigns
             CampaignList={campaignReadyToStartList}
             TableTitle={{ color: "ctm-bg-color-5", text: "Ready to Start" }}
@@ -186,7 +185,7 @@ function Dashboardcampaigns() {
             Trigger1={getCampaignListExternalTrigger}
           />
         )}
-        {!getCampaignEndedTrigger && viewerUserType === "Brand" && (
+        {!getCampaignEndedTrigger && loggedInUserType === "Brand" && (
           <ListCampaigns
             CampaignList={campaignEndedList}
             TableTitle={{ color: "ctm-bg-color-1", text: "Ended" }}
@@ -195,7 +194,7 @@ function Dashboardcampaigns() {
             Trigger1={getCampaignListExternalTrigger}
           />
         )}
-        {!getCampaignCancelledTrigger && viewerUserType === "Brand" && (
+        {!getCampaignCancelledTrigger && loggedInUserType === "Brand" && (
           <ListCampaigns
             CampaignList={campaignCancelledList}
             TableTitle={{ color: "ctm-bg-color-10", text: "Cancelled" }}

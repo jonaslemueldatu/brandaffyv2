@@ -22,7 +22,7 @@ function PopupAddTobox(props) {
   const handleAddButton = async () => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/box/addaffiliate`,
+        `${process.env.REACT_APP_ROUTE}/api/box/addcreator`,
         {
           id: props.ViewedProfileId,
           box_id: boxChoice,
@@ -77,7 +77,7 @@ function PopupAddTobox(props) {
         onClick={(e) => e.stopPropagation()}
         className="w-80 sm:w-1/2 max-w-xl rounded-md bg-white drop-shadow-sm  ctm-border-color-2 p-4 absolute"
       >
-        <div className="font-bold">Add Influencer to box:</div>
+        <div className="font-bold">Add Creator to box:</div>
 
         {!getBoxListTrigger &&
           (boxList.length === 0 ? (

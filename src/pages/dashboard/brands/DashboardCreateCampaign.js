@@ -10,7 +10,7 @@ import FormCreateCampaign from "../../../sections/FormCreateCampaign";
 function Dashboardcreatecampaign() {
   const auth = useAuthUser();
 
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
   const [loggedInUserId] = useState(auth().id);
   const [boxList, setBoxList] = useState([]);
 
@@ -47,7 +47,7 @@ function Dashboardcreatecampaign() {
 
   return (
     <div className="h-screen flex relative">
-      <NavigationDashboard ViewerUserType={viewerUserType} />
+      <NavigationDashboard LoggedInUserType={loggedInUserType} />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title="Campaign - New Campaign" />
         {!getBoxListTrigger && (

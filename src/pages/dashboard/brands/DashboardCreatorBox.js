@@ -15,7 +15,7 @@ function DashboardCreatorBox() {
   const auth = useAuthUser();
 
   const [loggedInUserId] = useState(auth().id);
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
 
   const [boxList, setBoxList] = useState([]);
 
@@ -27,7 +27,7 @@ function DashboardCreatorBox() {
   // Popup information
   const [createBoxPopup, setCreateBoxPopup] = useState(false);
   const [customData] = useState({
-    action: "Influencer Box - Brand",
+    action: "Creator Box - Brand",
   });
 
   useEffect(() => {
@@ -60,11 +60,11 @@ function DashboardCreatorBox() {
   return (
     <div className="h-screen flex relative">
       <NavigationDashboard
-        ActiveLink="Influencer Box"
-        ViewerUserType={viewerUserType}
+        ActiveLink="Creator Box"
+        LoggedInUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
-        <ContainerHeader Title="Influencer Box" />
+        <ContainerHeader Title="Creator Box" />
         {!getBoxListTrigger && (
           <ContainerActionGeneral
             SetPopup1={setCreateBoxPopup}

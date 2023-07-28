@@ -10,8 +10,8 @@ function ActionGeneral(props) {
 
   return (
     <div>
-      {/* Brand affiliate profile page action button */}
-      {props.CustomData.action === "Influencer Profile - Brand" && (
+      {/* Brand creator profile page action button */}
+      {props.CustomData.action === "Creator Profile - Brand" && (
         <div className="flex">
           <button
             onClick={() => props.SetPopup1(true)}
@@ -28,7 +28,7 @@ function ActionGeneral(props) {
         </div>
       )}
       {/* Brand inluencer box action button */}
-      {props.CustomData.action === "Influencer Box - Brand" && (
+      {props.CustomData.action === "Creator Box - Brand" && (
         <div className="flex">
           <button
             onClick={() => props.SetPopup1(true)}
