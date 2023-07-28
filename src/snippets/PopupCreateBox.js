@@ -4,13 +4,49 @@
 //3. BoxOwnerId = This is the box owner ID where the created box will be assigned to
 //4. GetBoxListTrigger = The status of the trigger
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthUser } from "react-auth-kit";
+
 import axios from "axios";
 
 function PopupCreateBox(props) {
+  const auth = useAuthUser();
+
+  const [loggedInUser] = useState(auth().id);
+  const [loggedInUserType] = useState(auth().user_type);
+
   const [description, setDescription] = useState("");
   const [boxLabel, setBoxLabel] = useState("");
   const [error, setError] = useState("");
+
+  const [subscriptionData, setSubscriptionData] = useState({});
+
+  //useEffect triggers
+  const [isGettingPlanData, setIsGettingPlanData] = useState(true);
+
+  useEffect(() => {
+    setIsGettingPlanData(true);
+    const getSubscriptionDetails = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_ROUTE}/api/subscription/getdetails`,
+        {
+          params: {
+            profile_id: loggedInUser,
+            user_type: loggedInUserType,
+          },
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+        setIsGettingPlanData(false);
+      } else {
+        setSubscriptionData(res.data.subscription_data[0]);
+        setIsGettingPlanData(false);
+      }
+    };
+
+    getSubscriptionDetails();
+  }, [loggedInUser, loggedInUserType]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,15 +104,21 @@ function PopupCreateBox(props) {
           </div>
           <div className="my-4 text-red-500">{error}</div>
 
-          <div className="flex justify-end">
-            <button
-              onClick={() => props.SetCreateBoxPopup(false)}
-              className="ctm-btn ctm-btn-2 mx-4"
-            >
-              Cancel
-            </button>
-            <button className="ctm-btn ctm-btn-3">Create</button>
-          </div>
+          {!isGettingPlanData &&
+            (subscriptionData.brand_current_active_boxes <
+            subscriptionData.brand_active_boxes ? (
+              <div className="flex justify-end">
+                <button
+                  onClick={() => props.SetCreateBoxPopup(false)}
+                  className="ctm-btn ctm-btn-2 mx-4"
+                >
+                  Cancel
+                </button>
+                <button className="ctm-btn ctm-btn-3">Create</button>
+              </div>
+            ) : (
+              <div className=" text-red-500">Plan limit reached! Upgrade plan or Delete existing boxes.</div>
+            ))}
         </form>
       </div>
     </div>

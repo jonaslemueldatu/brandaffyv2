@@ -5,10 +5,14 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
 function ListInfluencerBox(props) {
+  const auth = useAuthUser();
   const navigate = useNavigate();
+
+  const [loggedInUserID] = useState(auth().id);
 
   const [boxList] = useState(props.BoxList);
 
@@ -22,6 +26,7 @@ function ListInfluencerBox(props) {
         `${process.env.REACT_APP_ROUTE}/api/box/delete`,
         {
           box_id: boxId,
+          brand_owner: loggedInUserID,
         }
       );
       if (res.data.err) {
@@ -44,7 +49,9 @@ function ListInfluencerBox(props) {
               <th className="w-80 ctm-min-width-15 whitespace-nowrap px-4 text-left ctm-min-width-2">
                 Label
               </th>
-              <th className="w-80 ctm-min-width-15 ctm-max-width-4 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">Description</th>
+              <th className="w-80 ctm-min-width-15 ctm-max-width-4 overflow-hidden whitespace-nowrap overflow-ellipsis px-4 text-left">
+                Description
+              </th>
               <th className="w-12 px-4 text-center">List</th>
               <th className="w-80 px-4 text-center">Action</th>
             </tr>

@@ -37,7 +37,7 @@ function ActionTable(props) {
         console.log(res.data.err);
       } else {
         props.SetTrigger1(!props.Trigger1);
-        alert("removed!")
+        alert("removed!");
       }
     } catch (error) {
       console.log(error);
@@ -57,7 +57,7 @@ function ActionTable(props) {
         }
       );
       if (res.data.err) {
-        alert(res.data.err)
+        alert(res.data.err);
         console.log(res.data.err);
       } else {
         props.SetTrigger1(!props.Trigger1);
@@ -96,10 +96,12 @@ function ActionTable(props) {
         {
           campaign_id: props.ClickedCampaignId,
           change_to_status: "Active",
+          brand_owner_id: loggedInUserId,
         }
       );
       if (res.data.err) {
         console.log(res.data.err);
+        props.SetTrigger2(res.data.err);
       } else {
         props.SetTrigger1(!props.Trigger1);
       }
@@ -136,6 +138,7 @@ function ActionTable(props) {
         {
           campaign_id: props.ClickedCampaignId,
           change_to_status: "Ended",
+          brand_owner_id: loggedInUserId,
         }
       );
       if (res.data.err) {

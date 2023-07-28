@@ -132,7 +132,7 @@ function InfoCardBrand(props) {
         onSubmit={(e) => updateProfile(e)}
       >
         {editProfile ? (
-          <label htmlFor="profile-upload">
+          <label htmlFor="profilePicture-upload">
             <img
               alt="Upload user profile placeholder"
               className="rounded-lg w-60 h-60 cursor-pointer"

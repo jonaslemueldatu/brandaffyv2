@@ -19,6 +19,8 @@ function ListCampaigns(props) {
   const [viewerUserType] = useState(auth().user_type);
   const [campaignList] = useState(props.CampaignList);
 
+  const [error, setError] = useState("")
+
   const campaignNav = (e, campaignId) => {
     e.preventDefault();
     navigate(campaignId);
@@ -29,6 +31,7 @@ function ListCampaigns(props) {
       <div className={`font-bold mb-4 ${props.TableTitle.color} px-4`}>
         {props.TableTitle.text}
       </div>
+      <div className="mb-4 text-red-500">{error}</div>
       <div className="overflow-x-scroll flex">
         <table id="campaignList" className="flex-1">
           <thead>
@@ -127,6 +130,7 @@ function ListCampaigns(props) {
                       SetTrigger1={props.SetTrigger1}
                       Trigger1={props.Trigger1}
                       Status={campaign.status}
+                      SetTrigger2={setError}
                     />
                   </td>
                 </tr>
