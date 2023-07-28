@@ -27,6 +27,7 @@ function BrandRegisterPage() {
           brand_name: brandName,
           email: email,
           password: password,
+          user_type: "Brand"
         }
       );
 
@@ -39,7 +40,7 @@ function BrandRegisterPage() {
           tokenType: "Bearer",
           authState: res.data.user_profile,
         });
-        navigate("/dashboard/profile");
+        // navigate("/dashboard/profile");
       }
     } catch (error) {
       console.log(error);
