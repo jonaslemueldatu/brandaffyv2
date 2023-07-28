@@ -35,7 +35,9 @@ function BrandLoginPage() {
           tokenType: "Bearer",
           authState: res.data.user_profile,
         });
-        navigate("/dashboard/profile");
+        res.data.user_profile.plan_active
+          ? navigate("/dashboard/profile")
+          : navigate("/dashboard/plans");
       }
     } catch (error) {
       console.log(error);
