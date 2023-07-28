@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 
-function ListInfluencerBox(props) {
+function ListCreatorBox(props) {
   const auth = useAuthUser();
   const navigate = useNavigate();
 
@@ -108,4 +108,4 @@ function ListInfluencerBox(props) {
   );
 }
 
-export default ListInfluencerBox;
+export default ListCreatorBox;

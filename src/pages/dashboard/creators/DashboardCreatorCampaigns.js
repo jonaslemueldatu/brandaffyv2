@@ -31,7 +31,7 @@ function Dashboardcampaigns() {
     action: "Campaigns - Invited - Affiliate",
   });
   const [AcceptedTableActionData] = useState({
-    action: "Campaigns - Accepted - Affiliate"
+    action: "Campaigns - Accepted - Affiliate",
   });
 
   //Setup popup information
@@ -125,14 +125,14 @@ function Dashboardcampaigns() {
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title="Campaigns" />
-        {!getCampaignAcceptedTrigger && auth().user_type === "Affiliate" && (
+        {!getCampaignAcceptedTrigger && auth().user_type === "Creator" && (
           <ListCampaigns
             CampaignList={campaignAcceptedList}
             TableTitle={{ color: "ctm-bg-color-1", text: "Accepted" }}
             CustomData={AcceptedTableActionData}
           />
         )}
-        {!getCampaignInvitedTrigger && viewerUserType === "Affiliate" && (
+        {!getCampaignInvitedTrigger && viewerUserType === "Creator" && (
           <ListCampaigns
             CampaignList={campaignInvitedList}
             TableTitle={{ color: "ctm-bg-color-1", text: "Invited" }}
@@ -141,7 +141,7 @@ function Dashboardcampaigns() {
             Trigger1={getCampaignListExternalTrigger}
           />
         )}
-        {/* {!getCampaignAppliedTrigger && viewerUserType === "Affiliate" && (
+        {/* {!getCampaignAppliedTrigger && viewerUserType === "Creator" && (
           <ListCampaigns
             CampaignList={campaignAppliedList}
             TableTitle={{ color: "ctm-bg-color-1", text: "Applied" }}

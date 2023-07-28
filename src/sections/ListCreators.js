@@ -19,7 +19,7 @@ import IndicatorGender from "../snippets/IndicatorGender";
 import ActionTable from "../snippets/ActionTable";
 import IndicatorPlatform from "../snippets/IndicatorPlatform";
 
-function ListAffiliates(props) {
+function ListCreators(props) {
   const navigate = useNavigate();
   const auth = useAuthUser();
 
@@ -199,4 +199,4 @@ function ListAffiliates(props) {
   );
 }
 
-export default ListAffiliates;
+export default ListCreators;

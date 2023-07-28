@@ -5,13 +5,13 @@ import axios from "axios";
 // Section imports
 import NavigationDashboard from "../../../sections/NavigationDashboard";
 import ContainerHeader from "../../../sections/ContainerHeader";
-import ListInfluencerBox from "../../../sections/ListInfluencerBox";
+import ListCreatorBox from "../../../sections/ListCreatorBox";
 import ContainerActionGeneral from "../../../sections/ContainerGeneralAction";
 
 //Snippet imports
 import PopupCreateBox from "../../../snippets/PopupCreateBox";
 
-function DashboardInfluencerBox() {
+function DashboardCreatorBox() {
   const auth = useAuthUser();
 
   const [loggedInUserId] = useState(auth().id);
@@ -72,7 +72,7 @@ function DashboardInfluencerBox() {
           />
         )}
         {!getBoxListTrigger && (
-          <ListInfluencerBox
+          <ListCreatorBox
             BoxList={boxList}
             SetGetBoxListTrigger={setGetBoxListExternalTrigger}
             GetBoxListTrigger={getBoxListExternalTrigger}
@@ -91,4 +91,4 @@ function DashboardInfluencerBox() {
   );
 }
 
-export default DashboardInfluencerBox;
+export default DashboardCreatorBox;

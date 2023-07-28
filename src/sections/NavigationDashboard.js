@@ -1,6 +1,7 @@
 // Props
-// 1. ActiveLink = Link that will be set to active
-// 2. ViewerUserType = User Type of logged-in user (Brand/Affilaite)
+//  ActiveLink = Link that will be set to active
+//  ViewerUserType = User Type of Viewer (Brand/Affilaite)
+
 import React, { useState } from "react";
 import { useSignOut, useAuthUser } from "react-auth-kit";
 import { useNavigate, Link } from "react-router-dom";
@@ -17,23 +18,23 @@ function NavigationDashboard(props) {
   const signOut = useSignOut();
   const navigate = useNavigate();
 
-  const [viewerUserType] = useState(props.ViewerUserType.toLowerCase());
+  const [loggedInUserType] = useState(props.ViewerUserType.toLowerCase());
   const [activeLink] = useState(props.ActiveLink);
-  const [viewerId] = useState(auth().id);
+  const [loggedInUser] = useState(auth().id);
 
   const handleLogout = async () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/logout`,
         {
-          _id: viewerId,
-          viewer_user_type: viewerUserType,
+          _id: loggedInUser,
+          viewer_user_type: loggedInUserType,
         }
       );
       if (res.data.err) {
         console.log(res.data.err);
       } else {
-        navigate(`/${viewerUserType}/login`);
+        navigate(`/${loggedInUserType}/login`);
         setTimeout(() => {
           signOut();
         }, 1000);
@@ -54,7 +55,7 @@ function NavigationDashboard(props) {
         <img alt="Brandaffy logo colored" src={brandlogo}></img>
       </div>
       <div className="flex flex-col justify-around flex-1">
-        {viewerUserType === "affiliate" && (
+        {loggedInUserType === "creator" && (
           <div className="flex flex-col">
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
@@ -72,7 +73,7 @@ function NavigationDashboard(props) {
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink(`/dashboard/campaigns/${viewerUserType}`)}
+              onClick={() => handleLink(`/dashboard/campaigns/${loggedInUserType}`)}
             >
               Campaigns
             </Link>
@@ -89,7 +90,7 @@ function NavigationDashboard(props) {
           </div>
         )}
 
-        {viewerUserType === "brand" && (
+        {loggedInUserType === "brand" && (
           <div className="flex flex-col">
             <Link
               className={`p-3 m-1 font-bold leading-5 cursor-pointer no-underline hover:text-black hover:rounded-lg ctm-hvr-bg-color-1 ${
@@ -107,7 +108,7 @@ function NavigationDashboard(props) {
                   ? "rounded-lg text-black ctm-bg-color-1"
                   : "ctm-font-color-1"
               }`}
-              onClick={() => handleLink(`/dashboard/campaigns/${viewerUserType}`)}
+              onClick={() => handleLink(`/dashboard/campaigns/${loggedInUserType}`)}
             >
               Campaigns
             </Link>

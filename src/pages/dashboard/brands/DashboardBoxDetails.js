@@ -6,7 +6,7 @@ import axios from "axios";
 //Section import
 import NavigationDashboard from "../../../sections/NavigationDashboard";
 import ContainerHeader from "../../../sections/ContainerHeader";
-import ListAffiliates from "../../../sections/ListAffiliates";
+import ListCreators from "../../../sections/ListCreators";
 
 function DashboardBoxDetails() {
   const auth = useAuthUser();
@@ -86,7 +86,7 @@ function DashboardBoxDetails() {
           <ContainerHeader Title={`Influencer Box - ${box.box_label}`} />
         )}
         {!getBoxDetailsTrigger && (
-          <ListAffiliates
+          <ListCreators
             AffiliateList={affiliateList}
             CustomData={customData}
             SetTrigger1={setGetBoxDetailsExternalTrigger}

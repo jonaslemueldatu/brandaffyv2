@@ -81,13 +81,13 @@ function Affiliatelandingpage() {
             Brand Portal
           </Link>
           <Link
-            to={"/affiliate/login"}
+            to={"/creator/login"}
             className="mx-5 font-bold cursor-pointer text-lg  hover:underline"
           >
             Login
           </Link>
           <Link
-            to={"/affiliate/register"}
+            to={"/creator/register"}
             className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg"
           >
             Sign Up
@@ -227,7 +227,7 @@ function Affiliatelandingpage() {
             </dl>
           </div>
           <Link
-            to={"/affiliate/register"}
+            to={"/creator/register"}
             className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4 w-fit"
           >
             Create Your Account Now
@@ -311,7 +311,7 @@ function Affiliatelandingpage() {
                     </ul>
                     <div className="rounded-md shadow">
                       <Link
-                        to={"affiliate/register"}
+                        to={"creator/register"}
                         className="flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-5 py-3 text-xl text-blue hover:bg-gray-100"
                       >
                         Subscribe
@@ -478,7 +478,8 @@ function Affiliatelandingpage() {
           </div>
         </div>
         <p className="my-8 text-lg text-center">
-          You don't have to decide now! FREE Plan is available for creators who are just getting started!
+          You don't have to decide now! FREE Plan is available for creators who
+          are just getting started!
         </p>
       </div>
       {/* Tag Phrase */}
@@ -497,7 +498,7 @@ function Affiliatelandingpage() {
             complete access to all existing and upcoming features.
           </p>
           <Link
-            to={"/affiliate/register"}
+            to={"/creator/register"}
             className="shadow-lg bg-indigo-100 text-indigo-700 ctm-btn text-lg my-4 w-fit"
           >
             Sign Up Today
@@ -534,7 +535,7 @@ function Affiliatelandingpage() {
             </li> */}
               <li className="my-4 hover:underline cursor-pointer">
                 {" "}
-                <Link to={"/affiliate"}>UGC Creator Portal</Link>
+                <Link to={"/creator"}>UGC Creator Portal</Link>
               </li>
             </ul>
           </div>
@@ -547,10 +548,10 @@ function Affiliatelandingpage() {
                 </a>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                <Link to={"/affiliate/pages/terms"}>Terms of Service</Link>
+                <Link to={"/creator/pages/terms"}>Terms of Service</Link>
               </li>
               <li className="my-4 hover:underline cursor-pointer">
-                <Link to={"/affiliate/pages/privacy"}>Privacy Policy</Link>
+                <Link to={"/creator/pages/privacy"}>Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -595,13 +596,13 @@ function Affiliatelandingpage() {
             </ul>
             <div className="flex flex-col">
               <Link
-                to={"/affiliate/login"}
+                to={"/creator/login"}
                 className="font-bold mx-auto  hover:underline"
               >
                 Login &#x28;Brands&#x29;
               </Link>
               <Link
-                to={"affiliate/register"}
+                to={"creator/register"}
                 className="shadow-lg ctm-bg-1 text-white ctm-btn text-lg my-4"
               >
                 Sign Up

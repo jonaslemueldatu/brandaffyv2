@@ -1,33 +1,38 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useSignIn } from "react-auth-kit";
+import axios from "axios";
 
-function AffiliateRegisterPage() {
+function CreatorRegisterPage() {
   const navigate = useNavigate();
   const signIn = useSignIn();
 
+  //Assts
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
   );
 
+  // Main section states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+
+  //Handle display error
   const [error, setError] = useState("");
 
+  //Functions
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/affiliate/register`,
+        `${process.env.REACT_APP_ROUTE}/api/creator/register`,
         {
           first_name: firstname,
           last_name: lastname,
           email: email,
           password: password,
+          user_type: "Creator",
         }
       );
       if (res.data.err) {
@@ -120,7 +125,7 @@ function AffiliateRegisterPage() {
               Already have an account?{" "}
               <Link
                 className="ctm-font-color-2 cursor-pointer"
-                to="/affiliate/login"
+                to="/creator/login"
               >
                 Login
               </Link>
@@ -133,4 +138,4 @@ function AffiliateRegisterPage() {
   );
 }
 
-export default AffiliateRegisterPage;
+export default CreatorRegisterPage;

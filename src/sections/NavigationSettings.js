@@ -1,5 +1,5 @@
 //Props
-//1. ActiveLink = the current active sublink
+// ActiveLink = the current active sublink
 
 import React from "react";
 import { useNavigate } from "react-router-dom";

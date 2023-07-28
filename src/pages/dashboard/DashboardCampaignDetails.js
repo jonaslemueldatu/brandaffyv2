@@ -12,7 +12,7 @@ import ContainerGeneralAction from "../../sections/ContainerGeneralAction";
 
 //Snippet Imports
 import PopupLinkTiktokVid from "../../snippets/PopupLinkTiktokVid";
-import ListAffiliates from "../../sections/ListAffiliates";
+import ListCreators from "../../sections/ListCreators";
 import InfoCardCampaignSummary from "../../sections/InfoCardCampaignSummary";
 
 function DashboardCampaignDetails() {
@@ -225,7 +225,7 @@ function DashboardCampaignDetails() {
           />
         )}
         {!gettingCampaignDetails &&
-          viewerUserType === "Affiliate" &&
+          viewerUserType === "Creator" &&
           campaignDetails.status === "Ready to Start" &&
           acceptedUserIds.indexOf(loggedInUserID) >= 0 && (
             <ContainerGeneralAction
@@ -245,7 +245,7 @@ function DashboardCampaignDetails() {
           viewerUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status !== "Cancelled" && (
-            <ListAffiliates
+            <ListCreators
               CustomData={customDataBrandAccepted}
               AffiliateList={acceptedUserList}
               Title="Accepted"
@@ -256,7 +256,7 @@ function DashboardCampaignDetails() {
           viewerUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status === "Ready to Start" && (
-            <ListAffiliates
+            <ListCreators
               CustomData={customDataBrandInvited}
               AffiliateList={invitedUserList}
               Title="Invited"
@@ -267,7 +267,7 @@ function DashboardCampaignDetails() {
           viewerUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status === "Ready to Start" && (
-            <ListAffiliates
+            <ListCreators
               CustomData={customDataBrandRequested}
               AffiliateList={requestedUserList}
               Title="Requested"
@@ -276,7 +276,7 @@ function DashboardCampaignDetails() {
 
         {!isGettingVidList &&
           !gettingCampaignDetails &&
-          viewerUserType === "Affiliate" && (
+          viewerUserType === "Creator" && (
             <ListTiktokVideos
               VideoList={videoList}
               CustomData={customDataAffiliateReady}

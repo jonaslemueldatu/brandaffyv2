@@ -1,26 +1,28 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import axios from "axios";
 
-function AffiliateLoginPage() {
+function CreatorLoginPage() {
+  const signIn = useSignIn();
+  const navigate = useNavigate();
+
+  //Assets
   const [brandlogo] = useState(
     "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
   );
 
+  //Main section state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const signIn = useSignIn();
-  const navigate = useNavigate();
-
+  //Functions
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       const res = await axios.post(
-        `${process.env.REACT_APP_ROUTE}/api/affiliate/login`,
+        `${process.env.REACT_APP_ROUTE}/api/creator/login`,
         {
           email: email,
           password: password,
@@ -35,7 +37,10 @@ function AffiliateLoginPage() {
           tokenType: "Bearer",
           authState: res.data.user_profile,
         });
-        navigate("/dashboard/profile");
+        //Check if plan is active
+        res.data.user_profile.is_plan_active
+          ? navigate("/dashboard/profile")
+          : navigate("/dashboard/plans");
       }
     } catch (error) {
       console.log(error);
@@ -49,7 +54,7 @@ function AffiliateLoginPage() {
           className="h-40 w-40 m-7 cursor-pointer"
           alt="Brandaffy colored logo"
           src={brandlogo}
-          onClick={() => navigate("/affiliate")}
+          onClick={() => navigate("/creator")}
         ></img>
         <div className="flex-1 flex justify-start flex-col">
           <form
@@ -92,7 +97,7 @@ function AffiliateLoginPage() {
               Not registered yet?
               <Link
                 className="ctm-font-color-2 cursor-pointer"
-                to="/affiliate/register"
+                to="/creator/register"
               >
                 {" "}
                 Create an Account
@@ -106,4 +111,4 @@ function AffiliateLoginPage() {
   );
 }
 
-export default AffiliateLoginPage;
+export default CreatorLoginPage;

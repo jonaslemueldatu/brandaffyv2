@@ -7,7 +7,7 @@ import axios from "axios";
 // Section imports
 import NavigationDashboard from "../../sections/NavigationDashboard";
 import ContainerHeader from "../../sections/ContainerHeader";
-import InfoCardAffiliate from "../../sections/InfoCardAffiliate";
+import InfoCardCreator from "../../sections/InfoCardCreator";
 import InfoCardBrand from "../../sections/InfoCardBrand";
 import ContainerActionGeneral from "../../sections/ContainerGeneralAction";
 import ConnectorTiktok from "../../sections/ConnectorTiktok";
@@ -24,7 +24,7 @@ function DashboardProfile() {
 
   const [isThisMyProfile] = useState(id ? false : true);
   const [viewedProfileId] = useState(id ? id : auth().id);
-  const [viewedProfileUserType] = useState(id ? "Affiliate" : auth().user_type);
+  const [viewedProfileUserType] = useState(id ? "Creator" : auth().user_type);
   const [viewerUserType] = useState(auth().user_type);
   const [profileToDisplay, setProfileToDisplay] = useState({});
 
@@ -80,7 +80,7 @@ function DashboardProfile() {
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader
           Title={
-            viewedProfileUserType === "Affiliate"
+            viewedProfileUserType === "Creator"
               ? "Influencer Profile"
               : "Brand Profile"
           }
@@ -95,8 +95,8 @@ function DashboardProfile() {
             />
           )}
 
-        {!GetProfileTrigger && viewedProfileUserType === "Affiliate" && (
-          <InfoCardAffiliate
+        {!GetProfileTrigger && viewedProfileUserType === "Creator" && (
+          <InfoCardCreator
             ProfileToDisplay={profileToDisplay}
             IsThisMyProfile={isThisMyProfile}
             ViewedProfileId={viewedProfileId}
@@ -111,7 +111,7 @@ function DashboardProfile() {
         )}
         {!GetProfileTrigger &&
           isThisMyProfile &&
-          viewedProfileUserType === "Affiliate" &&
+          viewedProfileUserType === "Creator" &&
           !linkedTiktok && <ConnectorTiktok />}
         {!GetProfileTrigger && linkedTiktok && (
           <InfoCardTiktok ViewedProfileId={viewedProfileId} />

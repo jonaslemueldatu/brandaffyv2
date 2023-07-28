@@ -9,7 +9,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-function InfoCardAffiliate(props) {
+function InfoCardCreator(props) {
   // Toggles the edit buttons if profile viewed is logged-in user
   const [isThisMyProfile] = useState(props.IsThisMyProfile);
 
@@ -90,7 +90,7 @@ function InfoCardAffiliate(props) {
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("type", "profile");
-      formData.append("user_type", "Affiliate");
+      formData.append("user_type", "Creator");
 
       await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/profile/update`,
@@ -112,7 +112,7 @@ function InfoCardAffiliate(props) {
         phone_number: phoneNumber,
         province: province,
         country: country,
-        user_type: "Affiliate",
+        user_type: "Creator",
       });
       setContactStillLoading(false);
       seteditContact(false);
@@ -396,4 +396,4 @@ function InfoCardAffiliate(props) {
   );
 }
 
-export default InfoCardAffiliate;
+export default InfoCardCreator;

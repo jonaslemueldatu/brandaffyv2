@@ -73,7 +73,7 @@ function Brandlandingpage() {
         <div className="hidden xl:flex items-center">
           <Link
             className="mx-5 font-semibold hover:underline text-lg underline cursor-pointer"
-            to={"/affiliate"}
+            to={"/creator"}
           >
             UGC Creator Portal
           </Link>
@@ -601,7 +601,7 @@ function Brandlandingpage() {
             </li> */}
               <li className="my-4 hover:underline cursor-pointer">
                 {" "}
-                <Link to={"/affiliate"}>UGC Creator Portal</Link>
+                <Link to={"/creator"}>UGC Creator Portal</Link>
               </li>
             </ul>
           </div>
@@ -657,7 +657,7 @@ function Brandlandingpage() {
                 Upcoming Features
               </li> */}
               <li className="font-semibold hover:underline">
-                <Link to={"/affiliate"}>UGC Creator Portal</Link>
+                <Link to={"/creator"}>UGC Creator Portal</Link>
               </li>
             </ul>
             <div className="flex flex-col">

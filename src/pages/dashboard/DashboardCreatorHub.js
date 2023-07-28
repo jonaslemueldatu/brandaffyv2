@@ -5,13 +5,13 @@ import axios from "axios";
 // Section imports
 import NavigationDashboard from "../../sections/NavigationDashboard";
 import ContainerHeader from "../../sections/ContainerHeader";
-import ListAffiliates from "../../sections/ListAffiliates";
+import ListCreators from "../../sections/ListCreators";
 
 //Snippet imports
 import PopupAddTobox from "../../snippets/PopupAddToBox";
 import PopupInviteCampaign from "../../snippets/PopupInviteCampaign";
 
-function Dashboardinfluencerhub() {
+function Dashboardcreatorhub() {
   const auth = useAuthUser();
 
   const [viewerUserType] = useState(auth().user_type);
@@ -63,7 +63,7 @@ function Dashboardinfluencerhub() {
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title="Influencer Hub" />
         {!getAffiliateListTrigger && (
-          <ListAffiliates
+          <ListCreators
             AffiliateList={affiliateList}
             CustomData={customData}
             SetPopup1={setAddToBoxPopup}
@@ -88,4 +88,4 @@ function Dashboardinfluencerhub() {
   );
 }
 
-export default Dashboardinfluencerhub;
+export default Dashboardcreatorhub;

@@ -10,18 +10,18 @@ import InfoCardBrandPlan from "../../sections/InfoCardBrandPlan";
 
 function DashboardSettings() {
   const auth = useAuthUser();
-  //Get URL -> Search params
+  //Get Search params to know current subsetting
   const { search } = useLocation();
   const subSettings = new URLSearchParams(search);
 
   const [currentSetting] = useState(subSettings.get("subsettings"));
-  const [viewerUserType] = useState(auth().user_type);
+  const [loggedInUserType] = useState(auth().user_type);
 
   return (
     <div className="h-screen flex relative">
       <NavigationDashboard
         ActiveLink="Account Settings"
-        ViewerUserType={viewerUserType}
+        ViewerUserType={loggedInUserType}
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title={`Account Settings - ${currentSetting} `} />

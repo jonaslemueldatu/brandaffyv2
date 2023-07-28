@@ -1,33 +1,44 @@
 import React from "react";
 import axios from "axios";
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 
-function BrandRegisterPage() {
-  const [brandlogo] = useState(
-    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
-  );
+//Snippet Imports
+import DropdownBusinessType from "../../snippets/DropdownBusinessType";
 
+function BrandRegisterPage() {
   const navigate = useNavigate();
   const signIn = useSignIn();
 
+  //Assets
+  const [brandLogo] = useState(
+    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
+  );
+
+  //Main States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [brandName, setBrandname] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("CORPORATION");
+
+  //Handle display of errors
   const [error, setError] = useState("");
 
+  //Functions
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/brand/register`,
         {
+          business_name: businessName,
           brand_name: brandName,
+          business_type: businessType,
           email: email,
           password: password,
-          user_type: "Brand"
+          user_type: "Brand",
         }
       );
 
@@ -40,7 +51,7 @@ function BrandRegisterPage() {
           tokenType: "Bearer",
           authState: res.data.user_profile,
         });
-        // navigate("/dashboard/profile");
+        navigate("/dashboard/profile");
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +64,7 @@ function BrandRegisterPage() {
         <img
           className="h-40 w-40 m-7 cursor-pointer"
           alt="Brandaffy colored logo"
-          src={brandlogo}
+          src={brandLogo}
           onClick={() => navigate("/")}
         ></img>
         <div className="flex-1 flex justify-start flex-col">
@@ -65,15 +76,35 @@ function BrandRegisterPage() {
               Hi, Welcome to Brandaffy!
             </div>
             <div className="my-2 flex flex-col">
-              <label className="my-2">Brand Name</label>
+              <label className="my-2">Business Name</label>
               <input
                 required
-                placeholder="Brand Name"
+                placeholder="Business Name"
                 className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
                 type="text"
-                onChange={(e) => setBrandname(e.target.value)}
+                onChange={(e) => setBusinessName(e.target.value)}
                 onFocus={(e) => setError("")}
               ></input>
+            </div>
+            <div className="flex gap-3">
+              <div className="my-2 flex flex-1 flex-col">
+                <label className="my-2">Brand Name</label>
+                <input
+                  required
+                  placeholder="Brand Name"
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm"
+                  type="text"
+                  onChange={(e) => setBrandname(e.target.value)}
+                  onFocus={(e) => setError("")}
+                ></input>
+              </div>
+              <div className="my-2 flex flex-1 flex-col">
+                <label className="my-2">Business Type</label>
+                <DropdownBusinessType
+                  SetState1={setBusinessType}
+                  State1={businessType}
+                />
+              </div>
             </div>
             <div className="my-2 flex flex-col">
               <label className="my-2">Email</label>

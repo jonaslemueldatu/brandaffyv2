@@ -1,21 +1,25 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import axios from "axios";
 
 function BrandLoginPage() {
-  const [brandlogo] = useState(
-    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
-  );
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
   const signIn = useSignIn();
   const navigate = useNavigate();
 
+  //Assets
+  const [brandLogo] = useState(
+    "https://brandaffy.s3.ap-southeast-2.amazonaws.com/website+assets/Brandaffy+Logo.png"
+  );
+
+  //Main states
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //Handle error display
+  const [error, setError] = useState("");
+
+  //Functions
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -35,7 +39,8 @@ function BrandLoginPage() {
           tokenType: "Bearer",
           authState: res.data.user_profile,
         });
-        res.data.user_profile.plan_active
+        //Check if plan is active
+        res.data.user_profile.is_plan_active
           ? navigate("/dashboard/profile")
           : navigate("/dashboard/plans");
       }
@@ -43,13 +48,14 @@ function BrandLoginPage() {
       console.log(error);
     }
   };
+
   return (
     <div className="flex h-screen">
       <div className="flex-1 h-full flex flex-col">
         <img
           className="h-40 w-40 m-7 cursor-pointer"
           alt="Brandaffy colored logo"
-          src={brandlogo}
+          src={brandLogo}
           onClick={() => navigate("/")}
         ></img>
         <div className="flex-1 flex justify-start flex-col">

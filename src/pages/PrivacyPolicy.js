@@ -22,7 +22,7 @@ function TermsOfService() {
 
   const [mobileMenu, setMobileMenu] = useState(false);
   const { type } = useParams();
-  const [linkBack] = useState(type === "brand" ? "/" : "/affiliate");
+  const [linkBack] = useState(type === "brand" ? "/" : "/creator");
 
   const handleLink = (e, link) => {
     navigate(link);
@@ -273,7 +273,7 @@ function TermsOfService() {
             </li> */}
               <li className="my-4 hover:underline cursor-pointer">
                 {" "}
-                <div onClick={(e) => handleLink(e, `/affiliate`)}>
+                <div onClick={(e) => handleLink(e, `/creator`)}>
                   UGC Creator Portal
                 </div>
               </li>
