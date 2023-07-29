@@ -16,11 +16,13 @@ function InfoCardPaymentMethod() {
       customer_id: "cust-a551556b-d905-4067-a8b1-f69c18f8eb70",
       country: "PH",
       ewallet: {
-        channel_code: "GCASH",
+        channel_code: "PAYMAYA",
         channel_properties: {
           success_return_url:
             "https://brandaffy.com/dashboard/settings?subsettings=Payment",
           failure_return_url:
+            "https://brandaffy.com/dashboard/settings?subsettings=Payment",
+          cancel_return_url:
             "https://brandaffy.com/dashboard/settings?subsettings=Payment",
         },
       },
