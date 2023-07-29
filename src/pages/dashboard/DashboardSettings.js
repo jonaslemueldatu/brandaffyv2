@@ -7,6 +7,7 @@ import NavigationDashboard from "../../sections/NavigationDashboard";
 import ContainerHeader from "../../sections/ContainerHeader";
 import NavigationSettings from "../../sections/NavigationSettings";
 import InfoCardBrandPlan from "../../sections/InfoCardBrandPlan";
+import InfoCardPaymentMethod from "../../sections/InfoCardPaymentMethod";
 
 function DashboardSettings() {
   const auth = useAuthUser();
@@ -31,6 +32,8 @@ function DashboardSettings() {
           </div>
           <div className="my-3 px-3 w-full overflow-hidden sm:my-8 sm:px-8 sm:w-full md:my-2 md:px-2 md:w-8/12 lg:my-8 lg:px-8 xl:my-8 xl:px-8">
             {currentSetting === "Subscription" && <InfoCardBrandPlan />}
+            {/* Test */}
+            {currentSetting === "Payment" && <InfoCardPaymentMethod />}
           </div>
         </div>
       </div>
