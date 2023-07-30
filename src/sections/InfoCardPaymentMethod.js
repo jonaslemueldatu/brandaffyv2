@@ -19,7 +19,7 @@ function InfoCardPaymentMethod() {
         channel_code: "PAYMAYA",
         channel_properties: {
           success_return_url:
-            "https://brandaffy.com/dashboard/settings?subsettings=Payment",
+            "http://brandaffy.com/dashboard/settings?subsettings=Payment",
           failure_return_url:
             "https://brandaffy.com/dashboard/settings?subsettings=Payment",
           cancel_return_url:
@@ -46,9 +46,9 @@ function InfoCardPaymentMethod() {
     //   }
     // );
     window.location.replace(result.data.actions[0].url);
-
-    // console.log(result2.data);
   };
+
+  // console.log(result2.data);
 
   // const createPaymentMethod2 = async () = {
   // const reqBody = JSON.stringify({
