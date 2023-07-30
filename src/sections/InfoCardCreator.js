@@ -30,6 +30,10 @@ function InfoCardCreator(props) {
   const [oldProfilePicture] = useState(props.ProfileToDisplay.profile_picture);
   const [firstName, setFirstName] = useState(props.ProfileToDisplay.firstname);
   const [lastName, setLastName] = useState(props.ProfileToDisplay.lastname);
+  const [occupation, setOccupation] = useState(
+    props.ProfileToDisplay.occupation
+  );
+  const [niche, setNiche] = useState(props.ProfileToDisplay.niche);
   const [birthDate, setBirthDate] = useState(props.ProfileToDisplay.birthdate);
   const [age, setAge] = useState(props.ProfileToDisplay.age);
   const [gender, setGender] = useState(props.ProfileToDisplay.gender);
@@ -46,6 +50,8 @@ function InfoCardCreator(props) {
         setProfilePicture(props.ProfileToDisplay.profile_picture);
         setFirstName(props.ProfileToDisplay.firstname);
         setLastName(props.ProfileToDisplay.lastname);
+        setOccupation(props.ProfileToDisplay.occupation);
+        setNiche(props.ProfileToDisplay.niche);
         setGender(props.ProfileToDisplay.gender);
         setBirthDate(props.ProfileToDisplay.birthdate);
         setAge(props.ProfileToDisplay.age);
@@ -87,6 +93,8 @@ function InfoCardCreator(props) {
       formData.append("birthdate", birthDate);
       formData.append("firstname", firstName);
       formData.append("lastname", lastName);
+      formData.append("occupation", occupation);
+      formData.append("niche", niche);
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("type", "profile");
@@ -199,6 +207,38 @@ function InfoCardCreator(props) {
               )}
             </div>
           </div>
+
+          <div className="flex gap-3 flex-wrap">
+            <div className="flex flex-1 flex-col my-4">
+              <label className="my-2 font-bold">Occupation</label>
+              {editProfile ? (
+                <input
+                  type="text"
+                  onChange={(e) => setOccupation(e.target.value)}
+                  required
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
+                  placeholder={occupation}
+                ></input>
+              ) : (
+                <div className="p-4 ctm-min-width-1">{occupation}</div>
+              )}
+            </div>
+            <div className="flex flex-1 flex-col my-4">
+              <label className="my-2 font-bold">Niche</label>
+              {editProfile ? (
+                <input
+                  type="text"
+                  onChange={(e) => setNiche(e.target.value)}
+                  required
+                  className="p-4 rounded-lg ctm-border-color-3 drop-shadow-sm border ctm-min-width-1"
+                  placeholder={niche}
+                ></input>
+              ) : (
+                <div className="p-4 ctm-min-width-1">{niche}</div>
+              )}
+            </div>
+          </div>
+
           <div className="flex gap-3 flex-wrap">
             <div className="flex flex-1 flex-col my-4">
               <label className="font-bold">Gender</label>

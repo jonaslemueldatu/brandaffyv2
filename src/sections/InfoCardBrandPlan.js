@@ -69,6 +69,11 @@ function InfoCardBrandPlan() {
           },
         }
       );
+      if (res.data.err) {
+        console.log(res.data.err);
+      } else {
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -161,7 +166,9 @@ function InfoCardBrandPlan() {
                     <small className="block text-red-500">
                       {" "}
                       {subscriptionData.plan_title === "Growth" ? (
-                        <span className="text-green-300">{`${dateLeft} days before renewal`}</span>
+                        <span className="text-green-300">{`${dateLeft.toFixed(
+                          0
+                        )} days before renewal`}</span>
                       ) : (
                         <span>&nbsp;</span>
                       )}
@@ -453,6 +460,10 @@ function InfoCardBrandPlan() {
               </tbody>
             )}
           </table>
+          <p className="text-red-500">
+            Renewing a plan extends the expiration date by 30 days. However,
+            changing to a new plan will reset the expiration date to 30 days
+          </p>
         </div>
       </div>
       <p className="text-center my-10">

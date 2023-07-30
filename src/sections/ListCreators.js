@@ -49,6 +49,8 @@ function ListCreators(props) {
                     { first_name: { $regex: searchValue, $options: "i" } },
                     { last_name: { $regex: searchValue, $options: "i" } },
                     { email: { $regex: searchValue, $options: "i" } },
+                    { occupation: { $regex: searchValue, $options: "i" } },
+                    { niche: { $regex: searchValue, $options: "i" } },
                   ],
                 },
               ],
@@ -100,7 +102,7 @@ function ListCreators(props) {
             type="text"
             placeholder="Search..."
             onChange={(e) => handleSearch(e)}
-            className="p-4 rounded-lg ctm-border-color-3 border drop-shadow-sm max-w-lg bg-gray-100"
+            className="p-4 rounded-lg ctm-border-color-3 border drop-shadow-sm w-3/12 bg-gray-100"
           ></input>
         </div>
         <table className="flex-1">
@@ -116,10 +118,17 @@ function ListCreators(props) {
               <th className="w-12 px-4 text-center">Gender</th>
               <th className="w-12 px-4 text-center">Age</th>
               <th className="w-80 ctm-min-width-1 whitespace-nowrap px-4 text-left">
+                Occupation
+              </th>
+              <th className="w-80 ctm-min-width-1 whitespace-nowrap px-4 text-left">
+                Niche
+              </th>
+              <th className="w-80 ctm-min-width-1 whitespace-nowrap px-4 text-left">
                 Province
               </th>
               <th className="w-12 px-4 text-center">Online</th>
               <th className="w-12 px-4 text-center">Tiktok</th>
+              <th className="w-12 px-4 text-center">Followers</th>
               <th className="w-80 px-4 text-center">Action</th>
             </tr>
           </thead>
@@ -160,6 +169,12 @@ function ListCreators(props) {
                   </td>
                   <td className="w-12 px-4 text-center">{creator.age}</td>
                   <td className="w-80 ctm-min-width-1 whitespace-nowrap overflow-ellipsis px-4 text-left">
+                    {creator.occupation}
+                  </td>
+                  <td className="w-80 ctm-min-width-1 whitespace-nowrap overflow-ellipsis px-4 text-left">
+                    {creator.niche}
+                  </td>
+                  <td className="w-80 ctm-min-width-1 whitespace-nowrap overflow-ellipsis px-4 text-left">
                     {creator.province}
                   </td>
                   <td className="w-12 px-4 text-center">
@@ -170,6 +185,9 @@ function ListCreators(props) {
                     <IndicatorPlatform
                       Platform={creator.social_tiktok ? "Tiktok" : ""}
                     />
+                  </td>
+                  <td className="w-12 px-4 text-center">
+                    {creator.social_tiktok_follower_count}
                   </td>
                   <td className="w-80 px-4">
                     {props.CustomData.displayActionButtons && (

@@ -174,6 +174,7 @@ function Dashboardcampaigns() {
             CustomData={CustomDataActive}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
+            Accordion={true}
           />
         )}
         {!getCampaignReadyToStartTrigger && loggedInUserType === "Brand" && (
@@ -183,6 +184,7 @@ function Dashboardcampaigns() {
             CustomData={CustomDataReadyToStart}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
+            Accordion={false}
           />
         )}
         {!getCampaignEndedTrigger && loggedInUserType === "Brand" && (
@@ -192,6 +194,7 @@ function Dashboardcampaigns() {
             CustomData={CustomDataEnded}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
+            Accordion={false}
           />
         )}
         {!getCampaignCancelledTrigger && loggedInUserType === "Brand" && (
@@ -201,6 +204,7 @@ function Dashboardcampaigns() {
             CustomData={{}}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
+            Accordion={false}
           />
         )}
       </div>

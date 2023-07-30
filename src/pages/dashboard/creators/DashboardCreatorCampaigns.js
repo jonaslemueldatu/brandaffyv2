@@ -130,6 +130,7 @@ function Dashboardcampaigns() {
             CampaignList={campaignAcceptedList}
             TableTitle={{ color: "ctm-bg-color-1", text: "Accepted" }}
             CustomData={AcceptedTableActionData}
+            Accordion={true}
           />
         )}
         {!getCampaignInvitedTrigger && loggedInUserType === "Creator" && (
@@ -139,6 +140,7 @@ function Dashboardcampaigns() {
             CustomData={CustomDataInvited}
             SetTrigger1={setGetCampaignListExternalTrigger}
             Trigger1={getCampaignListExternalTrigger}
+            Accordion={false}
           />
         )}
         {/* {!getCampaignAppliedTrigger && loggedInUserType === "Creator" && (
