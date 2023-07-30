@@ -50,6 +50,23 @@ function InfoCardBrandPlan() {
     };
     getSubscriptionDetails();
   }, [loggedInUser, loggedInUserType, navigate]);
+
+  // Functions
+  const requestPayment = async (e, amount, new_plan) => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_ROUTE}/api/subscription/requestpayment`,
+        {
+          amount: amount,
+          reference_id: subscriptionData._id.toString(),
+          customer_id: subscriptionData.xendit_reference_id,
+          payment_method_id: subscriptionData.plan_payment_methods_object[0].id,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex flex-col w-full bg-white shadow-lg rounded-2xl mb-4">
       <div className="text-2xl p-6 border-b-2 ctm-border-color-1 font-semibold mb-2">
@@ -81,9 +98,15 @@ function InfoCardBrandPlan() {
                           : "bg-[#6C5DD3] text-white "
                       }`}
                     >
-                      {subscriptionData.plan_title === "Starter"
-                        ? "Your Plan"
-                        : "Change Plan"}
+                      {subscriptionData.plan_title === "Starter" ? (
+                        <span
+                          onClick={(e) => requestPayment(e, 1499, "Starter")}
+                        >
+                          Renew Plan
+                        </span>
+                      ) : (
+                        "Change Plan"
+                      )}
                     </div>
                     <small className="block text-red-500">
                       {subscriptionData.plan_title === "Starter" ? (
