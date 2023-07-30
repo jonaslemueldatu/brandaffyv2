@@ -52,7 +52,7 @@ function InfoCardBrandPlan() {
   }, [loggedInUser, loggedInUserType, navigate]);
 
   // Functions
-  const requestPayment = async (e, amount, new_plan) => {
+  const requestPayment = async (e, amount, new_plan, boxes, campaigns) => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ROUTE}/api/subscription/requestpayment`,
@@ -61,6 +61,12 @@ function InfoCardBrandPlan() {
           reference_id: subscriptionData._id.toString(),
           customer_id: subscriptionData.xendit_reference_id,
           payment_method_id: subscriptionData.plan_payment_methods_object[0].id,
+          metadata: {
+            current_plan: subscriptionData.plan_title,
+            new_plan: new_plan,
+            plan_active_boxes: boxes,
+            plan_active_campaigns: campaigns,
+          },
         }
       );
     } catch (error) {
@@ -100,7 +106,9 @@ function InfoCardBrandPlan() {
                     >
                       {subscriptionData.plan_title === "Starter" ? (
                         <span
-                          onClick={(e) => requestPayment(e, 1499, "Starter")}
+                          onClick={(e) =>
+                            requestPayment(e, 1499, "Starter", 5, 3)
+                          }
                         >
                           Renew Plan
                         </span>
