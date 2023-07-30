@@ -5,83 +5,69 @@ import { useAuthUser } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+//Snippet Imports
+import PaymentPaymaya from "../snippets/PaymentPaymaya";
+
 function InfoCardPaymentMethod() {
-  const createPaymentMethod2 = async () => {
-    let apiKey =
-      "xnd_development_NZvxlmIGcBTUDPt65l4IJlj6ZosrwEISS3chz4eS2KXXNojRnIiRTxGMyq47ll:";
-    const reqBody = {
-      type: "EWALLET",
-      reusability: "MULTIPLE_USE",
-      reference_id: "123456",
-      customer_id: "cust-a551556b-d905-4067-a8b1-f69c18f8eb70",
-      country: "PH",
-      ewallet: {
-        channel_code: "PAYMAYA",
-        channel_properties: {
-          success_return_url:
-            "http://brandaffy.com/dashboard/settings?subsettings=Payment",
-          failure_return_url:
-            "https://brandaffy.com/dashboard/settings?subsettings=Payment",
-          cancel_return_url:
-            "https://brandaffy.com/dashboard/settings?subsettings=Payment",
-        },
-      },
-    };
-    const result = await axios.post(
-      `https://api.xendit.co/v2/payment_methods`,
-      reqBody,
-      {
-        headers: {
-          Authorization: `Basic ${btoa(apiKey + ":")}`,
-          "Content-Type": "application/json",
-        },
+  const auth = useAuthUser();
+  const navigate = useNavigate();
+
+  //Util States
+  const [loggedInUser] = useState(auth().id);
+  const [loggedInUserType] = useState(auth().user_type);
+
+  //Main section state
+  const [subscriptionData, setSubscriptionData] = useState({});
+
+  //UseEfect states
+  const [isGettingPlanData, setIsGettingPlanData] = useState(true);
+
+  //useEffect
+  useEffect(() => {
+    setIsGettingPlanData(true);
+    const getSubscriptionDetails = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_ROUTE}/api/subscription/getdetails`,
+        {
+          params: {
+            brand_profile_id: loggedInUser,
+            user_type: loggedInUserType,
+          },
+        }
+      );
+      if (res.data.err) {
+        console.log(res.data.err);
+        setIsGettingPlanData(false);
+      } else {
+        //Check if plan is active
+        if (!res.data.is_plan_active) {
+          navigate("/dashboard/plans");
+        }
+        setSubscriptionData(res.data.subscription_data);
+        setIsGettingPlanData(false);
       }
-    );
-    // const result2 = await axios.get(
-    //   `${process.env.REACT_APP_ROUTE}/api/subscription/payment/createmethod`,
-    //   {
-    //     params: {
-    //       link: result.data.actions[0].url,
-    //     },
-    //   }
-    // );
-    window.location.replace(result.data.actions[0].url);
-  };
+    };
+    getSubscriptionDetails();
+  }, [loggedInUser, loggedInUserType, navigate]);
 
-  // console.log(result2.data);
-
-  // const createPaymentMethod2 = async () = {
-  // const reqBody = JSON.stringify({
-  //   type: "EWALLET",
-  //   reusability: "MULTIPLE_USE",
-  //   ewallet: {
-  //     channel_code: "OVO",
-  //     channel_properties: {
-  //       success_return_url: "https://your-redirect-website.com/success",
-  //       failure_return_url: "https://your-redirect-website.com/failure",
-  //     },
-  //   },
-  //   customer_id: "cust-a551556b-d905-4067-a8b1-f69c18f8eb70",
-  //   metadata: {
-  //     sku: "ABCDEFGH",
-  //   },
-  // });
-
-  // const result = await axios.post(
-  //   `https://api.xendit.co/v2/payment_methods`,
-  //   reqBody
-  // );
-  //     }
   return (
     <div className="flex flex-col w-full bg-white shadow-lg rounded-2xl mb-4">
-      <div
-        className="text-2xl p-6 border-b-2 ctm-border-color-1 font-semibold mb-2"
-        onClick={() => createPaymentMethod2()}
-      >
+      <div className="text-2xl p-6 border-b-2 ctm-border-color-1 font-semibold mb-2">
         Payment Method
       </div>
-      <div className="mx-[5%] py-5 overflow-scroll"></div>
-      <div onClick={() => createPaymentMethod2()}>Hi</div>
+      <div className="mx-[5%] py-5 overflow-scroll">
+        <ul>
+          {!isGettingPlanData && (
+            <li>
+              <PaymentPaymaya
+                PaymentMethods={subscriptionData.plan_payment_methods}
+                CustomerId={subscriptionData.xendit_reference_id}
+                ReferenceId={subscriptionData._id.toString()}
+              />
+            </li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
