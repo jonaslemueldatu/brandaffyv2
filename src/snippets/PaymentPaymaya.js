@@ -32,10 +32,10 @@ function PaymentPaymaya(props) {
   };
 
   return (
-    <div className="flex h-10 justify-between">
+    <div className="flex h-8 justify-between">
       <img alt="Paymaya icon" src={mayaLogo}></img>
       {paymaya ? (
-        <div>Unlink</div>
+        <div className="ctm-btn ctm-btn-2">Unlink</div>
       ) : (
         <div className="ctm-btn ctm-btn-3" onClick={(e) => handleLink(e)}>
           Link
