@@ -63,6 +63,9 @@ function InfoCardPaymentMethod() {
                 PaymentMethods={subscriptionData.plan_payment_methods}
                 CustomerId={subscriptionData.xendit_reference_id}
                 ReferenceId={subscriptionData._id.toString()}
+                PaymentId={subscriptionData.plan_payment_methods_object.find(
+                  (method) => method.ewallet.channel_code === "PAYMAYA"
+                )}
               />
             </li>
           )}
