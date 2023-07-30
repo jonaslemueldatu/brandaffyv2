@@ -146,9 +146,17 @@ function InfoCardBrandPlan() {
                           : "bg-[#6C5DD3] text-white "
                       }`}
                     >
-                      {subscriptionData.plan_title === "Growth"
-                        ? "Your Plan"
-                        : "Change Plan"}
+                      {subscriptionData.plan_title === "Growth" ? (
+                        "Your Plan"
+                      ) : (
+                        <span
+                          onClick={(e) =>
+                            requestPayment(e, 2699, "Growth", 15, 7)
+                          }
+                        >
+                          Change Plan
+                        </span>
+                      )}
                     </div>
                     <small className="block text-red-500">
                       {" "}
@@ -178,9 +186,17 @@ function InfoCardBrandPlan() {
                           : "bg-[#6C5DD3] text-white "
                       }`}
                     >
-                      {subscriptionData.plan_title === "Beyond"
-                        ? "Your Plan"
-                        : "Change Plan"}
+                      {subscriptionData.plan_title === "Beyond" ? (
+                        "Your Plan"
+                      ) : (
+                        <span
+                          onClick={(e) =>
+                            requestPayment(e, 4299, "Beyond", 25, 15)
+                          }
+                        >
+                          Change Plan
+                        </span>
+                      )}
                     </div>
                     <small className="block text-red-500">
                       {" "}
