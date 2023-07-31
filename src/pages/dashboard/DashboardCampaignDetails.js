@@ -31,9 +31,27 @@ function DashboardCampaignDetails() {
   const [gettingCampaignDetails, setGettingCampaignDetails] = useState(true);
   const [videoListTrigger, setVideoListTrigger] = useState(true);
   const [isGettingVidList, setIsGettingVidList] = useState(true);
+
+  //Accepted State
   const [isGettingAcceptedUser, setIsGettingAcceptedUser] = useState(true);
+  const [pageAccepted, setPageAccepted] = useState(1);
+  const [searchAccepted, setSearchAccepted] = useState("");
+  const [totalAccepted, setTotalAccepted] = useState(0);
+  const limitAccepted = 5;
+
+  //Invited State
   const [isGettingInvitedUser, setIsGettingInvitedUser] = useState(true);
+  const [pageInvited, setPageInvited] = useState(1);
+  const [searchInvited, setSearchInvited] = useState("");
+  const [totalInvited, setTotalInvited] = useState(0);
+  const limitInvited = 5;
+
+  //Requested State
   const [isGettingRequestedUser, setIsGettingRequestedUser] = useState(true);
+  const [pageRequested, setPageRequested] = useState(1);
+  const [searchRequested, setSearchRequested] = useState("");
+  const [totalRequested, setTotalRequested] = useState(0);
+  const limitRequested = 5;
 
   const [acceptedUserIds, setAcceptedUserIds] = useState([]);
   const [acceptedUserList, setAcceptedUserList] = useState([]);
@@ -134,9 +152,10 @@ function DashboardCampaignDetails() {
         `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
         {
           params: {
-            _id: {
-              $in: acceptedUserIds,
-            },
+            search: searchAccepted,
+            page: pageAccepted - 1,
+            limit: limitAccepted,
+            list: acceptedUserIds,
           },
         }
       );
@@ -144,6 +163,7 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
         setIsGettingAcceptedUser(false);
       } else {
+        setTotalAccepted(acceptedUserIds.length);
         setAcceptedUserList(res.data.creator_list);
         setIsGettingAcceptedUser(false);
       }
@@ -153,7 +173,7 @@ function DashboardCampaignDetails() {
     } else {
       setIsGettingAcceptedUser(false);
     }
-  }, [acceptedUserIds]);
+  }, [acceptedUserIds, pageAccepted, searchAccepted]);
 
   //Get Invited user list
   useEffect(() => {
@@ -164,9 +184,10 @@ function DashboardCampaignDetails() {
         `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
         {
           params: {
-            _id: {
-              $in: invitedUserIds,
-            },
+            search: searchInvited,
+            page: pageInvited - 1,
+            limit: limitInvited,
+            list: invitedUserIds,
           },
         }
       );
@@ -174,6 +195,7 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
         setIsGettingInvitedUser(false);
       } else {
+        setTotalInvited(invitedUserIds.length);
         setInvitedUserList(res.data.creator_list);
         setIsGettingInvitedUser(false);
       }
@@ -183,7 +205,7 @@ function DashboardCampaignDetails() {
     } else {
       setIsGettingInvitedUser(false);
     }
-  }, [invitedUserIds]);
+  }, [invitedUserIds, pageInvited, searchInvited]);
 
   //Get Requested user list
   useEffect(() => {
@@ -194,9 +216,10 @@ function DashboardCampaignDetails() {
         `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
         {
           params: {
-            _id: {
-              $in: requestedUserIds,
-            },
+            search: searchRequested,
+            page: pageRequested - 1,
+            limit: limitRequested,
+            list: requestedUserIds,
           },
         }
       );
@@ -204,6 +227,7 @@ function DashboardCampaignDetails() {
         console.log(res.data.err);
         setIsGettingRequestedUser(false);
       } else {
+        setTotalRequested(requestedUserIds.length);
         setRequestedUserList(res.data.creator_list);
         setIsGettingRequestedUser(false);
       }
@@ -213,7 +237,7 @@ function DashboardCampaignDetails() {
     } else {
       setIsGettingRequestedUser(false);
     }
-  }, [requestedUserIds]);
+  }, [requestedUserIds, pageRequested, searchRequested, limitRequested]);
 
   return (
     <div className="h-screen flex relative">
@@ -241,36 +265,54 @@ function DashboardCampaignDetails() {
           <InfoCardCampaignSummary />
         )}
 
-        {!isGettingAcceptedUser &&
-          loggedInUserType === "Brand" &&
+        {loggedInUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status !== "Cancelled" && (
             <ListCreators
               CustomData={customDataBrandAccepted}
               CreatorList={acceptedUserList}
               Title="Accepted"
+              SetState1={setPageAccepted}
+              SetState2={setSearchAccepted}
+              State1={pageAccepted}
+              State2={totalAccepted}
+              State3={limitAccepted}
+              State4={searchAccepted}
+              State5={isGettingAcceptedUser}
             />
           )}
 
-        {!isGettingInvitedUser &&
-          loggedInUserType === "Brand" &&
+        {loggedInUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status === "Ready to Start" && (
             <ListCreators
               CustomData={customDataBrandInvited}
               CreatorList={invitedUserList}
               Title="Invited"
+              SetState1={setPageInvited}
+              SetState2={setSearchInvited}
+              State1={pageInvited}
+              State2={totalInvited}
+              State3={limitInvited}
+              State4={searchInvited}
+              State5={isGettingInvitedUser}
             />
           )}
 
-        {!isGettingRequestedUser &&
-          loggedInUserType === "Brand" &&
+        {loggedInUserType === "Brand" &&
           !gettingCampaignDetails &&
           campaignDetails.status === "Ready to Start" && (
             <ListCreators
               CustomData={customDataBrandRequested}
               CreatorList={requestedUserList}
               Title="Requested"
+              SetState1={setPageRequested}
+              SetState2={setSearchRequested}
+              State1={pageRequested}
+              State2={totalRequested}
+              State3={limitRequested}
+              State4={searchRequested}
+              State5={isGettingRequestedUser}
             />
           )}
 

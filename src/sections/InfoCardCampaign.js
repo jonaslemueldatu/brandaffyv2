@@ -61,6 +61,48 @@ function InfoCardCampaign(props) {
             {campaignDetails.campaign_terms}
           </div>
         </div>
+        <div className="flex justify-between flex-wrap">
+          <div className="flex flex-1 flex-col my-4">
+            <label className="my-2 font-bold">Create Date</label>
+            <div className="p-4 ctm-min-width-1 ctm-font-color-1">
+              {new Date(campaignDetails.create_date).toLocaleDateString(
+                "en-CA"
+              )}
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col my-4">
+            <label className="my-2 font-bold">Start Date</label>
+            <div className="p-4 ctm-min-width-1 ctm-font-color-1">
+              {campaignDetails.start_date ? (
+                new Date(campaignDetails.start_date).toLocaleDateString("en-CA")
+              ) : (
+                <span>--</span>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col my-4">
+            <label className="my-2 font-bold">End Date</label>
+            <div className="p-4 ctm-min-width-1 ctm-font-color-1">
+              {campaignDetails.end_date ? (
+                new Date(campaignDetails.end_date).toLocaleDateString("en-CA")
+              ) : (
+                <span>--</span>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col my-4">
+            <label className="my-2 font-bold">Cancel Date</label>
+            <div className="p-4 ctm-min-width-1 ctm-font-color-1">
+              {campaignDetails.cancelled_date ? (
+                new Date(campaignDetails.cancelled_date).toLocaleDateString(
+                  "en-CA"
+                )
+              ) : (
+                <span>--</span>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+//Snippet Imports
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 function InfoCardTiktok(props) {
   const [tiktokProfile, setTiktokProfile] = useState({});
 
@@ -33,6 +37,13 @@ function InfoCardTiktok(props) {
   return (
     <a target="_blank" href={tiktokProfile.profile_deep_link} rel="noreferrer">
       <div className="mb-4 flex-col md:flex-row cursor-pointer justify-center flex rounded-lg bg-black drop-shadow-sm border ctm-border-color-2 p-4">
+        {getTiktokProfileTrigger && (
+          <FontAwesomeIcon
+            className="mx-4 my-auto text-white"
+            icon={faSpinner}
+            spin
+          />
+        )}
         {!getTiktokProfileTrigger && (
           <div className="flex flex-col items-center text-white">
             <img

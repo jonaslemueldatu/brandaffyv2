@@ -8,7 +8,7 @@
 //6. Trigger1 = goes hand in hand with SetTrigger1
 //7. Title
 
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 
@@ -18,6 +18,7 @@ import IndicatorGender from "../snippets/IndicatorGender";
 import ActionTable from "../snippets/ActionTable";
 import IndicatorPlatform from "../snippets/IndicatorPlatform";
 import TablesPagination from "../snippets/TablesPagination";
+import FormatterNumber from "../snippets/FormatterNumber";
 
 function ListCreators(props) {
   const navigate = useNavigate();
@@ -128,8 +129,14 @@ function ListCreators(props) {
                         Platform={creator.social_tiktok ? "Tiktok" : ""}
                       />
                     </td>
-                    <td className="w-12 px-4 text-center">
-                      {creator.social_tiktok_follower_count}
+                    <td className="w-12 px-4 text-center font-bold">
+                      {creator.social_tiktok_follower_count ? (
+                        <FormatterNumber
+                          Number={creator.social_tiktok_follower_count}
+                        />
+                      ) : (
+                        <div>--</div>
+                      )}
                     </td>
                     <td className="w-80 px-4">
                       {props.CustomData.displayActionButtons && (
@@ -150,19 +157,19 @@ function ListCreators(props) {
             </tbody>
           )}
         </table>
-        {!props.State5 && (
-          <TablesPagination
-            Page={props.State1}
-            Total={props.State2}
-            Limit={props.State3}
-            SetState1={props.SetState1}
-          />
-        )}
       </div>
       {props.CreatorList.length <= 0 && (
         <div className="text-center my-8 ctm-font-color-1">
           No Data to display
         </div>
+      )}
+      {!props.State5 && (
+        <TablesPagination
+          Page={props.State1}
+          Total={props.State2}
+          Limit={props.State3}
+          SetState1={props.SetState1}
+        />
       )}
     </div>
   );
