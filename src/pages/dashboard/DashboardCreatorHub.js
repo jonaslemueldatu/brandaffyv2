@@ -28,7 +28,7 @@ function Dashboardcreatorhub() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [total, setTotal] = useState(0);
-  const limit = 3;
+  const limit = 15;
 
   const [clickedProfileId, setClickedProfileId] = useState("");
 
@@ -50,7 +50,8 @@ function Dashboardcreatorhub() {
             params: {
               search: search,
               page: page - 1,
-              limit: limit,
+              limit: 15,
+              list: [],
             },
           }
         );
