@@ -24,7 +24,14 @@ function Dashboardcreatorhub() {
   const [addToBoxPopup, setAddToBoxPopup] = useState(false);
   const [inviteCampaignPopup, setInviteCampaignPopup] = useState(false);
 
+  //State for search sort filter
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [total, setTotal] = useState(0);
+  const limit = 3;
+
   const [clickedProfileId, setClickedProfileId] = useState("");
+
   // Action displayed may differ based on Viewer user type
   const [customData] = useState({
     action:
@@ -35,24 +42,36 @@ function Dashboardcreatorhub() {
   });
 
   useEffect(() => {
-    setGetCreatorListTrigger(true);
     const getCreatorList = async () => {
       try {
         const res = await axios.get(
           `${process.env.REACT_APP_ROUTE}/api/profile/getlist`,
           {
-            params: {},
+            params: {
+              search: search,
+              page: page - 1,
+              limit: limit,
+            },
           }
         );
+        setTotal(res.data.total);
         setCreatorList(res.data.creator_list);
         setGetCreatorListTrigger(false);
       } catch (error) {
         console.log(error);
       }
     };
-
-    getCreatorList();
-  }, []);
+    if (search !== "") {
+      const delayDebounceFn = setTimeout(() => {
+        setGetCreatorListTrigger(true);
+        getCreatorList();
+      }, 1000);
+      return () => clearTimeout(delayDebounceFn);
+    } else {
+      setGetCreatorListTrigger(true);
+      getCreatorList();
+    }
+  }, [search, limit, page]);
 
   return (
     <div className="h-screen flex relative">
@@ -62,15 +81,20 @@ function Dashboardcreatorhub() {
       />
       <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         <ContainerHeader Title="Creator Hub" />
-        {!getCreatorListTrigger && (
-          <ListCreators
-            CreatorList={creatorList}
-            CustomData={customData}
-            SetPopup1={setAddToBoxPopup}
-            SetPopup2={setInviteCampaignPopup}
-            SetClickedProfileId={setClickedProfileId}
-          />
-        )}
+        <ListCreators
+          CreatorList={creatorList}
+          CustomData={customData}
+          SetPopup1={setAddToBoxPopup}
+          SetPopup2={setInviteCampaignPopup}
+          SetClickedProfileId={setClickedProfileId}
+          SetState1={setPage}
+          SetState2={setSearch}
+          State1={page}
+          State2={total}
+          State3={limit}
+          State4={search}
+          State5={getCreatorListTrigger}
+        />
       </div>
       {addToBoxPopup && !getCreatorListTrigger && (
         <PopupAddTobox
